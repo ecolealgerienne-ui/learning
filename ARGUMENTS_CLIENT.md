@@ -156,6 +156,60 @@ Total                        : 4,0s
 
 ---
 
+## 5. ROI Calculator — La formule qui convainc un CFO
+
+> **Slide cours :** "ROI Calculator"
+
+### Décomposition du coût évitable (base : 20 000€/mois de LLM)
+
+| Poste de coût | Montant mensuel | Explication |
+|---------------|----------------|-------------|
+| Gaspillage tokens (30%) | 6 000€ | Prompts mal optimisés, contextes inutiles |
+| Temps de debug (10h/sem × 100€/h) | 4 000€ | Développeurs qui cherchent à l'aveugle |
+| Coût incidents (amorti) | 5 000€ | Token spike, downtime, violations |
+| **Total coût évitable** | **15 000€/mois** | |
+
+### Investissement pour éviter ça
+
+- **Plateforme :** 500 à 2 000€/mois (Langfuse self-hosted = ~50€/mois infra)
+- **Setup :** 8 heures one-time ← c'est votre prestation
+
+### ROI : 7 à 30x dès le premier mois
+
+**Résultats réels mesurés :**
+- **47%** de réduction des coûts tokens → via optimisation des prompts
+- **80%** de temps de debug en moins → via tracing complet
+- **0€** de surprises incontrôlées → via budget guardrails
+
+### La formule (à écrire sur un tableau blanc en réunion)
+
+```
+Économies = (Gaspillage tokens) + (Temps debug × TJM) + (Incidents évités × Coût)
+```
+
+### Pitch CFO / DAF (chiffres adaptés contexte bancaire)
+
+> "Votre équipe dépense 15 000€/mois en coûts évitables sur vos LLM.
+> Mon intervention coûte 8 heures de setup et 50€/mois d'infra.
+> Le ROI est entre 7 et 30x dès le premier mois.
+> C'est l'investissement IA le plus rentable que vous ferez cette année."
+
+### Comment personnaliser la formule en rendez-vous
+
+Posez ces 3 questions au client :
+1. "Quel est votre budget LLM mensuel actuel ?" → X€
+2. "Combien d'heures vos devs passent à débugger des appels IA par semaine ?" → Yh
+3. "Avez-vous déjà eu un incident de surcoût ou de conformité IA ?" → Z€
+
+Puis calculez devant eux :
+```
+Économies = (X × 30%) + (Y × 4 semaines × TJM/8h) + (Z amorti)
+```
+
+**Ils voient leur propre chiffre. C'est imparable.**
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

@@ -473,6 +473,53 @@ Portkey a une version cloud propriétaire — éliminatoire en banque de détail
 
 ---
 
+## 11. Pourquoi Langfuse — Les 4 arguments définitifs
+
+> **Slide cours :** "My Recommendation: Langfuse — Concepts transfer to any platform"
+
+### Les 4 piliers
+
+| Argument | Ce que ça veut dire concrètement | Valeur bancaire |
+|----------|----------------------------------|-----------------|
+| **Open source — self-host** | Code auditable, déployable dans votre datacenter | Conformité, souveraineté des données, pas de dépendance fournisseur |
+| **Vendor-neutral** | Fonctionne avec Claude, GPT, Llama, Mistral, Ollama | Liberté de changer de modèle sans refaire l'observabilité |
+| **Full-featured** | Tracing + métriques + évaluations dans un seul outil | Pas besoin d'assembler 3 outils différents |
+| **Free tier généreux** | 50 000 observations/mois gratuit | POC et démo client sans coût |
+
+### L'argument vendor-neutral est stratégique pour vous
+
+Vos clients bancaires ont peur du **vendor lock-in** — être captif d'Anthropic, d'OpenAI, ou de Microsoft.
+
+Avec Langfuse :
+- Aujourd'hui Claude → demain Llama local → après-demain Azure OpenAI
+- L'observabilité ne change pas
+- Les dashboards ne changent pas
+- Les alertes ne changent pas
+
+> "Je vous construis une couche d'observabilité indépendante des modèles.
+> Si Anthropic double ses prix demain, vous basculez sur un autre provider
+> en changeant une ligne de config. Votre monitoring, vos alertes,
+> vos dashboards — rien ne change."
+
+### Le sous-titre du slide est votre argument de formation
+
+**"Concepts transfer to any platform"**
+
+Même si votre client passe à Azure AI Foundry dans 2 ans,
+les concepts que vous lui apprenez (traces, cost attribution, évaluations)
+restent valables. Vous ne le rendez pas dépendant de Langfuse —
+vous lui apprenez à piloter ses LLM. C'est votre valeur ajoutée durable.
+
+### Pitch closing (fin de rendez-vous)
+
+> "Langfuse, c'est l'outil que je recommande à 100% de mes clients
+> en environnement réglementé. Open source, self-hosted, vendor-neutral,
+> complet. Et si dans 3 ans vous migrez vers Azure AI Foundry,
+> tout ce qu'on a construit ensemble — les processus, les métriques,
+> les habitudes d'équipe — se transfère. Vous ne repartez pas de zéro."
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

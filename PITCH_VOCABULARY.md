@@ -162,4 +162,39 @@ Format : Terme → Définition technique → Phrase client
 
 ---
 
+---
+
+## 💰 ARGUMENTS ROI (À sortir face à un DSI)
+
+### Tableau ROI — Observabilité LLM
+
+| Catégorie | Sans observabilité | Avec observabilité |
+|-----------|-------------------|-------------------|
+| Dépense LLM mensuelle | 35 000€+ | 15 000€ |
+| Retries inutiles | 5 000€+ | ~0€ |
+| Temps de debug/semaine | 20h+ | 2h |
+| Réponse incident | Plusieurs jours | Jour même |
+
+**Pitch client :**
+> "L'infrastructure que je déploie se rembourse en moins d'un mois. Sur le coût LLM seul, vous passez de 35 000€ à 15 000€/mois grâce au routing intelligent et au caching sémantique. Et en cas d'incident, votre équipe répond le jour même — pas après trois jours d'investigation à l'aveugle."
+
+---
+
+## 🔴 MATRICE DE RISQUES — Sans Observabilité
+
+| Risque | Impact | Probabilité | Argument banque |
+|--------|--------|-------------|-----------------|
+| **Token spike** | Élevé (10 000€+) | Très élevé | Une boucle infinie sur un batch nocturne = facture catastrophique au matin |
+| **Silent failures** | Moyen | Élevé | Le LLM répond HTTP 200 mais hallucine — personne ne le sait |
+| **Performance degradation** | Moyen | Élevé | Latence qui dérive progressivement, invisible sans monitoring |
+| **Compliance violation** | Critique | Moyen | PII envoyé à l'API externe sans détection — violation RGPD immédiate |
+
+**Pitch client (conformité) :**
+> "Sans observabilité, une violation de conformité RGPD sur vos appels LLM peut passer inaperçue des semaines. Avec Langfuse, chaque appel est tracé, chaque donnée sensible est détectée avant envoi. C'est votre première ligne de défense face à l'ACPR."
+
+**Pitch client (budget) :**
+> "Le token spike, c'est le cauchemar de tout DSI : une erreur de code la nuit, et vous vous réveillez avec 10 000€ de facture Anthropic en plus. Les budget guardrails que je configure coupent automatiquement avant que ça arrive."
+
+---
+
 _Mise à jour : 2026-06-14_

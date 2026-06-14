@@ -258,6 +258,78 @@ calculer et comparer les coûts de n'importe quel prompt sur tous les modèles.
 
 ---
 
+## 7. Où se cachent les coûts — Pipeline RAG + Agent
+
+> **Slide cours :** "Where Costs Hide: RAG + Agent Pipeline"
+
+### Décomposition d'une seule requête utilisateur
+
+```
+User Query
+    │
+    ▼
+1. Query Embedding       → $0.0001
+    │
+    ▼
+2. Vector Search         → minimal
+    │
+    ▼
+3. Context Assembly      → inclus
+    │
+    ▼
+4. LLM #1 (RAG)         → $0.003
+    │
+    ▼
+5. Agent Decision        → inclus
+  "Need more info"
+    │
+    ▼
+6. Tool Call (API)       → variable
+    │
+    ▼
+7. LLM #2 (Final)       → $0.004
+    │
+    ▼
+Response
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+Total : $0.007 / requête
+```
+
+### L'effet d'échelle — "Seems cheap... until you multiply"
+
+| Volume | Coût |
+|--------|------|
+| 100 000 req/jour | **700$/jour** |
+| 1 mois | **21 000$/mois** |
+| 1 an | **252 000$/an** |
+
+### Ce que ça change pour l'architecture
+
+Sans visibilité par étape → vous savez que "c'est cher", pas pourquoi.
+
+Avec Langfuse → vous voyez exactement quelle étape consomme quoi :
+- LLM #1 trop cher ? → remplacer par modèle local (Ollama)
+- Tool Call trop fréquent ? → améliorer le context assembly
+- Embedding coûteux ? → batch ou cache les embeddings récurrents
+
+### Pitch client (CTO / Architecte)
+
+> "Avant de déployer votre RAG en production, je modélise le coût réel
+> à votre volume. 0,007€ par requête semble négligeable.
+> À 100 000 requêtes/jour — ce qui est courant en banque —
+> c'est 252 000€/an. On optimise chaque étape du pipeline
+> avant que la facture arrive."
+
+### Argument décision build vs buy (DSI)
+
+> "La plupart des équipes découvrent ces coûts après le déploiement.
+> Je les modélise avant. C'est la différence entre une architecture
+> qui passe en prod sereinement et une qui déclenche un comité
+> d'arbitrage budgétaire trois mois plus tard."
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

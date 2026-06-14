@@ -210,6 +210,54 @@ Puis calculez devant eux :
 
 ---
 
+## 6. Les 3 leviers FinOps LLM — Réduire les coûts sans dégrader la qualité
+
+> **Slide cours :** "3 Cost Optimization Levers" + démo token_calculator-2.py
+
+### Les 3 actions concrètes
+
+#### Levier 1 — Choisir le bon modèle
+
+**Preuve par les chiffres (même prompt, même tâche) :**
+
+| Modèle | Coût / requête | Coût à 1M req/mois | Ratio |
+|--------|---------------|-------------------|-------|
+| GPT-4o | $0.000415 | $415 | référence |
+| GPT-4o-mini | $0.000025 | $24.90 | **17x moins cher** |
+| Claude Sonnet | $0.000606 | $606 | premium |
+
+> **Règle :** Tâche simple (classification, résumé court, extraction) → modèle économique.
+> Tâche complexe (analyse juridique, raisonnement multi-étapes) → modèle premium.
+> LiteLLM fait ce routing automatiquement selon vos règles.
+
+#### Levier 2 — Optimiser les prompts
+
+- Supprimer les instructions redondantes
+- Éviter les exemples inutiles (few-shot coûteux)
+- Compresser le contexte système
+- **Résultat mesuré : -47% sur les coûts tokens** (cf. slide ROI)
+
+#### Levier 3 — Contrôler la longueur des outputs
+
+- Toujours définir `max_tokens` selon le cas d'usage
+- Un LLM sans limite de tokens peut répondre 10x plus long que nécessaire
+- Chaque token output = 3 à 5x plus cher que token input (selon les modèles)
+
+### Pitch FinOps (DSI / CTO)
+
+> "Ces 3 leviers ne dégradent pas la qualité — ils éliminent le gaspillage.
+> Choisir le bon modèle pour la bonne tâche, c'est comme ne pas envoyer
+> un senior à 800€/jour pour rédiger un email.
+> Je configure ces règles dans LiteLLM, vous ne changez rien côté applicatif."
+
+### Démonstration live possible
+
+Le fichier `module_1_gateway/course_code/token_calculator-2.py` permet de
+calculer et comparer les coûts de n'importe quel prompt sur tous les modèles.
+**À sortir en rendez-vous pour calculer les économies du client en direct.**
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

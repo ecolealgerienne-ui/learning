@@ -434,6 +434,45 @@ C'est une décision d'architecte, pas d'économie.
 
 ---
 
+## 10. Decision Matrix — Quel outil selon la situation client
+
+> **Slide cours :** "Decision Matrix"
+
+### La matrice officielle
+
+| Situation client | Recommandation standard | Notre recommandation banque |
+|-----------------|------------------------|----------------------------|
+| Utilise LangChain massivement | LangSmith | ⚠️ Acceptable si données non sensibles |
+| Veut open source / self-host | **Langfuse** | ✅ **Langfuse — toujours** |
+| Cost tracking uniquement | Helicone | ⚠️ Propriétaire, limité |
+| Multi-providers LLM | Portkey | ⚠️ À évaluer selon contraintes data |
+
+### Comment utiliser cette matrice en rendez-vous
+
+Posez la question : **"Quelle est votre contrainte principale ?"**
+
+- **"On veut garder le contrôle de nos données"** → Langfuse self-hosted. Fin de la discussion.
+- **"On veut juste voir les coûts"** → Langfuse fait aussi ça. Et bien plus.
+- **"On est sur LangChain"** → Langfuse s'intègre aussi avec LangChain. LangSmith n'est pas obligatoire.
+- **"On a plusieurs providers LLM"** → LiteLLM + Langfuse couvre ce cas mieux que Portkey en environnement réglementé.
+
+### Le message clé : Langfuse répond à TOUTES les situations en banque
+
+> "Quelle que soit votre situation, Langfuse self-hosted est la réponse
+> en environnement réglementé. Il couvre le cost tracking, le multi-provider,
+> l'open source, et l'intégration LangChain.
+> Les autres outils sont des spécialistes. Langfuse est la plateforme complète
+> que vous pouvez déployer dans votre datacenter dès aujourd'hui."
+
+### Note compétitive — Portkey
+
+Portkey est un concurrent direct de LiteLLM (gateway multi-providers).
+Notre stack LiteLLM + Langfuse couvre exactement le même périmètre,
+avec un avantage décisif : **100% open source, 100% self-hosted**.
+Portkey a une version cloud propriétaire — éliminatoire en banque de détail.
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

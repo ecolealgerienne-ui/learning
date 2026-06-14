@@ -149,9 +149,40 @@ Objectif : construire la crédibilité avant les premiers clients.
 
 ---
 
-## Post 5 — Les 3 leviers FinOps LLM (À venir)
+## Post 5 — Top 5 Cost Drivers LLM
 
-_À rédiger après Module 2_
+**Accroche :**
+> Votre prompt système coûte peut-être 400$/mois.
+> Personne ne le sait parce que personne ne le mesure.
+
+**Corps :**
+> Les 5 vraies sources de gaspillage sur vos LLM en production :
+>
+> 1️⃣ Prompt système trop lourd
+> Envoyé à CHAQUE requête. 800 tokens inutiles × 500K appels/mois = 450$/mois gaspillés. Sur une seule optimisation.
+>
+> 2️⃣ Contexte RAG excessif
+> Plus de contexte ≠ meilleure réponse. 10 chunks au lieu de 3, c'est 3x le coût sans gain de qualité.
+>
+> 3️⃣ Agent reasoning verbeux
+> Le modèle "pense à voix haute" sur chaque micro-décision. Ces tokens de raisonnement intermédiaire, vous les payez.
+>
+> 4️⃣ Historique de conversation non géré
+> Le message 50 transporte tout le contexte des 49 précédents. Croissance linéaire du coût, invisible sans monitoring.
+>
+> 5️⃣ Mauvais choix de modèle
+> Écart jusqu'à 200x entre le modèle premium et l'économique. 90% des tâches bancaires (classification, extraction, résumé) ne nécessitent pas GPT-4o.
+>
+> Un audit FinOps LLM sur ces 5 points prend 2 jours.
+> Dans 100% des cas : au moins 2 sources de gaspillage non détectées.
+>
+> Vous savez où va votre budget LLM token par token ?
+
+**Hashtags :** #FinOpsIA #LLM #CostOptimization #ArchitectureIA #BanqueIA #DSI
+
+---
+
+## Post 6 — Sécurité LLM en banque (À venir)
 
 ---
 

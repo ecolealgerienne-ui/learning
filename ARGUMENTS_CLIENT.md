@@ -330,6 +330,64 @@ Avec Langfuse → vous voyez exactement quelle étape consomme quoi :
 
 ---
 
+## 8. Top 5 des sources de gaspillage LLM
+
+> **Slide cours :** "Top 5 Cost Drivers"
+
+### Les 5 coupables (par ordre de fréquence en prod)
+
+| # | Source | Pourquoi ça coûte | Solution |
+|---|--------|-------------------|----------|
+| 1 | **Bloated system prompts** | Envoyé à CHAQUE requête — 500 tokens inutiles × 1M appels = fortune | Audit et compression du prompt système |
+| 2 | **Excessive RAG context** | Plus de contexte ≠ meilleure réponse. 10 chunks au lieu de 3 = 3x le coût | Top-K optimisé, reranking |
+| 3 | **Agent reasoning loops** | Le modèle "pense à voix haute" (chain-of-thought verbeux) sur chaque étape | `max_tokens` sur les étapes intermédiaires, modèle économique pour le raisonnement |
+| 4 | **Growing chat history** | L'historique grandit linéairement — message 50 = 50x le contexte du message 1 | Résumé glissant, fenêtre limitée |
+| 5 | **Wrong model selection** | Écart de prix jusqu'à **200x** entre le modèle le plus cher et le plus économique | Routing intelligent par complexité de tâche |
+
+### Focus #1 — Bloated system prompt (le plus sous-estimé)
+
+```
+System prompt de 800 tokens × 500 000 appels/mois
+= 400 000 000 tokens input
+= ~600$/mois juste pour le prompt système
+
+Après compression à 200 tokens :
+= 100 000 000 tokens
+= ~150$/mois
+
+Économie : 450$/mois sur UNE seule optimisation.
+```
+
+### Focus #5 — Wrong model (200x de différence)
+
+```
+GPT-4o      : $0.005 / 1K tokens
+GPT-4o-mini : $0.000025 / 1K tokens
+Ratio       : 200x
+
+Llama3 local (Ollama) : $0.00 (infrastructure fixe)
+```
+
+**90% des tâches en banque ne nécessitent pas le modèle premium :**
+classification de documents, extraction de champs, résumés courts, Q&A sur FAQ interne.
+
+### Pitch audit FinOps (DSI / CTO)
+
+> "Je commence toujours par un audit de ces 5 points.
+> Dans 100% des cas, on trouve au moins 2 sources de gaspillage
+> que l'équipe n'avait pas vues. Le prompt système seul
+> représente souvent 30 à 40% de la facture totale —
+> et personne ne le touche parce que personne ne le mesure."
+
+### Argument mission courte (pour vendre un premier engagement)
+
+> "Je peux réaliser un audit FinOps LLM en 2 jours :
+> analyse de vos top 5 cost drivers, chiffrage des économies possibles,
+> plan d'action priorisé. C'est une mission à valeur immédiate
+> avant tout engagement long terme."
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

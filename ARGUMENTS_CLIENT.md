@@ -105,6 +105,57 @@ Requête → [???] → Réponse
 
 ---
 
+## 4. Ce que vous mesurez concrètement avec Langfuse
+
+> **Slide cours :** "What You'll Measure"
+
+### Les 5 dimensions de mesure
+
+| Dimension | Ce qu'on mesure | Valeur bancaire |
+|-----------|----------------|-----------------|
+| **Token usage** | Ratio input/output par appel | Identifier les prompts qui "gonflent" inutilement la facture |
+| **Latency** | Décomposition par étape (pas juste le total) | Savoir si le problème vient du réseau, du modèle, ou du RAG |
+| **Cost** | Par requête, par feature, par utilisateur | Chargeback par département — chaque équipe voit sa consommation |
+| **Quality** | Pertinence des réponses, taux d'hallucination | Détecter quand le modèle dégrade sans que personne s'en plaigne |
+| **Errors** | Par type, par modèle, par prompt | Identifier quel prompt génère le plus d'erreurs |
+
+### Pourquoi la décomposition par étape (latency per step) est clé
+
+Sans Langfuse, vous voyez : **"L'appel a pris 4 secondes."**
+
+Avec Langfuse, vous voyez :
+```
+Récupération contexte (RAG)  : 2,1s  ← problème ici
+Appel Claude API             : 1,6s
+Formatage réponse            : 0,3s
+─────────────────────────────────────
+Total                        : 4,0s
+```
+
+**Vous savez où agir.** Sans ça, vous optimisez à l'aveugle.
+
+### Pitch client (CTO / Architecte)
+
+> "Langfuse vous donne une vue chirurgicale sur chaque appel LLM :
+> combien de tokens, à quelle étape ça ralentit, combien ça coûte,
+> et si la réponse était de qualité. C'est le premier outil
+> dont vos développeurs ont besoin avant de mettre un LLM en production."
+
+### Argument FinOps (CFO / DSI)
+
+> "Le coût par feature vous permet de savoir exactement combien coûte
+> votre chatbot conformité vs votre assistant crédit.
+> Vous pouvez refacturer chaque département à l'euro près —
+> exactement comme vous le faites déjà avec le cloud."
+
+### Argument qualité (Conformité / Métier)
+
+> "Le taux d'hallucination, c'est la métrique que votre comité des risques
+> attend. Je mets en place les évaluations automatiques qui mesurent
+> si le modèle invente des réponses — et vous alertent quand ça dépasse un seuil."
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

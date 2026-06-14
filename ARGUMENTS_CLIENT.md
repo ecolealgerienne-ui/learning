@@ -520,6 +520,69 @@ vous lui apprenez à piloter ses LLM. C'est votre valeur ajoutée durable.
 
 ---
 
+## 12. Granularité des coûts dans Langfuse — 5 niveaux de visibilité
+
+> **Slide cours :** "Why This Matters for Cost Management"
+
+### Les 5 niveaux de tracking
+
+| Niveau | Ce que Langfuse mesure | Cas d'usage bancaire |
+|--------|----------------------|---------------------|
+| **Generation** | Chaque appel LLM : tokens + coût calculé | Identifier quel appel individuel coûte le plus |
+| **Trace** | Coût total d'une requête = somme de toutes ses générations | Coût réel d'une fonctionnalité end-to-end |
+| **Session** | Coût total d'une conversation entière | Pricing d'un chatbot — combien coûte un client par session |
+| **Tags** | Découpage par feature, segment, expérience | Chargeback par département, par produit bancaire |
+| **User** | Analyse par utilisateur — trouver les plus coûteux | Détecter les utilisateurs abusifs ou les cas limites |
+
+### Pourquoi la hiérarchie Generation → Trace → Session est clé
+
+```
+Session (conversation complète)
+  └── Trace (une requête utilisateur)
+        └── Generation 1 : embedding      $0.0001
+        └── Generation 2 : LLM RAG        $0.003
+        └── Generation 3 : LLM final      $0.004
+        ──────────────────────────────────────────
+        Coût total trace                  $0.0071
+
+  └── Trace suivante...
+  ──────────────────────────────────────────────
+  Coût total session                      $0.035
+```
+
+**Sans ce découpage, vous gérez votre budget IA comme un forfait téléphonique — vous voyez la facture totale, pas ce qui la compose.**
+
+### Tags — L'argument chargeback (décisif en banque)
+
+Les tags permettent de taguer chaque appel avec des métadonnées :
+```
+tags: ["departement:credit", "produit:scoring", "env:prod"]
+```
+
+→ Rapport mensuel : combien a coûté le scoring crédit vs le chatbot conformité vs l'assistant RH.
+
+> "Chaque département reçoit son relevé de consommation IA mensuel,
+> comme un relevé de carte corporate. La DSI refacture en interne.
+> Personne ne peut contester — les chiffres viennent de Langfuse,
+> pas d'une estimation."
+
+### User tracking — L'argument détection d'abus
+
+> "Avec le tracking par utilisateur, vous identifiez immédiatement
+> les 1% d'utilisateurs qui consomment 30% du budget.
+> En banque, ça peut être un analyste qui a automatisé des requêtes
+> manuellement, ou un bug dans une application interne.
+> Vous le voyez en temps réel, pas à la fin du mois."
+
+### Pitch global (synthèse des 5 niveaux)
+
+> "Langfuse vous donne une visibilité chirurgicale à 5 niveaux :
+> de l'appel individuel à la conversation complète, par feature,
+> par département, par utilisateur.
+> C'est le P&L de votre IA — vous savez exactement où va chaque euro."
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

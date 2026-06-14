@@ -388,6 +388,52 @@ classification de documents, extraction de champs, résumés courts, Q&A sur FAQ
 
 ---
 
+## 9. Paysage des plateformes — Pourquoi Langfuse
+
+> **Slide cours :** "The Platform Landscape — 40+ tools, but only 6 matter for production"
+
+### Comparatif des 4 plateformes principales
+
+| Plateforme | Meilleur pour | Open Source | Notre choix |
+|------------|--------------|-------------|-------------|
+| **Langfuse** | Équipes voulant le contrôle total | ✅ Oui | ✅ **OUI** |
+| LangSmith | Utilisateurs LangChain | ❌ Non | ❌ |
+| Arize Phoenix | Équipes ML, évaluation | 🟡 Partiel | ❌ |
+| Helicone | Cost tracking uniquement | ❌ Non | ❌ |
+
+### Pourquoi Langfuse est le seul choix viable en banque
+
+**LangSmith** → Propriétaire, données envoyées chez LangChain. Incompatible avec les exigences de souveraineté des données bancaires.
+
+**Arize Phoenix** → Orienté équipes data science / ML. Pas adapté aux architectes qui déploient des gateways LLM.
+
+**Helicone** → Uniquement cost tracking, pas de tracing complet. Et propriétaire.
+
+**Langfuse** → Open source, self-hosted, traces complètes, coûts, évaluations, API ouverte. Vos données ne quittent jamais votre infrastructure.
+
+### Pitch souveraineté (argument décisif en banque)
+
+> "En environnement bancaire, vos prompts contiennent souvent des données
+> sensibles — contexte client, données contractuelles, informations réglementaires.
+> Langfuse self-hosted garantit que ces données restent dans votre datacenter.
+> Aucun provider tiers ne les voit. C'est le seul outil d'observabilité LLM
+> compatible avec vos exigences RGPD et votre politique de sécurité."
+
+### Argument face à un concurrent qui propose LangSmith
+
+> "LangSmith est excellent pour les startups sur LangChain.
+> En banque, vous ne pouvez pas envoyer vos traces — qui contiennent
+> vos prompts métier — chez un tiers non qualifié.
+> Langfuse self-hosted, c'est la même puissance, dans votre périmètre."
+
+### Ce que ça dit de votre positionnement
+
+Vous ne choisissez pas Langfuse parce que c'est gratuit.
+Vous le choisissez parce que c'est le **seul choix rationnel** pour un environnement réglementé.
+C'est une décision d'architecte, pas d'économie.
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

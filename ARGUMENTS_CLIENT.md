@@ -783,6 +783,85 @@ Les instructions précises et spécifiques au cas d'usage restent — les géné
 
 ---
 
+## 16. Semantic Caching — Le cache qui comprend le sens
+
+> **Slide cours :** "Semantic Caching"
+> Sous-titre : *"What's your return policy?" ≈ "How do I return something?"*
+
+### Ce qui différencie le cache sémantique d'un cache classique
+
+**Cache classique (Redis standard) :**
+```
+"Quel est votre taux de crédit ?"  → cache HIT  ✅
+"Quel est votre taux de credit ?"  → cache MISS ❌  (faute d'accent)
+"Quels sont vos taux de crédit ?"  → cache MISS ❌  (pluriel)
+```
+
+**Cache sémantique (embeddings + similarité) :**
+```
+"Quel est votre taux de crédit ?"     → cache HIT ✅
+"Quels sont vos taux de crédit ?"     → cache HIT ✅  (même sens)
+"C'est quoi votre taux pour un prêt?" → cache HIT ✅  (même intention)
+```
+
+### Les 4 paramètres clés
+
+| Paramètre | Valeur | Signification |
+|-----------|--------|---------------|
+| **Match** | Similarité sémantique | Pas égalité exacte — compréhension du sens |
+| **Cache hit rate** | 30-50% en production | 1 requête sur 3 servie depuis le cache, coût zéro |
+| **Similarity threshold** | 0.92 | En dessous = réponse fraîche. Au dessus = cache. Réglable. |
+| **TTL** | 24h (majorité des cas) | Après 24h, la réponse est régénérée |
+
+### Calcul de l'économie (cache hit rate 40%)
+
+```
+Volume : 100 000 requêtes/jour
+Cache hit rate : 40%
+= 40 000 requêtes servies depuis Redis
+
+Coût sans cache  : 100 000 × $0.003 = $300/jour
+Coût avec cache  :  60 000 × $0.003 = $180/jour  (+ infra Redis négligeable)
+
+Économie : $120/jour = $3 600/mois = $43 200/an
+```
+
+### Réglage du threshold 0.92 — l'argument d'expertise
+
+**Threshold trop bas (ex: 0.75)** → trop permissif → mauvaises réponses réutilisées → perte de qualité
+
+**Threshold trop haut (ex: 0.99)** → trop strict → quasi-aucun cache hit → économies nulles
+
+**0.92 = sweet spot** pour la majorité des cas FAQ, support, Q&A interne.
+
+> "Le réglage du similarity threshold, c'est là où l'expertise fait la différence.
+> Trop bas, vous dégradez la qualité. Trop haut, vous n'économisez rien.
+> Je calibre ce paramètre sur vos données réelles après 2 semaines de monitoring."
+
+### TTL 24h — adapter selon le cas d'usage bancaire
+
+| Cas d'usage | TTL recommandé | Raison |
+|-------------|---------------|--------|
+| FAQ réglementaire (RGPD, CGU) | 7 jours | Contenu stable |
+| Taux et tarifs | 1 heure | Données volatiles |
+| Procédures internes | 24 heures | Standard |
+| Données marché | Pas de cache | Temps réel obligatoire |
+
+### Pitch client (DSI / Architecte)
+
+> "Le cache sémantique, c'est Redis, que vous avez déjà.
+> On y ajoute une couche de compréhension du sens via les embeddings.
+> Résultat : 30 à 50% de vos requêtes LLM ne coûtent plus rien.
+> Elles sont servies en 10ms depuis votre infrastructure interne."
+
+### Argument conformité (données qui restent en interne)
+
+> "Contrairement à un cache cloud, le cache sémantique tourne sur votre Redis interne.
+> Les réponses mises en cache ne quittent jamais votre périmètre.
+> C'est une optimisation de coût ET un renforcement de la souveraineté des données."
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

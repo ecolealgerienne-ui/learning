@@ -1161,6 +1161,85 @@ et ouvrent un ticket support.
 
 ---
 
+## 21. Your 30-Day Plan — Votre offre packagée "Sprint IA"
+
+> **Slide cours :** "Your 30-Day Plan"
+
+### Le plan en 4 semaines
+
+| Semaine | Focus | Livrable client |
+|---------|-------|-----------------|
+| **Semaine 1** | Foundation | First traces flowing — les premiers appels LLM tracés |
+| **Semaine 2** | Visibility | Cost dashboard + alerts — vous voyez tout, vous êtes alerté |
+| **Semaine 3** | Optimization | Cache + routing live — 70-85% d'économies activées |
+| **Semaine 4** | Polish | Security + docs + training — équipe autonome |
+
+### Ce que chaque semaine produit concrètement
+
+**Semaine 1 — Foundation**
+- Gateway LLM déployé (LiteLLM + Langfuse)
+- Première trace visible dans le dashboard
+- Claude API connectée + test validé
+- Livrable : stack running, rapport de première trace
+
+**Semaine 2 — Visibility**
+- Dashboard coûts par département configuré
+- 4 alertes critiques activées (spend, single request, error rate, P95)
+- Virtual keys par équipe (multi-tenant)
+- Livrable : dashboard live, documentation des alertes
+
+**Semaine 3 — Optimization**
+- Semantic caching Redis activé (threshold calibré sur vos données)
+- Model routing configuré (Haiku/Sonnet/Local selon la tâche)
+- Prompt optimization sur vos prompts système existants
+- Livrable : rapport d'économies avant/après, -70% minimum garanti
+
+**Semaine 4 — Polish**
+- Audit sécurité (PII detection, audit logs)
+- Documentation technique complète
+- Formation équipe (2h — utiliser Langfuse au quotidien)
+- Livrable : runbook opérationnel, équipe autonome
+
+### Pourquoi "Polish" = Security + Docs + Training est non-négociable
+
+Beaucoup de prestataires livrent le technique et partent.
+Vous restez une semaine de plus pour :
+- **Security** : votre client ne peut pas aller en prod sans ça en banque
+- **Docs** : sans documentation, votre travail disparaît au prochain turnover
+- **Training** : une équipe autonome = un client qui vous recommande
+
+> "Je ne livre pas juste du code. Je livre une équipe capable
+> de faire évoluer la solution sans moi. C'est ça la vraie valeur."
+
+### Votre proposition commerciale (à personnaliser)
+
+```
+SPRINT IA — 30 JOURS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Semaine 1 : Foundation        Gateway LLM + premières traces
+Semaine 2 : Visibility        Dashboard + alertes
+Semaine 3 : Optimization      Cache + routing (−70% coûts)
+Semaine 4 : Polish            Sécurité + docs + formation
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Engagement : 20 jours/homme sur 4 semaines
+Résultat garanti : −70% sur la facture LLM
+Suivi optionnel : 1 jour/mois (monitoring continu)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+### Pitch closing final
+
+> "Voilà comment on travaille ensemble.
+> Semaine 1, vous avez vos premières traces — vous voyez déjà la valeur.
+> Semaine 3, vos coûts ont baissé de 70%.
+> Semaine 4, votre équipe est autonome.
+> En 30 jours, votre IA est industrialisée, sécurisée, et maîtrisée.
+> On commence quand ?"
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

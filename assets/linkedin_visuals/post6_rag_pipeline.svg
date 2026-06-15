@@ -1,0 +1,101 @@
+<svg width="1200" height="627" viewBox="0 0 1200 627" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="1200" height="627" fill="#0f1117"/>
+  <rect width="1200" height="4" fill="#06b6d4"/>
+
+  <text x="600" y="62" text-anchor="middle" fill="#ffffff" font-size="34" font-weight="800">RAG Pipeline : Où Part Votre Budget ?</text>
+  <text x="600" y="90" text-anchor="middle" fill="#64748b" font-size="16">Anatomie d'un appel RAG — coût réel par étape (mesuré via traces Langfuse)</text>
+
+  <!-- Pipeline steps -->
+  <!-- Step 1 -->
+  <rect x="60" y="118" width="195" height="100" rx="10" fill="#1a1d27" stroke="#06b6d420" stroke-width="1"/>
+  <text x="157" y="148" text-anchor="middle" fill="#06b6d4" font-size="12" font-weight="700">① QUESTION</text>
+  <text x="157" y="170" text-anchor="middle" fill="#94a3b8" font-size="13">"Quels sont les</text>
+  <text x="157" y="188" text-anchor="middle" fill="#94a3b8" font-size="13">risques du contrat</text>
+  <text x="157" y="206" text-anchor="middle" fill="#94a3b8" font-size="13">article 7 ?"</text>
+
+  <!-- Arrow -->
+  <text x="270" y="175" text-anchor="middle" fill="#334155" font-size="22">→</text>
+
+  <!-- Step 2 -->
+  <rect x="285" y="118" width="195" height="100" rx="10" fill="#1a1d27" stroke="#6366f120" stroke-width="1"/>
+  <text x="382" y="148" text-anchor="middle" fill="#6366f1" font-size="12" font-weight="700">② EMBEDDING</text>
+  <text x="382" y="172" text-anchor="middle" fill="#94a3b8" font-size="13">Vectorisation</text>
+  <text x="382" y="192" text-anchor="middle" fill="#f59e0b" font-size="14" font-weight="700">~50 tokens</text>
+  <text x="382" y="210" text-anchor="middle" fill="#22c55e" font-size="12">0.0001€</text>
+
+  <!-- Arrow -->
+  <text x="495" y="175" text-anchor="middle" fill="#334155" font-size="22">→</text>
+
+  <!-- Step 3 -->
+  <rect x="510" y="118" width="195" height="100" rx="10" fill="#1a1d27" stroke="#ef444420" stroke-width="1"/>
+  <text x="607" y="145" text-anchor="middle" fill="#ef4444" font-size="12" font-weight="700">③ RETRIEVAL</text>
+  <text x="607" y="163" text-anchor="middle" fill="#94a3b8" font-size="12">Chunks récupérés</text>
+  <text x="607" y="181" text-anchor="middle" fill="#ef4444" font-size="20" font-weight="800">50 chunks</text>
+  <text x="607" y="201" text-anchor="middle" fill="#ef4444" font-size="13" font-weight="600">≈ 40 000 tokens</text>
+  <text x="607" y="215" text-anchor="middle" fill="#ef4444" font-size="12">0.14€ ← PROBLÈME</text>
+
+  <!-- Arrow -->
+  <text x="720" y="175" text-anchor="middle" fill="#334155" font-size="22">→</text>
+
+  <!-- Step 4 -->
+  <rect x="735" y="118" width="195" height="100" rx="10" fill="#1a1d27" stroke="#f59e0b20" stroke-width="1"/>
+  <text x="832" y="148" text-anchor="middle" fill="#f59e0b" font-size="12" font-weight="700">④ LLM CALL</text>
+  <text x="832" y="168" text-anchor="middle" fill="#94a3b8" font-size="12">Prompt + contexte</text>
+  <text x="832" y="188" text-anchor="middle" fill="#f59e0b" font-size="14" font-weight="700">42 000 tokens</text>
+  <text x="832" y="208" text-anchor="middle" fill="#f59e0b" font-size="12">0.15€ / appel</text>
+
+  <!-- Arrow -->
+  <text x="945" y="175" text-anchor="middle" fill="#334155" font-size="22">→</text>
+
+  <!-- Step 5 -->
+  <rect x="960" y="118" width="195" height="100" rx="10" fill="#1a1d27" stroke="#22c55e20" stroke-width="1"/>
+  <text x="1057" y="148" text-anchor="middle" fill="#22c55e" font-size="12" font-weight="700">⑤ RÉPONSE</text>
+  <text x="1057" y="168" text-anchor="middle" fill="#94a3b8" font-size="12">Génération output</text>
+  <text x="1057" y="188" text-anchor="middle" fill="#22c55e" font-size="14" font-weight="700">~400 tokens</text>
+  <text x="1057" y="208" text-anchor="middle" fill="#22c55e" font-size="12">0.006€</text>
+
+  <!-- Cost breakdown bar -->
+  <text x="600" y="254" text-anchor="middle" fill="#64748b" font-size="13" font-weight="600" letter-spacing="1">RÉPARTITION DU COÛT PAR ÉTAPE</text>
+
+  <!-- Bar chart horizontal -->
+  <rect x="60" y="268" width="1080" height="36" rx="4" fill="#1a1d27"/>
+  <!-- Embedding: 0.03% -->
+  <rect x="60" y="268" width="3" height="36" rx="2" fill="#6366f1"/>
+  <!-- Retrieval: 47% -->
+  <rect x="63" y="268" width="506" height="36" fill="#ef4444" opacity="0.8"/>
+  <!-- LLM: 51% -->
+  <rect x="569" y="268" width="549" height="36" rx="2" fill="#f59e0b" opacity="0.8"/>
+
+  <text x="310" y="292" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700">Retrieval : 47%</text>
+  <text x="870" y="292" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700">LLM Input Context : 51%</text>
+  <text x="63" y="316" fill="#6366f1" font-size="11">Embed 2%</text>
+
+  <!-- Optimized version -->
+  <rect x="60" y="336" width="510" height="200" rx="12" fill="#1a1d27"/>
+  <rect x="60" y="336" width="510" height="40" rx="12" fill="#ef444418"/>
+  <text x="315" y="362" text-anchor="middle" fill="#ef4444" font-size="14" font-weight="700">SANS OPTIMISATION → 0.30€/appel</text>
+  <text x="100" y="392" fill="#64748b" font-size="13">50 chunks récupérés → 40 000 tokens contexte</text>
+  <text x="100" y="414" fill="#64748b" font-size="13">Le modèle se noie — qualité dégradée</text>
+  <text x="100" y="436" fill="#64748b" font-size="13">100 000 appels/mois</text>
+  <text x="100" y="464" fill="#ef4444" font-size="20" font-weight="800">= 30 000€/mois</text>
+  <text x="100" y="486" fill="#ef4444" font-size="13">pour un seul use case</text>
+  <text x="100" y="506" fill="#ef4444" font-size="13">Score qualité moyen : 0.71</text>
+
+  <rect x="630" y="336" width="510" height="200" rx="12" fill="#1a1d27"/>
+  <rect x="630" y="336" width="510" height="40" rx="12" fill="#22c55e18"/>
+  <text x="885" y="362" text-anchor="middle" fill="#22c55e" font-size="14" font-weight="700">OPTIMISÉ → 0.03€/appel (−90%)</text>
+  <text x="670" y="392" fill="#64748b" font-size="13">5 chunks ciblés → 4 000 tokens contexte</text>
+  <text x="670" y="414" fill="#64748b" font-size="13">Re-ranking par pertinence (score &gt; 0.85)</text>
+  <text x="670" y="436" fill="#64748b" font-size="13">100 000 appels/mois</text>
+  <text x="670" y="464" fill="#22c55e" font-size="20" font-weight="800">= 3 000€/mois</text>
+  <text x="670" y="486" fill="#22c55e" font-size="13">économie : 27 000€/mois</text>
+  <text x="670" y="506" fill="#22c55e" font-size="13">Score qualité amélioré : 0.89</text>
+
+  <!-- Arrow between panels -->
+  <text x="600" y="450" text-anchor="middle" fill="#6366f1" font-size="30" font-weight="800">→</text>
+
+  <text x="600" y="570" text-anchor="middle" fill="#06b6d4" font-size="16" font-weight="700">Plus de contexte ≠ meilleure réponse. Moins de bruit = meilleure précision.</text>
+  <text x="600" y="594" text-anchor="middle" fill="#475569" font-size="14">Visible uniquement avec traces Langfuse par étape de pipeline.</text>
+
+  <text x="1160" y="618" text-anchor="end" fill="#334155" font-size="11">Architecte IA · Environnements Réglementés</text>
+</svg>

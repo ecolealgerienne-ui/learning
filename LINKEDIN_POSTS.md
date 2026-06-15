@@ -14,7 +14,7 @@
 ---
 
 ## 📌 POST 1 — La boîte noire
-**Image :** `assets/slides_cours/` — slide "Traditional vs LLM Observability"
+**Image :** `assets/linkedin_visuals/post1_boite_noire.svg`
 **Semaine :** 1 | **Statut :** ✅ Prêt
 
 ---
@@ -56,7 +56,7 @@ Votre stack de monitoring actuel couvre-t-il le contenu des réponses IA ?
 ---
 
 ## 📌 POST 2 — Le token spike
-**Image :** `assets/slides_cours/` — slide "Risk Matrix"
+**Image :** `assets/linkedin_visuals/post2_token_spike.svg`
 **Semaine :** 2 | **Statut :** ✅ Prêt
 
 ---
@@ -95,7 +95,7 @@ Vous avez déjà eu un incident de surcoût IA ? Comment vous l'avez détecté ?
 ---
 
 ## 📌 POST 3 — 35 000€ → 15 000€
-**Image :** `assets/slides_cours/` — slide "ROI Framework"
+**Image :** `assets/linkedin_visuals/post3_roi.svg`
 **Semaine :** 3 | **Statut :** ✅ Prêt
 
 ---
@@ -132,7 +132,7 @@ Quel est votre budget LLM mensuel actuel ?
 ---
 
 ## 📌 POST 4 — 89 tokens → 13 tokens
-**Image :** `assets/slides_cours/` — slide "Prompt Optimization Before/After"
+**Image :** `assets/linkedin_visuals/post4_prompt_optimization.svg`
 **Semaine :** 4 | **Statut :** ✅ Prêt
 
 ---
@@ -177,7 +177,7 @@ Montrez-moi votre prompt système. Je vous dis en 5 minutes ce qu'on peut suppri
 ---
 
 ## 📌 POST 5 — Les 5 coupables
-**Image :** `assets/slides_cours/` — slide "Top 5 Cost Drivers"
+**Image :** `assets/linkedin_visuals/post5_top5_cost_drivers.svg`
 **Semaine :** 5 | **Statut :** ✅ Prêt
 
 ---
@@ -213,7 +213,7 @@ Vous savez exactement où va votre budget LLM, token par token ?
 ---
 
 ## 📌 POST 6 — 252 000€/an pour un pipeline RAG
-**Image :** `assets/slides_cours/` — slide "Where Costs Hide: RAG + Agent Pipeline"
+**Image :** `assets/linkedin_visuals/post6_rag_pipeline.svg`
 **Semaine :** 6 | **Statut :** ✅ Prêt
 
 ---
@@ -250,7 +250,7 @@ Vous avez modélisé le coût réel de votre pipeline RAG à votre volume de pro
 ---
 
 ## 📌 POST 7 — Gartner : 15% → 50%
-**Image :** Aucune (texte seul)
+**Image :** `assets/linkedin_visuals/post7_gartner.svg`
 **Semaine :** 7 | **Statut :** ✅ Prêt
 
 ---
@@ -287,7 +287,7 @@ Vous avez déjà évalué votre exposition à l'EU AI Act sur vos systèmes IA ?
 ---
 
 ## 📌 POST 8 — Le routing intelligent
-**Image :** `assets/slides_cours/` — slide "Smart Model Routing"
+**Image :** `assets/linkedin_visuals/post8_model_routing.svg`
 **Semaine :** 8 | **Statut :** ✅ Prêt
 
 ---
@@ -332,7 +332,7 @@ Vous avez déjà calculé la répartition de vos requêtes par complexité ?
 ---
 
 ## 📌 POST 9 — L'audit de 2 jours
-**Image :** `assets/slides_cours/` — slide "Implementation Priority"
+**Image :** `assets/linkedin_visuals/post9_audit_2jours.svg`
 **Semaine :** 9 | **Statut :** ✅ Prêt
 
 ---
@@ -369,7 +369,7 @@ Intéressé par un audit sur votre stack LLM actuel ?
 ---
 
 ## 📌 POST 10 — Langfuse vs les autres
-**Image :** `assets/slides_cours/` — slide "Platform Landscape" ou "Decision Matrix"
+**Image :** `assets/linkedin_visuals/post10_langfuse_vs_others.svg`
 **Semaine :** 10 | **Statut :** ✅ Prêt
 
 ---

@@ -1,0 +1,63 @@
+<svg width="1200" height="627" viewBox="0 0 1200 627" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="1200" height="627" fill="#0f1117"/>
+  <rect width="1200" height="4" fill="#6366f1"/>
+
+  <!-- Title -->
+  <text x="600" y="65" text-anchor="middle" fill="#ffffff" font-size="34" font-weight="800">Le Marché de l'Observabilité LLM</text>
+  <text x="600" y="93" text-anchor="middle" fill="#64748b" font-size="16">Sources : Gartner · Research &amp; Markets · FinOps Foundation — 2026</text>
+
+  <!-- Gartner quote -->
+  <rect x="60" y="115" width="1080" height="90" rx="12" fill="#6366f110" stroke="#6366f130" stroke-width="1"/>
+  <text x="90" y="148" fill="#6366f1" font-size="22">"</text>
+  <text x="110" y="152" fill="#94a3b8" font-size="15" font-style="italic">By 2028, explainable AI will drive LLM observability investments to</text>
+  <text x="110" y="175" fill="#ffffff" font-size="15" font-weight="700">50% of GenAI deployments — up from 15% today.</text>
+  <text x="980" y="195" text-anchor="end" fill="#475569" font-size="13">— Gartner, mars 2026</text>
+
+  <!-- Growth chart -->
+  <rect x="60" y="225" width="530" height="280" rx="12" fill="#1a1d27"/>
+  <text x="325" y="258" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="600" letter-spacing="1">TAILLE DU MARCHÉ (milliards $)</text>
+
+  <!-- Bars -->
+  <rect x="120" y="400" width="70" height="60" rx="4" fill="#6366f1" opacity="0.6"/>
+  <text x="155" y="395" text-anchor="middle" fill="#6366f1" font-size="14" font-weight="700">1,97</text>
+  <text x="155" y="475" text-anchor="middle" fill="#475569" font-size="13">2025</text>
+
+  <rect x="240" y="360" width="70" height="100" rx="4" fill="#6366f1" opacity="0.75"/>
+  <text x="275" y="355" text-anchor="middle" fill="#6366f1" font-size="14" font-weight="700">2,69</text>
+  <text x="275" y="475" text-anchor="middle" fill="#475569" font-size="13">2026</text>
+  <text x="275" y="491" text-anchor="middle" fill="#22c55e" font-size="11">+36%</text>
+
+  <rect x="360" y="295" width="70" height="165" rx="4" fill="#6366f1" opacity="0.85"/>
+  <text x="395" y="290" text-anchor="middle" fill="#6366f1" font-size="14" font-weight="700">4,2</text>
+  <text x="395" y="475" text-anchor="middle" fill="#475569" font-size="13">2027</text>
+
+  <rect x="480" y="200" width="70" height="260" rx="4" fill="#6366f1"/>
+  <text x="515" y="195" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="800">9,26</text>
+  <text x="515" y="475" text-anchor="middle" fill="#475569" font-size="13">2030</text>
+  <text x="515" y="491" text-anchor="middle" fill="#22c55e" font-size="11">CAGR +36%</text>
+
+  <!-- Right stats -->
+  <rect x="620" y="225" width="240" height="130" rx="12" fill="#1a1d27"/>
+  <text x="740" y="262" text-anchor="middle" fill="#64748b" font-size="13">Adoption observabilité LLM</text>
+  <text x="740" y="300" text-anchor="middle" fill="#ef4444" font-size="46" font-weight="800">15%</text>
+  <text x="740" y="330" text-anchor="middle" fill="#64748b" font-size="13">aujourd'hui</text>
+  <text x="740" y="348" text-anchor="middle" fill="#475569" font-size="11">→ 50% en 2028 (Gartner)</text>
+
+  <rect x="880" y="225" width="260" height="130" rx="12" fill="#1a1d27"/>
+  <text x="1010" y="262" text-anchor="middle" fill="#64748b" font-size="13">Demande freelance LLM</text>
+  <text x="1010" y="300" text-anchor="middle" fill="#22c55e" font-size="46" font-weight="800">+304%</text>
+  <text x="1010" y="330" text-anchor="middle" fill="#64748b" font-size="13">YoY (USA 2026)</text>
+  <text x="1010" y="348" text-anchor="middle" fill="#475569" font-size="11">offre +85% seulement → gap 3,5x</text>
+
+  <rect x="620" y="370" width="520" height="130" rx="12" fill="#1a1d27"/>
+  <text x="880" y="400" text-anchor="middle" fill="#f59e0b" font-size="13" font-weight="600" letter-spacing="1">EU AI ACT — EN VIGUEUR 2026</text>
+  <text x="880" y="428" text-anchor="middle" fill="#94a3b8" font-size="14">Systèmes IA à haut risque (scoring crédit, assurance)</text>
+  <text x="880" y="452" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="600">→ Traçabilité et auditabilité OBLIGATOIRES</text>
+  <text x="880" y="476" text-anchor="middle" fill="#ef4444" font-size="13">Sanction : jusqu'à 35M€ ou 7% du CA mondial</text>
+
+  <!-- Bottom -->
+  <text x="600" y="548" text-anchor="middle" fill="#6366f1" font-size="16" font-weight="700">Le marché de l'observabilité LLM décollage maintenant.</text>
+  <text x="600" y="572" text-anchor="middle" fill="#475569" font-size="14">Les profils spécialisés sont quasi-introuvables sur le marché français.</text>
+
+  <text x="1160" y="618" text-anchor="end" fill="#334155" font-size="11">Architecte IA · Environnements Réglementés</text>
+</svg>

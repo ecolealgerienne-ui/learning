@@ -1,0 +1,87 @@
+<svg width="1200" height="627" viewBox="0 0 1200 627" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="1200" height="627" fill="#0f1117"/>
+  <rect width="1200" height="4" fill="#ef4444"/>
+
+  <!-- Title -->
+  <text x="600" y="75" text-anchor="middle" fill="#ffffff" font-size="38" font-weight="800">Le Token Spike</text>
+  <text x="600" y="105" text-anchor="middle" fill="#64748b" font-size="18">Le risque FinOps n°1 des LLM en production</text>
+
+  <!-- Chart area -->
+  <rect x="60" y="130" width="700" height="340" rx="12" fill="#1a1d27"/>
+
+  <!-- Chart label -->
+  <text x="90" y="165" fill="#475569" font-size="12" font-weight="600" letter-spacing="1">COÛT LLM JOURNALIER (€)</text>
+
+  <!-- Y axis labels -->
+  <text x="88" y="195" text-anchor="end" fill="#475569" font-size="11">500€</text>
+  <text x="88" y="255" text-anchor="end" fill="#475569" font-size="11">250€</text>
+  <text x="88" y="315" text-anchor="end" fill="#475569" font-size="11">100€</text>
+  <text x="88" y="375" text-anchor="end" fill="#475569" font-size="11">50€</text>
+  <text x="88" y="435" text-anchor="end" fill="#475569" font-size="11">0€</text>
+
+  <!-- Grid lines -->
+  <line x1="100" y1="192" x2="740" y2="192" stroke="#252837" stroke-width="1"/>
+  <line x1="100" y1="252" x2="740" y2="252" stroke="#252837" stroke-width="1"/>
+  <line x1="100" y1="312" x2="740" y2="312" stroke="#252837" stroke-width="1"/>
+  <line x1="100" y1="372" x2="740" y2="372" stroke="#252837" stroke-width="1"/>
+  <line x1="100" y1="432" x2="740" y2="432" stroke="#334155" stroke-width="1"/>
+
+  <!-- Normal bars (days 1-20) -->
+  <rect x="110" y="392" width="20" height="40" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="138" y="387" width="20" height="45" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="166" y="395" width="20" height="37" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="194" y="388" width="20" height="44" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="222" y="393" width="20" height="39" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="250" y="390" width="20" height="42" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="278" y="394" width="20" height="38" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="306" y="389" width="20" height="43" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="334" y="392" width="20" height="40" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="362" y="391" width="20" height="41" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="390" y="393" width="20" height="39" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="418" y="388" width="20" height="44" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="446" y="394" width="20" height="38" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="474" y="390" width="20" height="42" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="502" y="392" width="20" height="40" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="530" y="389" width="20" height="43" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="558" y="393" width="20" height="39" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="586" y="391" width="20" height="41" rx="3" fill="#6366f1" opacity="0.7"/>
+  <rect x="614" y="392" width="20" height="40" rx="3" fill="#6366f1" opacity="0.7"/>
+
+  <!-- SPIKE bar -->
+  <rect x="642" y="182" width="28" height="250" rx="3" fill="#ef4444"/>
+  <!-- Spike glow -->
+  <rect x="638" y="178" width="36" height="258" rx="5" fill="#ef444420"/>
+
+  <!-- Spike label -->
+  <text x="656" y="175" text-anchor="middle" fill="#ef4444" font-size="13" font-weight="700">10 000€ !</text>
+  <text x="656" y="155" text-anchor="middle" fill="#ef4444" font-size="11">Bug nuit</text>
+  <line x1="656" y1="160" x2="656" y2="178" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- Normal range annotation -->
+  <line x1="100" y1="395" x2="620" y2="395" stroke="#22c55e" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="360" y="412" text-anchor="middle" fill="#22c55e" font-size="11">Zone normale ≈ 40-50€/jour</text>
+
+  <!-- Right panel -->
+  <rect x="790" y="130" width="370" height="340" rx="12" fill="#1a1d27"/>
+  <text x="975" y="175" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">La Solution</text>
+  <text x="975" y="198" text-anchor="middle" fill="#22c55e" font-size="13">Budget Guardrails — 10 min de config</text>
+
+  <rect x="815" y="215" width="320" height="110" rx="8" fill="#0d1117" stroke="#334155" stroke-width="1"/>
+  <text x="835" y="238" fill="#6366f1" font-size="12" font-weight="600">litellm-config.yaml</text>
+  <text x="835" y="260" fill="#94a3b8" font-size="12" font-family="monospace">virtual_keys:</text>
+  <text x="835" y="278" fill="#94a3b8" font-size="12" font-family="monospace">  - key: equipe-credit</text>
+  <text x="835" y="296" fill="#22c55e" font-size="12" font-family="monospace">    max_budget: 500</text>
+  <text x="835" y="314" fill="#f59e0b" font-size="12" font-family="monospace">    budget_duration: 30d</text>
+
+  <!-- Benefits -->
+  <text x="835" y="360" fill="#22c55e" font-size="14">✓  Coupure automatique</text>
+  <text x="835" y="385" fill="#22c55e" font-size="14">✓  Alerte avant le seuil</text>
+  <text x="835" y="410" fill="#22c55e" font-size="14">✓  Vue par département</text>
+  <text x="835" y="435" fill="#22c55e" font-size="14">✓  Zéro surprise en fin de mois</text>
+
+  <!-- Bottom -->
+  <text x="600" y="510" text-anchor="middle" fill="#64748b" font-size="15">Un bug la nuit. 10 000€ de facture au matin.</text>
+  <text x="600" y="533" text-anchor="middle" fill="#64748b" font-size="15">Ce risque disparaît en 10 minutes de configuration.</text>
+
+  <text x="1160" y="618" text-anchor="end" fill="#334155" font-size="11">Architecte IA · Environnements Réglementés</text>
+</svg>

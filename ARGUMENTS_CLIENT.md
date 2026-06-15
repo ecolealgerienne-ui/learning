@@ -1022,6 +1022,76 @@ if single_request_cost > 1.0:
 
 ---
 
+## 19. Debugging with Traces — Debug en minutes, pas en heures
+
+> **Slide cours :** "Debugging with Traces — Full visibility into every request"
+
+### Les 4 capacités de debugging que Langfuse apporte
+
+| Capacité | Exemple concret | Sans Langfuse |
+|----------|----------------|---------------|
+| **Identifier les bottlenecks** | "Retrieval : 6.8s !" | Vous savez juste que "c'est lent" |
+| **Voir les métadonnées** | "chunks_retrieved: 50 — too many!" | Vous ne savez pas pourquoi la réponse est mauvaise |
+| **Tracker les sources d'hallucination** | "Wrong docs indexed" | Vous savez que le modèle invente, pas pourquoi |
+| **Debug en minutes** | Trace complète dispo immédiatement | Investigation manuelle de plusieurs heures |
+
+### Scénario réel — Sans vs Avec Langfuse
+
+**Ticket support reçu :** "Le chatbot conformité donne des informations incorrectes sur le RGPD."
+
+**Sans Langfuse :**
+```
+Développeur junior → cherche dans les logs → trouve des codes HTTP 200
+→ ne voit pas le prompt → ne sait pas quels documents ont été récupérés
+→ recrée la situation manuellement → 4h de debug
+→ conclusion : "probablement un problème de prompt"
+```
+
+**Avec Langfuse :**
+```
+Ouvre la trace dans Langfuse → voit exactement :
+- chunks_retrieved: 50 (trop de contexte = bruit)
+- Document indexé : "RGPD_2018_v1.pdf" (version obsolète)
+- Prompt système : 847 tokens (trop long)
+→ 3 actions correctives identifiées en 5 minutes
+```
+
+### "chunks_retrieved: 50 — too many!" — l'exemple qui parle aux architectes
+
+50 chunks dans le contexte RAG = le modèle reçoit trop d'information contradictoire.
+Il ne sait pas quelle source prioriser → il hallucine ou donne une réponse vague.
+
+**Solution visible grâce à la trace :** réduire top-K de 50 à 5-10 chunks pertinents.
+
+> "Ce bug aurait pris une journée à diagnostiquer sans observabilité.
+> Avec Langfuse, la trace montre exactement le problème en 30 secondes :
+> 50 chunks récupérés, document obsolète indexé, réponse prévisiblement fausse."
+
+### "Track hallucination sources" — l'argument conformité le plus fort
+
+En banque, une hallucination sur une réglementation peut avoir des conséquences légales.
+
+Langfuse permet de remonter à la source :
+- Quel document a été récupéré ?
+- Était-il à jour ?
+- Y avait-il des contradictions entre les chunks ?
+
+> "Quand votre IA donne une mauvaise réponse réglementaire,
+> Langfuse vous dit pourquoi en 30 secondes.
+> Vous pouvez corriger la source, pas juste le symptôme.
+> Et vous avez la trace complète pour votre comité des risques."
+
+### Pitch DSI / Responsable qualité
+
+> "Le debugging LLM sans traces, c'est débugger un programme
+> sans pouvoir lire les variables.
+> Vous savez que quelque chose ne va pas, mais pas où ni pourquoi.
+> Langfuse vous donne la visibilité complète sur chaque requête :
+> inputs, outputs, métadonnées, timing par étape.
+> Debug en minutes, pas en heures — et une trace d'audit en prime."
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

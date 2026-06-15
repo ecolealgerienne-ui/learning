@@ -1240,6 +1240,61 @@ Suivi optionnel : 1 jour/mois (monitoring continu)
 
 ---
 
+## 22. Course Recap — Les 4 vérités fondamentales
+
+> **Slide cours :** "Course Recap" — slide final du module
+
+### Les 4 messages à retenir (et à répéter en rendez-vous)
+
+| # | Message | En une phrase client |
+|---|---------|---------------------|
+| 1 | **Observabilité = argent économisé** | 50-80% de réduction des coûts LLM |
+| 2 | **Trois leviers coût** | Prompts, Caching, Routing — dans cet ordre |
+| 3 | **Tracer tout, mesurer en continu** | Sans données, pas d'optimisation possible |
+| 4 | **Debug en minutes, pas en heures** | Traces complètes = incidents résolus le jour même |
+
+### Pourquoi ce recap est votre script d'ouverture de rendez-vous
+
+Ces 4 points se disent en 60 secondes. C'est votre accroche :
+
+> "Je fais une chose : j'industrialise les LLM en environnement réglementé.
+> Concrètement, ça veut dire :
+> réduire vos coûts de 50 à 80% grâce à trois leviers techniques,
+> tracer chaque appel pour votre conformité,
+> et quand quelque chose ne va pas — vous le savez en minutes, pas en jours.
+> C'est ça mon métier. On regarde ensemble où vous en êtes ?"
+
+### La hiérarchie des messages selon l'interlocuteur
+
+**Face au CFO / DAF :**
+→ Point 1 en premier : "50-80% de réduction"
+
+**Face au CTO / Architecte :**
+→ Point 2 en premier : "trois leviers, voici comment ça fonctionne"
+
+**Face au RSSI / Conformité :**
+→ Point 3 en premier : "tracer tout, c'est votre audit trail"
+
+**Face au DSI (tous les chapeaux) :**
+→ Point 4 en premier : "debug en minutes = moins de tickets, moins de stress"
+
+---
+
+## 🏁 SYNTHÈSE FINALE — Ce que ce cours vous a appris
+
+Vous avez maintenant les arguments pour répondre à toutes les objections :
+
+| Objection | Votre réponse |
+|-----------|---------------|
+| "On a déjà Datadog" | Datadog ne voit pas le contenu des appels LLM — c'est une boîte noire |
+| "C'est trop cher" | Le ROI est 7-30x dès le premier mois |
+| "On va utiliser LangSmith" | Propriétaire — vos données sortent de votre périmètre |
+| "On n'a pas le budget" | L'audit prompt optimization est gratuit, gains immédiats |
+| "On le fait en interne" | Je livre en 30 jours ce qui prendrait 6 mois en interne |
+| "C'est trop risqué" | Stack open source éprouvé, self-hosted, données chez vous |
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

@@ -862,6 +862,101 @@ Coût avec cache  :  60 000 × $0.003 = $180/jour  (+ infra Redis négligeable)
 
 ---
 
+## 17. Smart Model Routing — Router 80% vers les modèles économiques
+
+> **Slide cours :** "Smart Model Routing — Route 80% of requests to cheap models"
+
+### Le principe
+
+**70-80% de vos requêtes peuvent utiliser le modèle le moins cher.**
+Seuls 20-30% nécessitent vraiment le modèle premium.
+
+Le problème : sans routing, tout passe sur le modèle premium par défaut.
+
+### Routing par type de tâche (exemples bancaires)
+
+| Tâche | Modèle recommandé | Ratio coût |
+|-------|------------------|------------|
+| Classification de documents | Claude Haiku | 1x |
+| Extraction de champs (formulaires) | Claude Haiku | 1x |
+| Résumé court (< 500 mots) | Claude Haiku | 1x |
+| Q&A sur FAQ interne | Claude Haiku | 1x |
+| Analyse juridique / contrat complexe | Claude Sonnet | 12x |
+| Raisonnement multi-étapes | Claude Sonnet | 12x |
+| Génération de rapport long | Claude Sonnet | 12x |
+| Données ultra-sensibles (on-premise) | Llama3 local | ~0x |
+
+**Résultat : 80% des requêtes à 1x, 20% à 12x → coût moyen : ~3x au lieu de 12x**
+
+### Config LiteLLM pour le routing
+
+```yaml
+# Dans litellm-config.yaml
+router_settings:
+  routing_strategy: "cost-based-routing"
+
+model_list:
+  - model_name: claude-haiku      # tâches simples
+    litellm_params:
+      model: anthropic/claude-haiku-4-5
+
+  - model_name: claude-sonnet     # tâches complexes
+    litellm_params:
+      model: anthropic/claude-sonnet-4-5
+
+  - model_name: llama3-local      # données sensibles
+    litellm_params:
+      model: ollama/llama3
+```
+
+### "Upgrade only when quality suffers" — la règle d'or
+
+> Ne pas router vers le modèle premium par peur.
+> Router vers le modèle économique, mesurer la qualité avec Langfuse,
+> et upgrader seulement si les évaluations montrent une dégradation.
+
+C'est pourquoi l'observabilité (Langfuse) est la fondation : sans mesure de qualité, vous ne savez pas si vous pouvez downgrader.
+
+### A/B Testing des thresholds — argument d'expertise avancée
+
+Langfuse permet de faire des A/B tests entre modèles :
+- 50% des requêtes → Haiku
+- 50% des requêtes → Sonnet
+- Comparer qualité + coût dans le dashboard
+
+**Puis basculer 100% sur Haiku si la qualité est équivalente.**
+
+> "Je ne vous dis pas d'utiliser le modèle moins cher à l'aveugle.
+> Je mets en place les A/B tests qui prouvent que la qualité est maintenue.
+> Vous prenez la décision sur des données, pas sur une intuition."
+
+### Pitch client — L'analogie RH
+
+> "Vous n'envoyez pas un associé senior à 800€/jour
+> pour rédiger un email de confirmation.
+> Votre assistant junior fait ça très bien.
+> Le routing LLM, c'est exactement la même logique :
+> le bon modèle pour la bonne tâche.
+> Je configure LiteLLM pour que ce choix soit automatique,
+> invisible pour vos développeurs, et mesurable en temps réel."
+
+### Impact financier combiné avec le caching
+
+```
+Volume : 100 000 req/jour
+
+Après semantic caching (-40%)     :  60 000 req payantes
+Après model routing (80% Haiku)  :  48 000 × Haiku + 12 000 × Sonnet
+
+Coût sans optimisation   : 100 000 × $0.003 = $300/jour
+Coût avec optimisation   : 48 000 × $0.00025 + 12 000 × $0.003
+                         = $12 + $36 = $48/jour
+
+Réduction totale : -84%
+```
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

@@ -957,6 +957,71 @@ Réduction totale : -84%
 
 ---
 
+## 18. Alerts That Matter — Les 4 alertes à configurer dès le départ
+
+> **Slide cours :** "Alerts That Matter"
+
+### Les 4 alertes essentielles en production
+
+| Alerte | Seuil | Priorité | Ce que ça détecte |
+|--------|-------|----------|-------------------|
+| **Daily spend exceeded** | 120% de la moyenne | 🔴 High | Anomalie de consommation — bug, abus, attaque |
+| **Single request > 1$** | Seuil coût unitaire | 🔴 High | Requête anormale — contexte trop long, boucle |
+| **Error rate > 5%** | Seuil qualité | 🟥 Critical | Dégradation du service — modèle en erreur |
+| **Latency P95 > 10s** | Performance | 🟠 Medium | Dégradation progressive avant incident |
+
+### Pourquoi P95 et non la latence moyenne
+
+**Latence moyenne** : masque les outliers. Si 95% des requêtes prennent 1s et 5% prennent 30s, la moyenne affiche 2,5s. Vous ne voyez rien.
+
+**Latence P95** : le 95e percentile. 95% des requêtes sont sous ce seuil. C'est ce que vivent vos utilisateurs les plus lents — et c'est ce qui génère des tickets support.
+
+> "En banque, le SLA ne se négocie pas sur la moyenne — il se négocie sur le P95.
+> Je configure vos alertes sur les métriques que vos utilisateurs ressentent,
+> pas sur celles qui font bonne figure dans un tableau de bord."
+
+### L'alerte "Single request > 1$" — souvent ignorée, toujours critique
+
+Une seule requête à 1$ = contexte de ~330 000 tokens.
+En production, ça n'arrive que dans deux cas :
+1. **Bug** : historique de conversation qui n'est pas tronqué
+2. **Usage abusif** : utilisateur qui envoie des documents entiers
+
+> "Cette alerte coûte 5 minutes à configurer et peut vous éviter
+> des factures de plusieurs milliers d'euros en une nuit."
+
+### Configuration Langfuse (exemple)
+
+```python
+# alert_webhook.py (déjà dans course_code/)
+# Déclenche une alerte si le coût dépasse le threshold
+
+if daily_cost > average_cost * 1.20:
+    send_webhook_alert("Daily spend exceeded 120% of average")
+
+if single_request_cost > 1.0:
+    send_webhook_alert(f"Single request cost: ${single_request_cost:.2f}")
+```
+
+### Adaptation contexte bancaire — thresholds à ajuster
+
+| Alerte | Threshold cours | Threshold banque (suggestion) |
+|--------|----------------|-------------------------------|
+| Daily spend | 120% moyenne | 110% (plus conservateur) |
+| Single request | $1 | $0.50 (données plus sensibles) |
+| Error rate | >5% | >2% (SLA plus strict) |
+| Latency P95 | >10s | >3s (expérience utilisateur exigeante) |
+
+### Pitch (RSSI / DSI)
+
+> "Ces 4 alertes sont le filet de sécurité minimum avant tout déploiement LLM.
+> Je les configure en 30 minutes dans Langfuse.
+> Sans elles, vous découvrez les incidents sur votre facture mensuelle
+> ou dans un email de plainte utilisateur.
+> Avec elles, vous êtes alerté en temps réel et vous répondez avant que ça devienne un incident."
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

@@ -1092,6 +1092,75 @@ Langfuse permet de remonter à la source :
 
 ---
 
+## 20. Dashboard Essentials — Les 3 vues que tout dirigeant veut voir
+
+> **Slide cours :** "Dashboard Essentials"
+
+### Les 3 panneaux du dashboard Langfuse
+
+| # | Panneau | Métriques | Audience |
+|---|---------|-----------|----------|
+| 1 | **The Money** | Coût par modèle, par feature, tendances | CFO, DSI, Responsables budget |
+| 2 | **Performance** | Latency P50/P95/P99, error rate, cache hits | CTO, Architectes, DevOps |
+| 3 | **Quality** | Eval scores, hallucination rate, user feedback | Métier, Conformité, Product |
+
+### Pourquoi ces 3 vues correspondent exactement aux 3 interlocuteurs bancaires
+
+**Vue 1 — The Money → le DSI / CFO**
+> "Combien on dépense, sur quoi, et est-ce que ça augmente ?"
+- Coût par modèle : savoir si Sonnet est justifié vs Haiku
+- Coût par feature : quel produit IA coûte quoi
+- Tendances : détecter la dérive avant la facture
+
+**Vue 2 — Performance → l'Architecte / CTO**
+> "Est-ce que le système tient la charge ? Où sont les goulots ?"
+- P50 : latence médiane (expérience utilisateur typique)
+- P95 : ce que vivent 5% des utilisateurs les plus lents
+- P99 : les cas extrêmes (SLA contractuel)
+- Cache hits : valider que le caching fonctionne vraiment
+
+**Vue 3 — Quality → la Conformité / le Métier**
+> "Est-ce que l'IA répond correctement ? Quand est-ce qu'elle se trompe ?"
+- Eval scores : scores d'évaluation automatique des réponses
+- Hallucination rate : fréquence des réponses inventées
+- User feedback : thumbs up/down des utilisateurs réels
+
+### Pitch — "Un dashboard, trois audiences"
+
+> "Je livre un dashboard Langfuse avec trois vues.
+> Votre DSI ouvre la vue budget le lundi matin.
+> Votre CTO ouvre la vue performance lors des incidents.
+> Votre responsable conformité ouvre la vue qualité avant chaque audit.
+> Chacun voit ce qui le concerne. Personne ne se noie dans des métriques inutiles."
+
+### Les métriques P50/P95/P99 — explication simple
+
+```
+Exemple : 1000 requêtes/heure
+
+P50 = 1,2s   → la moitié des requêtes sont sous 1,2s
+P95 = 4,8s   → 95% des requêtes sont sous 4,8s
+P99 = 9,1s   → 99% des requêtes sont sous 9,1s
+
+Les 1% au-dessus de 9,1s = vos utilisateurs qui abandonnent
+et ouvrent un ticket support.
+```
+
+> "En banque, votre SLA est souvent défini sur le P99.
+> Si votre contrat dit 'réponse en moins de 5 secondes',
+> c'est le P99 que votre auditeur va regarder — pas la moyenne."
+
+### Argument récurrence (suivi mensuel)
+
+> "Ce dashboard tourne en continu.
+> Une fois par mois, je l'analyse avec vous :
+> dérives de coût, nouvelles opportunités d'optimisation,
+> alertes qualité à traiter.
+> C'est 1 jour/mois pour garantir que votre IA reste
+> performante, économique et conforme."
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

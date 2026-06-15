@@ -649,6 +649,69 @@ Ce sont des configurations dans LiteLLM + des patterns de code.
 
 ---
 
+## 14. Implementation Priority — Votre offre packagée en 4 étapes
+
+> **Slide cours :** "Implementation Priority"
+
+### Les 4 étapes dans l'ordre
+
+| Étape | Action | Pourquoi cet ordre |
+|-------|--------|--------------------|
+| **1** | Prompt Optimization | Gratuit, zéro infra, gains immédiats — quick win |
+| **2** | Caching des requêtes fréquentes | Redis déjà en place, ROI rapide sur les patterns répétitifs |
+| **3** | Routing pour workloads mixtes | Nécessite de connaître les patterns de requêtes — donc après le monitoring |
+| **4** | Monitor & iterate en continu | L'observabilité guide toutes les optimisations suivantes |
+
+### Pourquoi l'étape 4 est en réalité l'étape 0
+
+> **Paradoxe :** Pour optimiser (étapes 1-3), vous avez besoin de données.
+> Pour avoir des données, vous avez besoin de monitorer.
+> **Donc Langfuse s'installe avant tout le reste.**
+
+C'est votre argument pour démarrer par le gateway :
+```
+Semaine 0 : Gateway LLM + Langfuse (vous voyez tout)
+Semaine 1 : Prompt Optimization  (vous savez quoi optimiser)
+Semaine 2 : Caching              (vous savez quelles requêtes cacher)
+Semaine 3 : Model Routing        (vous savez comment router)
+En continu : Monitor & iterate   (Langfuse guide chaque décision)
+```
+
+### Étape 1 — "Free, no infra" : votre porte d'entrée commerciale
+
+> "Je commence toujours par l'optimisation des prompts.
+> C'est gratuit, ça ne touche pas à votre infrastructure,
+> et vous voyez les économies dès la première semaine.
+> C'est le quick win qui finance la suite du projet."
+
+**Tactique commerciale :** Proposer l'étape 1 comme mission d'entrée à prix réduit (ou même offerte sur une demi-journée). Le client voit la valeur immédiatement, la relation est lancée.
+
+### Étape 4 — "Monitor & iterate" : votre argument de récurrence
+
+> "Le monitoring, ce n'est pas un projet ponctuel — c'est un processus continu.
+> Les modèles changent, les volumes changent, les prix changent.
+> Ce que j'ai optimisé aujourd'hui sera peut-être sous-optimal dans 3 mois.
+> Je propose un suivi mensuel : 1 jour par mois pour analyser les dérives
+> et ajuster. C'est votre assurance que l'optimisation reste efficace."
+
+**Cet argument justifie un contrat récurrent** — pas juste une mission one-shot.
+
+### Votre offre packagée complète
+
+```
+SPRINT FINOPS LLM — 4 semaines
+
+Semaine 0 : Setup Gateway + Langfuse      [Fondation]
+Semaine 1 : Audit + Prompt Optimization   [Quick win]
+Semaine 2 : Semantic Caching              [ROI fort]
+Semaine 3 : Model Routing                 [ROI maximum]
+─────────────────────────────────────────────────────
+Résultat   : 70-85% de réduction coûts LLM
+Follow-up  : 1 jour/mois monitoring       [Récurrence]
+```
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

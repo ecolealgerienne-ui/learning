@@ -712,6 +712,77 @@ Follow-up  : 1 jour/mois monitoring       [Récurrence]
 
 ---
 
+## 15. Prompt Optimization — La démonstration qui choque
+
+> **Slide cours :** "Prompt Optimization — Before / After"
+
+### Avant / Après — 85% de réduction sur un seul prompt
+
+**AVANT (89 tokens) :**
+```
+You are a helpful AI assistant...
+Please note that...
+In your response, make sure to...
+As an AI assistant...
+```
+
+**APRÈS (13 tokens) :**
+```
+You're a helpful assistant.
+Be accurate and concise.
+```
+
+**Résultat : 89 → 13 tokens = -85% sur CE prompt**
+
+### Ce que ça représente à l'échelle
+
+```
+Prompt système de 89 tokens
+× 500 000 appels/mois
+= 44 500 000 tokens input/mois
+
+Après optimisation (13 tokens)
+× 500 000 appels/mois
+= 6 500 000 tokens input/mois
+
+Économie : 38 000 000 tokens/mois
+En euros (Claude Sonnet ~3$/M tokens) : ~114€/mois
+En euros (Claude Haiku ~0.25$/M tokens) : ~9.5€/mois
+```
+
+**Sur un volume bancaire réel (5M appels/mois) : économie de 1 140€/mois sur ce seul prompt.**
+
+### Les patterns de gaspillage les plus fréquents
+
+| Pattern | Exemple | Problème |
+|---------|---------|----------|
+| Auto-référence | "As an AI assistant..." | Inutile, le modèle le sait |
+| Politesse excessive | "Please note that..." | 3 tokens pour rien |
+| Redondances | Répéter 2x la même instruction | Doublement du coût |
+| Instructions vagues | "Make sure to be helpful" | Trop générique, tokens gaspillés |
+| Exemples superflus | Few-shot inutiles | Coûteux si non nécessaires |
+
+### Pitch démonstration live (30 secondes en rendez-vous)
+
+> "Montrez-moi votre prompt système actuel."
+>
+> *(Vous le lisez 30 secondes)*
+>
+> "Voilà les 3 lignes que vous pouvez supprimer immédiatement.
+> Ça ne change rien à la qualité de la réponse.
+> Sur votre volume, c'est X€ par mois économisés.
+> Sans toucher à votre code, sans infrastructure."
+
+**C'est votre démo de 5 minutes qui vaut mieux qu'une heure de présentation.**
+
+### Note technique importante
+
+L'optimisation de prompt ne dégrade pas la qualité si elle est faite correctement.
+Elle supprime le **bruit**, pas le **signal**.
+Les instructions précises et spécifiques au cas d'usage restent — les généralités partent.
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

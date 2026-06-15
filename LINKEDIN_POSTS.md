@@ -1,439 +1,439 @@
-# Publications LinkedIn — Prêtes à publier
+# LinkedIn Posts — Ready to Publish
 
-**Auteur :** Amar — Architecte IA pour environnements réglementés  
-**Cadence :** 1 post/semaine (mardi ou mercredi, 8h-9h)  
-**Objectif :** Construire la crédibilité avant les premiers clients
+**Author:** Amar — AI Architect for regulated environments  
+**Cadence:** 1 post/week (Tuesday or Wednesday, 8–9 AM)  
+**Goal:** Build credibility before landing the first clients
 
-**Règles de publication :**
-- Toujours une accroche chiffre ou paradoxe (ligne 1-2)
-- Texte aéré — une idée par paragraphe
-- Terminer par une question ouverte
-- Image du slide en pièce jointe quand disponible
-- 3-5 hashtags max (LinkedIn pénalise au-delà)
-
----
-
-## 📌 POST 1 — La boîte noire
-**Image :** `assets/linkedin_visuals/post1_boite_noire.svg`
-**Semaine :** 1 | **Statut :** ✅ Prêt
+**Publishing rules:**
+- Always open with a number or a paradox (lines 1–2)
+- Airy text — one idea per paragraph
+- End with an open question
+- Attach the visual as an image
+- 3–5 hashtags max (LinkedIn penalizes more)
 
 ---
 
-Votre Datadog vous dit que l'appel IA a réussi.
+## 📌 POST 1 — The Black Box
+**Image:** `assets/linkedin_visuals/post1_boite_noire.svg`
+**Week:** 1 | **Status:** ✅ Ready
 
-Il ne vous dit pas que la réponse était fausse.
+---
 
-C'est la limite fondamentale du monitoring classique appliqué aux LLM.
+Your Datadog tells you the AI call succeeded.
 
-Le monitoring traditionnel voit :
-→ Latence : 1,2s ✅
+It doesn't tell you the answer was wrong.
+
+That's the fundamental limit of classic monitoring applied to LLMs.
+
+Traditional monitoring sees:
+→ Latency: 1.2s ✅
 → HTTP 200 ✅
-→ Ce que le modèle a dit : ❌
-→ Pourquoi la réponse était incorrecte : ❌
-→ Combien ça a coûté exactement : ❌
+→ What the model actually said: ❌
+→ Why the response was incorrect: ❌
+→ Exactly what it cost: ❌
 
-L'observabilité LLM voit :
-→ Le prompt exact envoyé au modèle
-→ Les tokens input/output séparément
-→ Le coût à la requête, à la feature, par département
-→ Le taux d'hallucination mesuré
-→ L'étape exacte qui ralentit votre pipeline
+LLM observability sees:
+→ The exact prompt sent to the model
+→ Input/output tokens separately
+→ Cost per request, per feature, per department
+→ Hallucination rate measured
+→ The exact step slowing down your pipeline
 
-En banque, la différence est critique.
+In banking, this difference is critical.
 
-Votre comité des risques ne veut pas voir des codes HTTP 200.
-Il veut savoir si votre IA a donné une mauvaise recommandation de crédit.
-Et si oui, sur quelle base.
+Your risk committee doesn't want HTTP 200 codes.
+They want to know if your AI gave a wrong credit recommendation.
+And if so, on what basis.
 
-L'observabilité LLM, c'est ce qui transforme votre IA d'une boîte noire en système auditable.
+LLM observability is what turns your AI from a black box into an auditable system.
 
-Et avec l'EU AI Act en application depuis 2026 pour les systèmes à haut risque — scoring crédit, assurance — ce n'est plus optionnel.
+And with the EU AI Act in force since 2026 for high-risk systems — credit scoring, insurance — it's no longer optional.
 
-Votre stack de monitoring actuel couvre-t-il le contenu des réponses IA ?
+Does your current monitoring stack cover the content of AI responses?
 
-#LLM #BanqueIA #ArchitectureIA #Conformité #EUAIAct
-
----
-
-## 📌 POST 2 — Le token spike
-**Image :** `assets/linkedin_visuals/post2_token_spike.svg`
-**Semaine :** 2 | **Statut :** ✅ Prêt
+#LLM #BankingAI #AIArchitecture #Compliance #EUAIAct
 
 ---
 
-Un bug la nuit. 10 000€ de facture au matin.
+## 📌 POST 2 — The Token Spike
+**Image:** `assets/linkedin_visuals/post2_token_spike.svg`
+**Week:** 2 | **Status:** ✅ Ready
 
-C'est le "token spike" — le cauchemar silencieux de tout DSI qui déploie des LLM.
+---
 
-Une boucle infinie dans un batch nocturne. Un pipeline RAG mal configuré.
-Le modèle continue d'appeler l'API jusqu'à ce que quelqu'un s'en rende compte.
+One bug overnight. €10,000 on your invoice by morning.
 
-Sans guardrail → vous découvrez ça sur votre facture du mois.
+That's the "token spike" — the silent nightmare of every CTO deploying LLMs.
 
-La solution s'appelle budget guardrails.
-10 minutes de configuration dans LiteLLM :
+An infinite loop in a nightly batch job. A misconfigured RAG pipeline.
+The model keeps calling the API until someone notices.
+
+No guardrail → you find out on your end-of-month bill.
+
+The solution is called budget guardrails.
+10 minutes of configuration in LiteLLM:
 
 ```
-equipe-credit  : plafond 500€/mois
-equipe-risk    : plafond 200€/mois  
-equipe-rh      : plafond 100€/mois
+team-credit : €500/month cap
+team-risk   : €200/month cap
+team-hr     : €100/month cap
 ```
 
-Résultat : impossible de dépasser le budget alloué.
-Le système coupe automatiquement. Zéro surprise.
+Result: impossible to exceed the allocated budget.
+The system cuts automatically. Zero surprises.
 
-C'est l'équivalent du plafond de carte corporate — mais pour l'IA.
-Chaque département a son enveloppe. La DSI garde la vue globale.
+It's the equivalent of a corporate card limit — but for AI.
+Each department has its envelope. The CTO keeps the global view.
 
-Ce n'est pas une feature avancée.
-C'est la première chose à configurer avant de mettre un LLM en production.
+This is not an advanced feature.
+It's the first thing to configure before putting any LLM in production.
 
-Vous avez déjà eu un incident de surcoût IA ? Comment vous l'avez détecté ?
+Have you ever had an AI cost incident? How did you detect it?
 
-#FinOpsIA #LLM #DSI #BanqueIA #ArchitectureIA
-
----
-
-## 📌 POST 3 — 35 000€ → 15 000€
-**Image :** `assets/linkedin_visuals/post3_roi.svg`
-**Semaine :** 3 | **Statut :** ✅ Prêt
+#FinOpsAI #LLM #CTO #BankingAI #AIArchitecture
 
 ---
 
-35 000€/mois de LLM → 15 000€.
-
-Ce n'est pas de la théorie. Ce sont des chiffres mesurés en production.
-
-Voici d'où vient la différence :
-
-🔴 Sans observabilité, vous payez :
-• 6 000€ de tokens gaspillés (prompts non optimisés)
-• 4 000€ de debug (20h/semaine à l'aveugle)
-• 5 000€ d'incidents non détectés à temps
-= 15 000€ de coûts évitables chaque mois
-
-✅ Avec Langfuse + LiteLLM (self-hosted, open source) :
-• Chaque appel LLM tracé — prompt, réponse, coût, latence
-• Budget par équipe avec coupure automatique
-• Debug en 2h au lieu de 20h
-• ROI : 7 à 30x dès le premier mois
-
-La formule est simple :
-Économies = (tokens gaspillés) + (temps debug × TJM) + (incidents évités × coût)
-
-Prenez vos chiffres. Faites le calcul.
-
-En banque, c'est aussi votre argument conformité : chaque décision IA est tracée, horodatée, auditable. Exactement ce que demande l'ACPR.
-
-Quel est votre budget LLM mensuel actuel ?
-
-#FinOpsIA #LLM #Observabilité #BanqueIA #ArchitectureIA
+## 📌 POST 3 — €35,000 → €15,000
+**Image:** `assets/linkedin_visuals/post3_roi.svg`
+**Week:** 3 | **Status:** ✅ Ready
 
 ---
 
-## 📌 POST 4 — 89 tokens → 13 tokens
-**Image :** `assets/linkedin_visuals/post4_prompt_optimization.svg`
-**Semaine :** 4 | **Statut :** ✅ Prêt
+€35,000/month in LLM costs → €15,000.
+
+This is not theory. These are numbers measured in production.
+
+Here's where the difference comes from:
+
+🔴 Without observability, you pay for:
+• €6,000 in wasted tokens (unoptimized prompts)
+• €4,000 in debugging (20h/week in the dark)
+• €5,000 in incidents not caught in time
+= €15,000 in avoidable costs every month
+
+✅ With Langfuse + LiteLLM (self-hosted, open source):
+• Every LLM call traced — prompt, response, cost, latency
+• Budget per team with automatic cutoff
+• Debug in 2h instead of 20h
+• ROI: 7x to 30x from the first month
+
+The formula is simple:
+Savings = (wasted tokens) + (debug time × daily rate) + (avoided incidents × cost)
+
+Take your numbers. Do the math.
+
+In banking, it's also your compliance argument: every AI decision is traced, timestamped, auditable. Exactly what regulators require.
+
+What is your current monthly LLM budget?
+
+#FinOpsAI #LLM #Observability #BankingAI #AIArchitecture
 
 ---
 
-89 tokens → 13 tokens. Même qualité de réponse. -85% de coût.
-
-C'est ce que l'optimisation de prompt fait sur un cas réel.
-
-Avant :
-"You are a helpful AI assistant...
-Please note that...
-In your response, make sure to...
-As an AI assistant..."
-→ 89 tokens, envoyés à CHAQUE requête
-
-Après :
-"You're a helpful assistant.
-Be accurate and concise."
-→ 13 tokens
-
-Sur 500 000 appels/mois, ça représente :
-44,5M tokens → 6,5M tokens
-Économie : ~450€/mois sur CE seul prompt
-
-Et personne ne touche à ça. Parce que personne ne le mesure.
-
-Ce que je cherche dans un audit FinOps LLM :
-→ Les phrases "As an AI..."
-→ Les "Please note that..."
-→ Les instructions répétées 2x
-→ Les exemples few-shot inutiles
-
-Ce que je garde :
-→ Les instructions précises et spécifiques au métier
-
-Règle d'or : supprimer le bruit, pas le signal.
-
-Montrez-moi votre prompt système. Je vous dis en 5 minutes ce qu'on peut supprimer.
-
-#FinOpsIA #LLM #PromptEngineering #BanqueIA #CostOptimization
+## 📌 POST 4 — 847 tokens → 127 tokens
+**Image:** `assets/linkedin_visuals/post4_prompt_optimization.svg`
+**Week:** 4 | **Status:** ✅ Ready
 
 ---
 
-## 📌 POST 5 — Les 5 coupables
-**Image :** `assets/linkedin_visuals/post5_top5_cost_drivers.svg`
-**Semaine :** 5 | **Statut :** ✅ Prêt
+847 tokens → 127 tokens. Same response quality. −85% cost.
+
+That's what prompt optimization does on a real banking case.
+
+Before:
+"You are an expert and professional banking assistant.
+You must always respond in a courteous and formal manner.
+You must also verify that the user understands well.
+Remember to be precise and cite your sources…"
+→ 847 tokens, sent on EVERY request
+
+After:
+"Banking expert. FR/EU regulatory scope.
+Factual responses. Citations required."
+→ 127 tokens
+
+On 500,000 calls/month, that's:
+423M tokens → 63.5M tokens
+Savings: ~$1,190/month on THIS single prompt
+
+And nobody touches this. Because nobody measures it.
+
+What I look for in a LLM FinOps audit:
+→ Sentences starting with "As an AI..."
+→ "Please note that..." patterns
+→ Instructions repeated twice
+→ Unnecessary few-shot examples
+
+What I keep:
+→ Precise, business-specific instructions
+
+Golden rule: remove the noise, keep the signal.
+
+Show me your system prompt. I'll tell you in 5 minutes what can be removed.
+
+#FinOpsAI #LLM #PromptEngineering #BankingAI #CostOptimization
 
 ---
 
-Votre facture LLM augmente chaque mois. Vous ne savez pas pourquoi.
-
-Voici les 5 coupables, par ordre de fréquence :
-
-1️⃣ Prompt système trop lourd
-Envoyé à CHAQUE requête. 800 tokens inutiles × 500K appels = 450€/mois gaspillés. Sur une ligne de config.
-
-2️⃣ Contexte RAG excessif
-Plus de contexte ≠ meilleure réponse. 50 chunks au lieu de 5 : 10x le coût, qualité identique ou pire (le modèle se noie).
-
-3️⃣ Reasoning verbeux des agents
-Le modèle "pense à voix haute" sur chaque micro-décision. Vous payez chaque token de raisonnement intermédiaire.
-
-4️⃣ Historique de conversation non géré
-Le message 50 transporte tout le contexte des 49 précédents. Croissance linéaire du coût. Invisible sans monitoring.
-
-5️⃣ Mauvais modèle pour la tâche
-Écart de prix jusqu'à 200x entre Claude Sonnet et Claude Haiku. 90% des tâches en banque (classification, extraction, résumé) n'ont pas besoin du modèle premium.
-
-Un audit sur ces 5 points prend 2 jours.
-Dans 100% des cas : au moins 2 sources de gaspillage non identifiées.
-
-Résultat typique : -40 à -70% sur la facture LLM. Sans toucher à la qualité.
-
-Vous savez exactement où va votre budget LLM, token par token ?
-
-#FinOpsIA #LLM #CostOptimization #ArchitectureIA #DSI
+## 📌 POST 5 — The 5 Culprits
+**Image:** `assets/linkedin_visuals/post5_top5_cost_drivers.svg`
+**Week:** 5 | **Status:** ✅ Ready
 
 ---
 
-## 📌 POST 6 — 252 000€/an pour un pipeline RAG
-**Image :** `assets/linkedin_visuals/post6_rag_pipeline.svg`
-**Semaine :** 6 | **Statut :** ✅ Prêt
+Your LLM bill grows every month. You don't know why.
+
+Here are the 5 culprits, by frequency:
+
+1️⃣ Overloaded system prompt
+Sent on EVERY request. 800 useless tokens × 500K calls = $450/month wasted. On one config line.
+
+2️⃣ Excessive RAG context
+More context ≠ better answer. 50 chunks instead of 5: 10x the cost, equal or worse quality (the model drowns in noise).
+
+3️⃣ Verbose agent reasoning
+The model "thinks out loud" on every micro-decision. You pay for every intermediate reasoning token.
+
+4️⃣ Unmanaged conversation history
+Message 50 carries the full context of the previous 49. Linear cost growth. Invisible without monitoring.
+
+5️⃣ Wrong model for the task
+Up to 200x price gap between Claude Sonnet and Claude Haiku. 90% of banking tasks (classification, extraction, summarization) don't need the premium model.
+
+An audit on these 5 points takes 2 days.
+In 100% of cases: at least 2 unidentified waste sources.
+
+Typical result: −40 to −70% on the LLM bill. Without touching quality.
+
+Do you know exactly where your LLM budget goes, token by token?
+
+#FinOpsAI #LLM #CostOptimization #AIArchitecture #CTO
 
 ---
 
-0,007€ par requête. Ça semble négligeable.
+## 📌 POST 6 — $252,000/year for a RAG pipeline
+**Image:** `assets/linkedin_visuals/post6_rag_pipeline.svg`
+**Week:** 6 | **Status:** ✅ Ready
 
-À 100 000 requêtes/jour dans une banque : 252 000€/an.
+---
 
-Voilà ce que coûte vraiment une requête dans un pipeline RAG + agent :
+$0.007 per request. Sounds negligible.
 
-① Embedding de la question          → 0,0001€
-② Recherche vectorielle              → négligeable
-③ Assemblage du contexte            → inclus
-④ LLM #1 — traitement RAG           → 0,003€
-⑤ Décision de l'agent               → inclus
-⑥ Appel API externe (tool call)      → variable
-⑦ LLM #2 — réponse finale           → 0,004€
-─────────────────────────────────────
-Total par requête                     → 0,007€
+At 100,000 requests/day in a bank: $252,000/year.
 
-100 000 req/jour × 0,007€ = 700€/jour = 21 000€/mois = 252 000€/an
+Here's what a request really costs in a RAG + agent pipeline:
+
+① Question embedding                → $0.0001
+② Vector search                     → negligible
+③ Context assembly                  → included
+④ LLM #1 — RAG processing          → $0.003
+⑤ Agent decision                    → included
+⑥ External API call (tool call)     → variable
+⑦ LLM #2 — final response          → $0.004
+─────────────────────────────────────────
+Total per request                    → $0.007
+
+100,000 req/day × $0.007 = $700/day = $21,000/month = $252,000/year
 
 "Seems cheap... until you multiply."
 
-Sans visibilité par étape : vous savez que "c'est cher", pas pourquoi.
-Avec Langfuse : vous voyez exactement quelle étape consomme quoi.
+Without per-step visibility: you know it's expensive, not why.
+With Langfuse: you see exactly which step consumes what.
 
-Et vous savez où agir — sur le LLM #1, sur le top-K du RAG, sur la fréquence des tool calls.
+And you know where to act — LLM #1, RAG top-K, tool call frequency.
 
-Vous avez modélisé le coût réel de votre pipeline RAG à votre volume de production ?
+Have you modeled the real cost of your RAG pipeline at production volume?
 
-#RAG #LLM #FinOpsIA #ArchitectureIA #BanqueIA
-
----
-
-## 📌 POST 7 — Gartner : 15% → 50%
-**Image :** `assets/linkedin_visuals/post7_gartner.svg`
-**Semaine :** 7 | **Statut :** ✅ Prêt
+#RAG #LLM #FinOpsAI #AIArchitecture #BankingAI
 
 ---
 
-Gartner vient de publier une prédiction qui valide 3 ans de travail :
+## 📌 POST 7 — Gartner: 15% → 50%
+**Image:** `assets/linkedin_visuals/post7_gartner.svg`
+**Week:** 7 | **Status:** ✅ Ready
+
+---
+
+Gartner just published a prediction that validates years of work:
 
 "By 2028, explainable AI will drive LLM observability investments to 50% of GenAI deployments — up from 15% today."
 
-Traduction concrète :
+Concrete translation:
 
-Aujourd'hui, 85% des entreprises déploient des LLM sans observabilité sérieuse.
-Dans 2 ans : 50% en auront une.
+Today, 85% of companies deploy LLMs without serious observability.
+In 2 years: 50% will have it.
 
-Ce qui veut dire que quelqu'un devra la déployer.
+Which means someone will need to deploy it.
 
-Le marché de l'observabilité LLM :
-→ 1,97 milliard $ en 2025
-→ 2,69 milliards $ en 2026 (+36%)
-→ 9,26 milliards $ en 2030
+The LLM observability market:
+→ $1.97 billion in 2025
+→ $2.69 billion in 2026 (+36%)
+→ $9.26 billion in 2030
 
-Et côté réglementation, l'EU AI Act est en application depuis 2026 pour les systèmes IA à haut risque.
-Scoring crédit, assurance, décisions RH — traçabilité obligatoire.
-Sanction : jusqu'à 35M€ ou 7% du CA mondial.
+And on the regulatory side, the EU AI Act has been in force since 2026 for high-risk AI systems.
+Credit scoring, insurance, HR decisions — traceability mandatory.
+Penalty: up to €35M or 7% of global revenue.
 
-Les banques n'ont plus le choix sur le "si".
-Elles ont seulement le choix sur le "comment" et "avec qui".
+Banks no longer have a choice on the "if".
+They only have a choice on the "how" and "with whom".
 
-C'est exactement là que je me positionne.
+That's exactly where I position myself.
 
-Vous avez déjà évalué votre exposition à l'EU AI Act sur vos systèmes IA ?
+Have you assessed your EU AI Act exposure across your AI systems?
 
-#EUAIAct #LLM #Observabilité #BanqueIA #Gartner #ArchitectureIA
-
----
-
-## 📌 POST 8 — Le routing intelligent
-**Image :** `assets/linkedin_visuals/post8_model_routing.svg`
-**Semaine :** 8 | **Statut :** ✅ Prêt
+#EUAIAct #LLM #Observability #BankingAI #Gartner #AIArchitecture
 
 ---
 
-70 à 80% de vos requêtes LLM peuvent utiliser le modèle 200x moins cher.
-
-Mais tout passe sur le modèle premium par défaut.
-
-Pourquoi ? Parce que personne n'a configuré le routing.
-
-Exemple concret en banque :
-
-Tâches simples → Claude Haiku (0,25$/M tokens)
-→ Classification de documents
-→ Extraction de champs
-→ Résumés courts
-→ Q&A sur FAQ interne
-
-Tâches complexes → Claude Sonnet (3$/M tokens)
-→ Analyse juridique
-→ Raisonnement multi-étapes
-→ Génération de rapports
-
-Le ratio de prix : 12x.
-
-Sur 100 000 requêtes/jour avec 80% de tâches simples :
-Sans routing → 100 000 × 0,003$ = 300$/jour
-Avec routing → 80 000 × 0,00025$ + 20 000 × 0,003$ = 80$/jour
-
-Économie : 220$/jour = 6 600$/mois = 79 200$/an
-
-LiteLLM fait ce routing automatiquement.
-Vos développeurs ne changent rien. La config fait le travail.
-
-Et si vous n'êtes pas sûr que la qualité est maintenue sur le modèle économique ?
-A/B test dans Langfuse : 50/50, comparez les scores, décidez sur les données.
-
-Vous avez déjà calculé la répartition de vos requêtes par complexité ?
-
-#LLM #ModelRouting #FinOpsIA #ArchitectureIA #CostOptimization
+## 📌 POST 8 — Smart Model Routing
+**Image:** `assets/linkedin_visuals/post8_model_routing.svg`
+**Week:** 8 | **Status:** ✅ Ready
 
 ---
 
-## 📌 POST 9 — L'audit de 2 jours
-**Image :** `assets/linkedin_visuals/post9_audit_2jours.svg`
-**Semaine :** 9 | **Statut :** ✅ Prêt
+70 to 80% of your LLM requests can use the model that's 200x cheaper.
+
+But everything goes through the premium model by default.
+
+Why? Because nobody configured the routing.
+
+Concrete example in banking:
+
+Simple tasks → Claude Haiku ($0.25/M tokens)
+→ Document classification
+→ Field extraction
+→ Short summaries
+→ Internal FAQ Q&A
+
+Complex tasks → Claude Sonnet ($3/M tokens)
+→ Legal analysis
+→ Multi-step reasoning
+→ Report generation
+
+The price ratio: 12x.
+
+On 100,000 requests/day with 80% simple tasks:
+Without routing → 100,000 × $0.003 = $300/day
+With routing → 80,000 × $0.00025 + 20,000 × $0.003 = $80/day
+
+Savings: $220/day = $6,600/month = $79,200/year
+
+LiteLLM handles this routing automatically.
+Your developers change nothing. The config does the work.
+
+Not sure quality holds on the cheaper model?
+A/B test in Langfuse: 50/50, compare scores, decide on data.
+
+Have you calculated the breakdown of your requests by complexity?
+
+#LLM #ModelRouting #FinOpsAI #AIArchitecture #CostOptimization
 
 ---
 
-La première chose que je fais chez un nouveau client : un audit de 2 jours.
-
-Pas de réunion de cadrage de 3 semaines.
-Pas de proposition commerciale de 40 pages.
-
-2 jours. 5 points. Des chiffres concrets à la fin.
-
-Jour 1 — Audit FinOps LLM :
-① Analyse des prompts système (tokens gaspillés)
-② Vérification de la stratégie de caching
-③ Revue du model selection (est-ce que le bon modèle fait la bonne tâche ?)
-④ Calcul du coût réel par feature et par département
-⑤ Identification des top 3 quick wins
-
-Jour 2 — Résultats :
-→ Rapport chiffré : économies potentielles par levier
-→ Priorité d'implémentation (quick wins d'abord)
-→ Plan d'action sur 4 semaines
-
-Résultat typique : -40 à -70% sur la facture LLM identifié en 2 jours.
-
-C'est votre point de départ avant tout déploiement sérieux.
-
-Sans cette base, vous optimisez à l'aveugle.
-
-Intéressé par un audit sur votre stack LLM actuel ?
-
-#FinOpsIA #LLM #ArchitectureIA #DSI #BanqueIA
+## 📌 POST 9 — The 2-Day Audit
+**Image:** `assets/linkedin_visuals/post9_audit_2jours.svg`
+**Week:** 9 | **Status:** ✅ Ready
 
 ---
 
-## 📌 POST 10 — Langfuse vs les autres
-**Image :** `assets/linkedin_visuals/post10_langfuse_vs_others.svg`
-**Semaine :** 10 | **Statut :** ✅ Prêt
+The first thing I do at a new client: a 2-day audit.
+
+No 3-week scoping meeting.
+No 40-page commercial proposal.
+
+2 days. 5 checkpoints. Concrete numbers at the end.
+
+Day 1 — LLM FinOps Audit:
+① System prompt analysis (wasted tokens)
+② Caching strategy review
+③ Model selection review (is the right model doing the right task?)
+④ Real cost calculation per feature and per department
+⑤ Top 3 quick wins identified
+
+Day 2 — Results:
+→ Quantified report: potential savings by lever
+→ Implementation priority (quick wins first)
+→ 4-week action plan
+
+Typical result: −40 to −70% on the LLM bill identified in 2 days.
+
+This is your starting point before any serious deployment.
+
+Without this foundation, you're optimizing blind.
+
+Interested in an audit of your current LLM stack?
+
+#FinOpsAI #LLM #AIArchitecture #CTO #BankingAI
 
 ---
 
-40+ outils d'observabilité LLM existent.
-
-En environnement bancaire, un seul est vraiment viable.
-
-Comparatif rapide :
-
-LangSmith → Excellent pour LangChain. Propriétaire. Vos prompts et traces partent chez LangChain. ❌ Éliminatoire RGPD.
-
-Helicone → Cost tracking uniquement. Propriétaire. Incomplet pour l'auditabilité réglementaire. ❌
-
-Arize Phoenix → Orienté équipes data science. Partiel open source. Pas adapté aux architectures gateway. ❌
-
-Langfuse → Open source (MIT). Self-hosted. Vendor-neutral. Traces complètes. Coûts, qualité, évaluations. Utilisé par 63 des Fortune 500. ✅
-
-La question en banque n'est pas "quel outil est le meilleur".
-La question est "quel outil mes données peuvent-elles utiliser".
-
-Vos prompts contiennent du contexte client. Des données contractuelles. Des informations réglementaires.
-
-Avec Langfuse self-hosted : ces données restent dans votre datacenter.
-Zéro provider tiers. Zéro risque de fuite. Conformité RGPD par construction.
-
-Ce n'est pas un choix d'économie.
-C'est un choix d'architecte.
-
-Votre équipe a déjà évalué les implications RGPD de votre outil d'observabilité LLM actuel ?
-
-#Langfuse #LLM #RGPD #BanqueIA #ArchitectureIA #Conformité
+## 📌 POST 10 — Langfuse vs the Others
+**Image:** `assets/linkedin_visuals/post10_langfuse_vs_others.svg`
+**Week:** 10 | **Status:** ✅ Ready
 
 ---
 
-## 📌 CALENDRIER DE PUBLICATION
+40+ LLM observability tools exist.
 
-| Semaine | Date suggérée | Post | Image |
-|---------|--------------|------|-------|
-| S1 | Mardi 17 juin | Post 1 — La boîte noire | Slide Traditional vs LLM |
-| S2 | Mardi 24 juin | Post 2 — Token spike | Slide Risk Matrix |
-| S3 | Mardi 1 juillet | Post 3 — 35K→15K€ | Slide ROI Framework |
-| S4 | Mardi 8 juillet | Post 4 — 89→13 tokens | Slide Prompt Optimization |
-| S5 | Mardi 15 juillet | Post 5 — Les 5 coupables | Slide Top 5 Cost Drivers |
-| S6 | Mardi 22 juillet | Post 6 — 252K€/an RAG | Slide RAG Pipeline |
-| S7 | Mardi 29 juillet | Post 7 — Gartner 15→50% | Texte seul |
-| S8 | Mardi 5 août | Post 8 — Routing intelligent | Slide Smart Model Routing |
-| S9 | Mardi 12 août | Post 9 — Audit 2 jours | Slide Implementation Priority |
-| S10 | Mardi 19 août | Post 10 — Langfuse vs autres | Slide Platform Landscape |
+In a banking environment, only one is truly viable.
+
+Quick comparison:
+
+LangSmith → Excellent for LangChain. Proprietary. Your prompts and traces go to LangChain servers. ❌ GDPR dealbreaker.
+
+Helicone → Cost tracking only. Proprietary. Incomplete for regulatory auditability. ❌
+
+Arize Phoenix → Data science team oriented. Partial open source. Not suited for gateway architectures. ❌
+
+Langfuse → Open source (MIT). Self-hosted. Vendor-neutral. Complete traces. Costs, quality, evaluations. Used by 63 Fortune 500 companies. ✅
+
+The question in banking is not "which tool is best".
+The question is "which tool can my data actually use".
+
+Your prompts contain client context. Contractual data. Regulatory information.
+
+With self-hosted Langfuse: this data stays in your datacenter.
+Zero third-party provider. Zero leak risk. GDPR compliance by design.
+
+This is not a cost decision.
+It's an architecture decision.
+
+Has your team assessed the GDPR implications of your current LLM observability tool?
+
+#Langfuse #LLM #GDPR #BankingAI #AIArchitecture #Compliance
 
 ---
 
-## 📌 PROFIL LINKEDIN — À optimiser avant de publier
+## 📌 PUBLISHING CALENDAR
 
-**Titre :** Architecte IA pour environnements réglementés | LLM Gateway · Observabilité · FinOps IA | Banque & Assurance
-
-**Résumé (À l'affiche) :**
-> Je déploie des infrastructures IA industrielles pour les environnements bancaires et assuranciels.
-> Concrètement : gateway LLM self-hosted, observabilité complète (Langfuse), réduction des coûts de 70-85%, conformité EU AI Act / ACPR.
-> En 30 jours, votre IA passe d'une boîte noire à un système tracé, maîtrisé et auditable.
-> Architecte technique banque | Docker · NestJS · PostgreSQL · Redis · Keycloak
-> → Message privé pour un audit gratuit de 30 min.
+| Week | Suggested date | Post | Visual |
+|------|---------------|------|--------|
+| W1 | Tuesday June 17 | Post 1 — The Black Box | post1_boite_noire.svg |
+| W2 | Tuesday June 24 | Post 2 — Token Spike | post2_token_spike.svg |
+| W3 | Tuesday July 1 | Post 3 — €35K→€15K | post3_roi.svg |
+| W4 | Tuesday July 8 | Post 4 — 847→127 tokens | post4_prompt_optimization.svg |
+| W5 | Tuesday July 15 | Post 5 — The 5 Culprits | post5_top5_cost_drivers.svg |
+| W6 | Tuesday July 22 | Post 6 — $252K/yr RAG | post6_rag_pipeline.svg |
+| W7 | Tuesday July 29 | Post 7 — Gartner 15→50% | post7_gartner.svg |
+| W8 | Tuesday Aug 5 | Post 8 — Smart Routing | post8_model_routing.svg |
+| W9 | Tuesday Aug 12 | Post 9 — 2-Day Audit | post9_audit_2jours.svg |
+| W10 | Tuesday Aug 19 | Post 10 — Langfuse vs others | post10_langfuse_vs_others.svg |
 
 ---
 
-_Mise à jour : 2026-06-15_
-_10 posts | Calendrier 10 semaines | Images identifiées_
+## 📌 LINKEDIN PROFILE — Optimize before publishing
+
+**Headline:** AI Architect for Regulated Environments | LLM Gateway · Observability · AI FinOps | Banking & Insurance
+
+**Summary (Featured):**
+> I deploy production-grade AI infrastructure for banking and insurance environments.
+> Concretely: self-hosted LLM gateway, full observability (Langfuse), 70–85% cost reduction, EU AI Act / regulatory compliance.
+> In 30 days, your AI moves from a black box to a traced, controlled, auditable system.
+> Technical architect — Banking | Docker · NestJS · PostgreSQL · Redis · Keycloak
+> → DM me for a free 30-minute audit.
+
+---
+
+_Last updated: 2026-06-15_
+_10 posts | 10-week calendar | Original SVG visuals_

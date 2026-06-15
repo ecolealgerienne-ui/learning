@@ -1,17 +1,14 @@
 <svg width="1200" height="627" viewBox="0 0 1200 627" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
-  <!-- Background -->
   <rect width="1200" height="627" fill="#0f1117"/>
-  <!-- Accent line top -->
   <rect width="1200" height="4" fill="#6366f1"/>
 
-  <!-- Left panel — Monitoring classique -->
+  <!-- Left panel — Classic Monitoring -->
   <rect x="60" y="80" width="490" height="460" rx="16" fill="#1a1d27"/>
   <rect x="60" y="80" width="490" height="4" rx="2" fill="#ef4444"/>
-  <text x="305" y="130" text-anchor="middle" fill="#ef4444" font-size="14" font-weight="700" letter-spacing="2">MONITORING CLASSIQUE</text>
+  <text x="305" y="130" text-anchor="middle" fill="#ef4444" font-size="14" font-weight="700" letter-spacing="2">CLASSIC MONITORING</text>
 
-  <!-- Boxes left -->
   <rect x="130" y="160" width="350" height="54" rx="10" fill="#252837"/>
-  <text x="305" y="193" text-anchor="middle" fill="#94a3b8" font-size="16">Requête entrante</text>
+  <text x="305" y="193" text-anchor="middle" fill="#94a3b8" font-size="16">Incoming request</text>
 
   <text x="305" y="245" text-anchor="middle" fill="#475569" font-size="28">↓</text>
 
@@ -21,53 +18,50 @@
   <text x="305" y="345" text-anchor="middle" fill="#475569" font-size="28">↓</text>
 
   <rect x="130" y="360" width="350" height="54" rx="10" fill="#252837"/>
-  <text x="305" y="393" text-anchor="middle" fill="#94a3b8" font-size="16">Réponse — HTTP 200 ✓</text>
+  <text x="305" y="393" text-anchor="middle" fill="#94a3b8" font-size="16">Response — HTTP 200 ✓</text>
 
-  <!-- What you see -->
-  <text x="130" y="455" fill="#475569" font-size="13" font-weight="600" letter-spacing="1">CE QUE VOUS VOYEZ :</text>
-  <text x="130" y="480" fill="#64748b" font-size="14">✓  Latence : 1,2s</text>
+  <text x="130" y="455" fill="#475569" font-size="13" font-weight="600" letter-spacing="1">WHAT YOU SEE:</text>
+  <text x="130" y="480" fill="#64748b" font-size="14">✓  Latency : 1.2s</text>
   <text x="130" y="502" fill="#64748b" font-size="14">✓  HTTP 200</text>
-  <text x="130" y="524" fill="#ef444480" font-size="14">✗  Contenu de la réponse</text>
+  <text x="130" y="524" fill="#ef444480" font-size="14">✗  Content of the response</text>
 
-  <!-- Right panel — LLM Observabilité -->
+  <!-- Right panel — LLM Observability -->
   <rect x="650" y="80" width="490" height="460" rx="16" fill="#1a1d27"/>
   <rect x="650" y="80" width="490" height="4" rx="2" fill="#22c55e"/>
-  <text x="895" y="130" text-anchor="middle" fill="#22c55e" font-size="14" font-weight="700" letter-spacing="2">OBSERVABILITÉ LLM</text>
+  <text x="895" y="130" text-anchor="middle" fill="#22c55e" font-size="14" font-weight="700" letter-spacing="2">LLM OBSERVABILITY</text>
 
-  <!-- Trace rows -->
   <rect x="680" y="155" width="430" height="42" rx="8" fill="#252837"/>
   <text x="700" y="172" fill="#6366f1" font-size="11" font-weight="700">PROMPT</text>
-  <text x="700" y="189" fill="#94a3b8" font-size="13">"Analyse ce contrat et identifie les risques…"</text>
+  <text x="700" y="189" fill="#94a3b8" font-size="13">"Analyze this contract and identify risks…"</text>
 
   <rect x="680" y="207" width="430" height="42" rx="8" fill="#252837"/>
   <text x="700" y="224" fill="#f59e0b" font-size="11" font-weight="700">TOKENS</text>
-  <text x="700" y="241" fill="#94a3b8" font-size="13">Input : 1 247  ·  Output : 389  ·  Total : 1 636</text>
+  <text x="700" y="241" fill="#94a3b8" font-size="13">Input: 1,247  ·  Output: 389  ·  Total: 1,636</text>
 
   <rect x="680" y="259" width="430" height="42" rx="8" fill="#252837"/>
-  <text x="700" y="276" fill="#22c55e" font-size="11" font-weight="700">COÛT</text>
-  <text x="700" y="293" fill="#94a3b8" font-size="13">$0.00741  ·  Dept : Conformité  ·  Feature : Analyse</text>
+  <text x="700" y="276" fill="#22c55e" font-size="11" font-weight="700">COST</text>
+  <text x="700" y="293" fill="#94a3b8" font-size="13">$0.00741  ·  Dept: Compliance  ·  Feature: Analysis</text>
 
   <rect x="680" y="311" width="430" height="42" rx="8" fill="#252837"/>
-  <text x="700" y="328" fill="#06b6d4" font-size="11" font-weight="700">LATENCE PAR ÉTAPE</text>
-  <text x="700" y="345" fill="#94a3b8" font-size="13">RAG : 2,1s  ·  LLM : 1,6s  ·  Format : 0,3s</text>
+  <text x="700" y="328" fill="#06b6d4" font-size="11" font-weight="700">LATENCY BY STEP</text>
+  <text x="700" y="345" fill="#94a3b8" font-size="13">RAG: 2.1s  ·  LLM: 1.6s  ·  Formatting: 0.3s</text>
 
   <rect x="680" y="363" width="430" height="42" rx="8" fill="#252837"/>
-  <text x="700" y="380" fill="#a78bfa" font-size="11" font-weight="700">QUALITÉ</text>
-  <text x="700" y="397" fill="#94a3b8" font-size="13">Score : 0.87  ·  Hallucination : Non détectée</text>
+  <text x="700" y="380" fill="#a78bfa" font-size="11" font-weight="700">QUALITY</text>
+  <text x="700" y="397" fill="#94a3b8" font-size="13">Score: 0.87  ·  Hallucination: Not detected</text>
 
-  <!-- What you see -->
-  <text x="680" y="455" fill="#475569" font-size="13" font-weight="600" letter-spacing="1">CE QUE VOUS VOYEZ :</text>
-  <text x="680" y="480" fill="#22c55e" font-size="14">✓  Prompt exact envoyé</text>
-  <text x="680" y="502" fill="#22c55e" font-size="14">✓  Coût à la requête, au département</text>
-  <text x="680" y="524" fill="#22c55e" font-size="14">✓  Qualité mesurée, audit trail complet</text>
+  <text x="680" y="455" fill="#475569" font-size="13" font-weight="600" letter-spacing="1">WHAT YOU SEE:</text>
+  <text x="680" y="480" fill="#22c55e" font-size="14">✓  Exact prompt sent to the model</text>
+  <text x="680" y="502" fill="#22c55e" font-size="14">✓  Cost per request, per department</text>
+  <text x="680" y="524" fill="#22c55e" font-size="14">✓  Quality scored, full audit trail</text>
 
   <!-- VS badge -->
   <circle cx="600" cy="310" r="32" fill="#0f1117" stroke="#334155" stroke-width="2"/>
   <text x="600" y="316" text-anchor="middle" fill="#94a3b8" font-size="18" font-weight="700">VS</text>
 
   <!-- Bottom tagline -->
-  <text x="600" y="578" text-anchor="middle" fill="#475569" font-size="15">Votre Datadog vous dit que l'appel a réussi. Il ne vous dit pas que la réponse était fausse.</text>
+  <text x="600" y="578" text-anchor="middle" fill="#475569" font-size="15">Your Datadog tells you the call succeeded. It doesn't tell you the answer was wrong.</text>
 
   <!-- Brand -->
-  <text x="1160" y="618" text-anchor="end" fill="#334155" font-size="11">Architecte IA · Environnements Réglementés</text>
+  <text x="1160" y="618" text-anchor="end" fill="#334155" font-size="11">AI Architect · Regulated Environments</text>
 </svg>

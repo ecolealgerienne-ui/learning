@@ -3,23 +3,20 @@
   <rect width="1200" height="4" fill="#a78bfa"/>
 
   <text x="600" y="62" text-anchor="middle" fill="#ffffff" font-size="34" font-weight="800">Smart Model Routing</text>
-  <text x="600" y="90" text-anchor="middle" fill="#64748b" font-size="16">Le bon modèle pour la bonne tâche — économie automatique de 50 à 70%</text>
+  <text x="600" y="90" text-anchor="middle" fill="#64748b" font-size="16">The right model for the right task — automatic 50–70% savings</text>
 
   <!-- Left: Decision tree -->
   <rect x="60" y="110" width="440" height="430" rx="14" fill="#1a1d27"/>
-  <text x="280" y="142" text-anchor="middle" fill="#a78bfa" font-size="14" font-weight="700" letter-spacing="1">ARBRE DE DÉCISION</text>
+  <text x="280" y="142" text-anchor="middle" fill="#a78bfa" font-size="14" font-weight="700" letter-spacing="1">DECISION TREE</text>
 
-  <!-- Root -->
   <rect x="155" y="158" width="250" height="44" rx="8" fill="#252837" stroke="#6366f130" stroke-width="1"/>
-  <text x="280" y="185" text-anchor="middle" fill="#94a3b8" font-size="14">Requête utilisateur</text>
+  <text x="280" y="185" text-anchor="middle" fill="#94a3b8" font-size="14">User request</text>
 
-  <!-- Branch -->
   <line x1="280" y1="202" x2="280" y2="222" stroke="#334155" stroke-width="1"/>
   <line x1="165" y1="222" x2="395" y2="222" stroke="#334155" stroke-width="1"/>
   <line x1="165" y1="222" x2="165" y2="242" stroke="#334155" stroke-width="1"/>
   <line x1="395" y1="222" x2="395" y2="242" stroke="#334155" stroke-width="1"/>
 
-  <!-- Left branch: Simple -->
   <rect x="90" y="242" width="150" height="40" rx="6" fill="#22c55e15" stroke="#22c55e40" stroke-width="1"/>
   <text x="165" y="267" text-anchor="middle" fill="#22c55e" font-size="13">Simple / FAQ</text>
 
@@ -29,13 +26,10 @@
   <text x="165" y="325" text-anchor="middle" fill="#22c55e" font-size="13" font-weight="700">Haiku 3.5</text>
   <text x="165" y="345" text-anchor="middle" fill="#64748b" font-size="12">$0.0008 / 1K tk</text>
 
-  <!-- Right branch: Complex -->
   <rect x="320" y="242" width="150" height="40" rx="6" fill="#ef444415" stroke="#ef444440" stroke-width="1"/>
-  <text x="395" y="267" text-anchor="middle" fill="#ef4444" font-size="13">Analyse / Audit</text>
+  <text x="395" y="267" text-anchor="middle" fill="#ef4444" font-size="13">Analysis / Audit</text>
 
   <line x1="395" y1="282" x2="395" y2="302" stroke="#ef444450" stroke-width="1"/>
-
-  <!-- Sub-branch complex -->
   <line x1="340" y1="302" x2="450" y2="302" stroke="#334155" stroke-width="1"/>
   <line x1="340" y1="302" x2="340" y2="322" stroke="#334155" stroke-width="1"/>
   <line x1="450" y1="302" x2="450" y2="322" stroke="#334155" stroke-width="1"/>
@@ -50,41 +44,39 @@
 
   <!-- Cost comparison -->
   <rect x="90" y="400" width="370" height="120" rx="8" fill="#0d1117" stroke="#334155" stroke-width="1"/>
-  <text x="110" y="422" fill="#475569" font-size="11" font-weight="600" letter-spacing="1">ÉCART DE COÛT (200 000 req/mois)</text>
+  <text x="110" y="422" fill="#475569" font-size="11" font-weight="600" letter-spacing="1">COST DIFFERENCE (200,000 req/month)</text>
 
-  <text x="110" y="448" fill="#64748b" font-size="13">Tout Opus 4</text>
-  <text x="440" y="448" text-anchor="end" fill="#ef4444" font-size="14" font-weight="700">30 000€</text>
+  <text x="110" y="448" fill="#64748b" font-size="13">All Opus 4</text>
+  <text x="440" y="448" text-anchor="end" fill="#ef4444" font-size="14" font-weight="700">$30,000</text>
 
-  <text x="110" y="472" fill="#64748b" font-size="13">Tout Sonnet 4</text>
-  <text x="440" y="472" text-anchor="end" fill="#f59e0b" font-size="14" font-weight="700">6 000€</text>
+  <text x="110" y="472" fill="#64748b" font-size="13">All Sonnet 4</text>
+  <text x="440" y="472" text-anchor="end" fill="#f59e0b" font-size="14" font-weight="700">$6,000</text>
 
   <text x="110" y="496" fill="#94a3b8" font-size="13" font-weight="600">Smart routing (80/20)</text>
-  <text x="440" y="496" text-anchor="end" fill="#22c55e" font-size="16" font-weight="800">1 360€</text>
+  <text x="440" y="496" text-anchor="end" fill="#22c55e" font-size="16" font-weight="800">$1,360</text>
 
   <line x1="110" y1="502" x2="440" y2="502" stroke="#334155" stroke-width="1"/>
-  <text x="110" y="515" fill="#64748b" font-size="12">Économie vs Opus all-in</text>
-  <text x="440" y="515" text-anchor="end" fill="#22c55e" font-size="13" font-weight="700">−28 640€/mois</text>
+  <text x="110" y="515" fill="#64748b" font-size="12">Savings vs all-Opus</text>
+  <text x="440" y="515" text-anchor="end" fill="#22c55e" font-size="13" font-weight="700">−$28,640/month</text>
 
   <!-- Right: Config + Task types -->
   <rect x="530" y="110" width="620" height="430" rx="14" fill="#1a1d27"/>
-  <text x="840" y="142" text-anchor="middle" fill="#a78bfa" font-size="14" font-weight="700" letter-spacing="1">TÂCHES BANCAIRES PAR MODÈLE</text>
+  <text x="840" y="142" text-anchor="middle" fill="#a78bfa" font-size="14" font-weight="700" letter-spacing="1">BANKING TASKS BY MODEL</text>
 
-  <!-- Task rows -->
-  <!-- Haiku tasks -->
   <rect x="550" y="158" width="580" height="34" rx="6" fill="#22c55e10"/>
   <rect x="550" y="158" width="4" height="34" fill="#22c55e"/>
   <text x="564" y="172" fill="#22c55e" font-size="11" font-weight="700">HAIKU 3.5 — $0.0008/1K</text>
-  <text x="564" y="186" fill="#64748b" font-size="11">FAQ réglementaire · Résumé email · Extraction champs · Classification</text>
+  <text x="564" y="186" fill="#64748b" font-size="11">Regulatory FAQ · Email summary · Field extraction · Document classification</text>
 
   <rect x="550" y="198" width="580" height="34" rx="6" fill="#f59e0b10"/>
   <rect x="550" y="198" width="4" height="34" fill="#f59e0b"/>
   <text x="564" y="212" fill="#f59e0b" font-size="11" font-weight="700">SONNET 4 — $0.003/1K</text>
-  <text x="564" y="226" fill="#64748b" font-size="11">Analyse contrat · Scoring crédit · Rapport conformité · RAG complexe</text>
+  <text x="564" y="226" fill="#64748b" font-size="11">Contract analysis · Credit scoring · Compliance report · Complex RAG</text>
 
   <rect x="550" y="238" width="580" height="34" rx="6" fill="#ef444410"/>
   <rect x="550" y="238" width="4" height="34" fill="#ef4444"/>
   <text x="564" y="252" fill="#ef4444" font-size="11" font-weight="700">OPUS 4 — $0.015/1K</text>
-  <text x="564" y="266" fill="#64748b" font-size="11">Raisonnement juridique complexe · Edge cases réglementaires critiques</text>
+  <text x="564" y="266" fill="#64748b" font-size="11">Complex legal reasoning · Critical regulatory edge cases</text>
 
   <!-- Config code block -->
   <rect x="550" y="284" width="580" height="190" rx="8" fill="#0d1117" stroke="#334155" stroke-width="1"/>
@@ -96,20 +88,19 @@
   <text x="570" y="392" fill="#f59e0b" font-size="12" font-family="monospace">    return "claude-sonnet-4-6"  # 15%</text>
   <text x="570" y="408" fill="#94a3b8" font-size="12" font-family="monospace">  else:</text>
   <text x="570" y="424" fill="#ef4444" font-size="12" font-family="monospace">    return "claude-opus-4-8"   # 5%</text>
-  <text x="570" y="442" fill="#475569" font-size="12" font-family="monospace">  # Tracé automatiquement dans Langfuse</text>
-  <text x="570" y="460" fill="#475569" font-size="12" font-family="monospace">  # Coût par modèle visible en temps réel</text>
+  <text x="570" y="442" fill="#475569" font-size="12" font-family="monospace">  # Auto-traced in Langfuse</text>
+  <text x="570" y="460" fill="#475569" font-size="12" font-family="monospace">  # Cost per model visible in real time</text>
 
-  <!-- Pie chart approximation (text-based) -->
   <rect x="550" y="484" width="580" height="44" rx="6" fill="#252837"/>
   <text x="570" y="502" fill="#22c55e" font-size="13" font-weight="700">80% Haiku</text>
   <text x="680" y="502" fill="#475569" font-size="13">·</text>
   <text x="700" y="502" fill="#f59e0b" font-size="13" font-weight="700">15% Sonnet</text>
   <text x="820" y="502" fill="#475569" font-size="13">·</text>
   <text x="840" y="502" fill="#ef4444" font-size="13" font-weight="700">5% Opus</text>
-  <text x="570" y="520" fill="#64748b" font-size="12">Distribution optimale mesurée sur 100K requêtes bancaires</text>
+  <text x="570" y="520" fill="#64748b" font-size="12">Optimal distribution measured on 100K banking requests</text>
 
-  <text x="600" y="572" text-anchor="middle" fill="#a78bfa" font-size="16" font-weight="700">Écart entre Haiku et Opus : 200x sur le prix. 20% des tâches justifient le premium.</text>
-  <text x="600" y="596" text-anchor="middle" fill="#475569" font-size="14">Configurable en 30 minutes. ROI visible dès la première semaine.</text>
+  <text x="600" y="572" text-anchor="middle" fill="#a78bfa" font-size="16" font-weight="700">200x price gap between Haiku and Opus. Only 20% of tasks justify the premium.</text>
+  <text x="600" y="596" text-anchor="middle" fill="#475569" font-size="14">Configurable in 30 minutes. ROI visible within the first week.</text>
 
-  <text x="1160" y="618" text-anchor="end" fill="#334155" font-size="11">Architecte IA · Environnements Réglementés</text>
+  <text x="1160" y="618" text-anchor="end" fill="#334155" font-size="11">AI Architect · Regulated Environments</text>
 </svg>

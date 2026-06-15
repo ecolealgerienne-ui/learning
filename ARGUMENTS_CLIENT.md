@@ -1295,6 +1295,33 @@ Vous avez maintenant les arguments pour répondre à toutes les objections :
 
 ---
 
+## 23. Next Steps — Start building TODAY
+
+> **Slide cours :** "Next Steps — Start building TODAY"
+
+### Les 4 actions immédiates (et notre statut)
+
+| Action cours | Notre statut |
+|--------------|-------------|
+| Download all course code (GitHub repo) | ✅ Fait — `module_1_gateway/course_code/` |
+| Set up Langfuse (5 minutes) | ⏳ **Prochaine étape** — docker-compose up |
+| Instrument your main LLM endpoint | ⏳ Semaine 1 — Claude API via LiteLLM |
+| Implement ONE cost optimization this week | ⏳ Semaine 1 — Prompt optimization |
+
+### Ce que "5 minutes" veut dire avec notre stack
+
+```bash
+cd ~/learning/module_1_gateway/docker
+cp .env.example .env
+# Remplir ANTHROPIC_API_KEY dans .env
+docker-compose up -d
+# → Langfuse accessible sur http://localhost:3000
+```
+
+C'est littéralement 5 minutes si Docker est installé.
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

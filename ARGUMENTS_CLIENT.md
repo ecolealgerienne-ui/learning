@@ -583,6 +583,72 @@ tags: ["departement:credit", "produit:scoring", "env:prod"]
 
 ---
 
+## 13. Cost Optimization Summary — Le chiffre qui close
+
+> **Slide cours :** "Cost Optimization Summary"
+
+### Les 3 stratégies + l'effet combiné
+
+| Stratégie | Économies | Effort | Priorité |
+|-----------|-----------|--------|----------|
+| Prompt Optimization | **30-50%** | Faible | ✅ Faire en premier |
+| Semantic Caching | **30-50%** | Moyen | ✅ Faire en second |
+| Model Routing | **50-70%** | Moyen | ✅ Faire en troisième |
+| **Combined** | **70-85%** | **Moyen** | 🎯 L'objectif final |
+
+### Ce que ça veut dire sur une facture réelle
+
+```
+Budget LLM actuel : 20 000€/mois
+
+Après Prompt Optimization (-40%)  : 12 000€
+Après Semantic Caching (-40%)     :  7 200€
+Après Model Routing (-60%)        :  2 880€
+
+Économie totale : 17 120€/mois = 205 440€/an
+Effort : Moyen (2-4 semaines de mise en place)
+```
+
+### Pourquoi "Combined = Medium effort" est votre argument de vente
+
+Ces 3 stratégies ne sont pas des projets lourds.
+Ce sont des configurations dans LiteLLM + des patterns de code.
+**Medium effort ≠ projet de 6 mois. C'est 2 à 4 semaines avec le bon architecte.**
+
+> "Je mets en place ces 3 stratégies en 3 à 4 semaines.
+> Résultat : 70 à 85% de réduction sur votre facture LLM.
+> Sur 20 000€/mois, c'est 17 000€ économisés chaque mois.
+> Ma prestation se rembourse en moins d'une semaine d'économies."
+
+### La séquence d'implémentation recommandée
+
+**Semaine 1 — Prompt Optimization** (effort faible, gains immédiats)
+- Audit des prompts système existants
+- Compression et standardisation
+- Résultat visible dès le premier jour
+
+**Semaine 2-3 — Semantic Caching** (effort moyen)
+- Redis déjà dans notre stack
+- Configurer le cache sémantique LiteLLM
+- Particulièrement efficace sur les FAQ et requêtes répétitives
+
+**Semaine 3-4 — Model Routing** (effort moyen, gains les plus élevés)
+- Classifier les requêtes par complexité
+- Router automatiquement Haiku / Sonnet / Local
+- LiteLLM gère le routing sans toucher au code applicatif
+
+### Pitch closing avec ce slide (le plus fort du deck)
+
+> "Regardez ce tableau. 70 à 85% d'économies, effort moyen.
+> Ce n'est pas de la théorie — ce sont des chiffres mesurés en production.
+> Sur votre budget LLM actuel, calculons ensemble ce que ça représente."
+>
+> *(Sortez la calculette. Faites le calcul devant eux.)*
+>
+> "C'est ça que je déploie. En 3 à 4 semaines."
+
+---
+
 ## 📋 TEMPLATE — Ajouter un nouvel argument
 
 ```

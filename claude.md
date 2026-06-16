@@ -72,12 +72,24 @@ Module 5-6 (RAG + Governance)  ░░░░░░░░░░  [0%]
 
 ### Module 2 (FinOps)
 - [x] `module_2_finops/` folder structure created
-- [x] `module_2_finops/benchmarks/01_prompt_optimization.py` — ready to run
-- [x] `module_2_finops/benchmarks/02_semantic_cache.py` — ready to run
-- [x] `module_2_finops/benchmarks/03_model_routing.py` — ready to run
-- [x] `module_2_finops/benchmarks/04_conversation_history.py` — ready to run
-- [x] `module_2_finops/benchmarks/05_combined_report.py` — ready to run
+- [x] `module_2_finops/benchmarks/config.py` — shared config, ModelConfig, PRICING table (all providers)
+- [x] `module_2_finops/benchmarks/.env.example` — 4 routing profiles (Phase 1 Mistral / cross-provider / Phase 2 Claude)
+- [x] `module_2_finops/benchmarks/01_prompt_optimization.py` — manual prompt baseline (naive vs optimized)
+- [x] `module_2_finops/benchmarks/02_semantic_cache.py` — hybrid ANN + LLM judge cache
+- [x] `module_2_finops/benchmarks/03_model_routing.py` — cross-provider routing (simple/moderate/complex)
+- [x] `module_2_finops/benchmarks/04_conversation_history.py` — sliding window vs full history
+- [x] `module_2_finops/benchmarks/05_combined_report.py` — consolidated FinOps report (all levers)
+- [x] `module_2_finops/benchmarks/07_llmlingua_compression.py` — LLMLingua-2 compression (local CPU, no API)
+- [x] `module_2_finops/benchmarks/08_dspy_optimization.py` — DSPy automatic prompt optimization
 - [x] `GUIDE_DOCKER_FIRST_RUN.md` — step-by-step first launch guide
+
+**Key concepts implemented:**
+- Hybrid semantic cache: ANN search (ChromaDB) → LLM judge scores candidates → hit/miss decision
+- Cross-provider routing: MODEL_SIMPLE / MODEL_MODERATE / MODEL_COMPLEX from .env (mix any provider)
+- LLMLingua-2: local BERT model (~117M params), compresses prompts 2x–20x before LLM call, zero API cost
+- DSPy: automatic prompt optimization using BootstrapFewShot — run once before prod, zero runtime cost
+- Phase 1 (learning): Mistral Small $0.0001/1K, DeepSeek $0.00027/1K
+- Phase 2 (demo/pre-prod): Claude Sonnet $0.003/1K, GPT-4o $0.0025/1K
 
 ---
 
@@ -158,12 +170,20 @@ python 01_prompt_optimization.py
 ### Module 2 — FinOps (scripts ready, tests pending)
 ```
 ✅ Benchmark scripts created in module_2_finops/benchmarks/
-⬜ Run 01_prompt_optimization.py  → measure real savings
-⬜ Run 02_semantic_cache.py       → measure cache hit rate
-⬜ Run 03_model_routing.py        → measure routing savings
-⬜ Run 04_conversation_history.py → measure context growth
-⬜ Run 05_combined_report.py      → full FinOps report
+⬜ Run 01_prompt_optimization.py   → measure manual prompt savings
+⬜ Run 02_semantic_cache.py        → measure hybrid cache hit rate
+⬜ Run 03_model_routing.py         → measure cross-provider routing savings
+⬜ Run 04_conversation_history.py  → measure context growth / sliding window
+⬜ Run 07_llmlingua_compression.py → measure LLMLingua-2 compression (pip install llmlingua)
+⬜ Run 08_dspy_optimization.py     → measure DSPy auto-optimization (pip install dspy-ai)
+⬜ Run 05_combined_report.py       → full FinOps report (all 6 levers)
 ⬜ Produce report with real numbers for client pitches
+```
+
+**Install for new benchmarks:**
+```bash
+pip install llmlingua          # LLMLingua-2 (downloads ~500MB model from HuggingFace once)
+pip install dspy-ai            # DSPy (Stanford)
 ```
 
 ### Module 3 — Security (not started)
@@ -208,7 +228,9 @@ python 01_prompt_optimization.py
     ├── benchmarks/02_semantic_cache.py        ✅ Ready to run
     ├── benchmarks/03_model_routing.py         ✅ Ready to run
     ├── benchmarks/04_conversation_history.py  ✅ Ready to run
-    ├── benchmarks/05_combined_report.py       ✅ Ready to run
+    ├── benchmarks/05_combined_report.py       ✅ Ready to run (reads all b1–b8)
+    ├── benchmarks/07_llmlingua_compression.py ✅ Ready (pip install llmlingua)
+    ├── benchmarks/08_dspy_optimization.py     ✅ Ready (pip install dspy-ai)
     └── reports/                           ⬜ Generated after running tests
 ```
 
@@ -240,7 +262,9 @@ python 01_prompt_optimization.py
 python 02_semantic_cache.py
 python 03_model_routing.py
 python 04_conversation_history.py
-python 05_combined_report.py
+pip install llmlingua && python 07_llmlingua_compression.py
+pip install dspy-ai   && python 08_dspy_optimization.py
+python 05_combined_report.py       # full report — run last
 
 # --- Git ---
 cd ~/learning

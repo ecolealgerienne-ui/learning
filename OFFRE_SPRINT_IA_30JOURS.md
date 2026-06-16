@@ -83,6 +83,72 @@ Docker Compose   → Déploiement sur votre infrastructure
 
 ---
 
+## Use Case — Knowledge Base Auto-Learning Chatbot
+
+This is one of the highest-ROI applications of the stack.
+
+### The concept
+
+A corporate chatbot (HR portal, customer support, internal FAQ) starts with 100% LLM calls.
+Over time, the hybrid semantic cache builds a knowledge base automatically — every answered
+question becomes a cached entry available for future similar questions.
+
+```
+Month 1  →  100% LLM calls       (baseline cost)
+Month 3  →  ~60% cache hits      (frequent questions stabilize)
+Month 6  →  70–80% cache hits    (knowledge base mature)
+```
+
+**Your LLM cost decreases every month without any additional work.**
+
+### How it works
+
+```
+User question
+    ↓
+ANN search in Redis (< 5ms) → top-N similar cached questions
+    ↓
+Cheap model (Mistral Small) judges semantic equivalence → score 0-1
+    ↓
+Score ≥ threshold?
+    ├── YES → Return cached answer instantly   ($0 LLM cost, < 50ms)
+    └── NO  → Call LLM → store answer in cache for next time
+```
+
+### What makes this safe for regulated environments
+
+- **TTL per topic** — regulatory answers expire in 30 days, product info in 7 days
+- **LLM judge** — prevents wrong cache hits (pure cosine similarity is not enough)
+- **Langfuse audit trail** — every cache hit and miss is logged and traceable
+- **Human review queue** — low-confidence answers flagged for compliance review
+
+### Typical results (corporate FAQ chatbot, 50K questions/month)
+
+| Metric | Month 1 | Month 6 |
+|---|---|---|
+| Cache hit rate | 0% | 70–80% |
+| LLM cost | $1,500/month | $300–450/month |
+| Average response time | 1.8s | 0.2s (cache) / 1.8s (miss) |
+| Monthly savings | — | $1,050–1,200/month |
+
+### Use cases that fit this pattern
+
+✅ HR FAQ (policies, leave, benefits) — questions repeat heavily  
+✅ Internal IT helpdesk — same issues, same answers  
+✅ Customer support level 1 — product questions, billing, cancellation  
+✅ Regulatory FAQ for compliance teams — slow-changing content  
+❌ Personalized advice (client-specific data) — cannot cache  
+❌ Real-time market data — changes too fast  
+
+### Commercial pitch
+
+> *"We start at 100% LLM. In 3 months, your FAQ runs at 70% on cache
+> with automatic TTL management. Your LLM cost decreases each month
+> as the knowledge base matures. We show you the exact numbers in
+> Langfuse every week."*
+
+---
+
 ## Suivi optionnel — 1 jour/mois
 
 Après le sprint :

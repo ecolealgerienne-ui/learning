@@ -39,6 +39,8 @@ def main():
     b3 = latest("benchmark3_routing_*.json")
     b4 = latest("benchmark4_history_*.json")
     b6 = latest("benchmark6_quality_*.json")
+    b7 = latest("benchmark7_llmlingua_*.json")
+    b8 = latest("benchmark8_dspy_*.json")
 
     missing = []
     if not b1: missing.append("01_prompt_optimization.py")

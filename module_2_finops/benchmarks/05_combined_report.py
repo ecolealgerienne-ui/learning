@@ -41,6 +41,7 @@ def main():
     b6 = latest("benchmark6_quality_*.json")
     b7 = latest("benchmark7_llmlingua_*.json")
     b8 = latest("benchmark8_dspy_*.json")
+    b9 = latest("benchmark9_syntactic_*.json")
 
     missing = []
     if not b1: missing.append("01_prompt_optimization.py")
@@ -106,6 +107,48 @@ def main():
         s4 = b4["annual_savings_usd"]
     else:
         print("  ⚠️  No data"); s4 = 0
+
+    # ── Lever 5 — Syntactic optimization ─────────────────────────────────────
+    print("\n📊 LEVER 5 — Syntactic Prompt Optimization")
+    print("─" * 40)
+    if b9:
+        best = b9.get("best_technique", "unknown")
+        gain = b9.get("best_quality_gain", 0)
+        print(f"  Best technique:    {b9.get('best_technique', 'N/A')}")
+        print(f"  Quality gain:      +{gain:.2f} vs baseline")
+        print(f"  Baseline quality:  {b9.get('baseline_quality', 0):.2f}")
+        print(f"  Optimized quality: {b9.get('best_quality', 0):.2f}")
+        print(f"  Effort:            ~2 hours (one-time, offline)")
+    else:
+        print("  ⚠️  No data — run: python 09_syntactic_optimization.py")
+
+    # ── Lever 6 — LLMLingua-2 compression ────────────────────────────────────
+    print("\n📊 LEVER 6 — LLMLingua-2 Prompt Compression")
+    print("─" * 40)
+    if b7:
+        best_rate = b7.get("best_rate", "N/A")
+        rate_data = b7.get("summary_by_rate", {}).get(str(best_rate), {})
+        print(f"  Best compression rate: {best_rate} (keep {int(best_rate*100)}% of tokens)")
+        print(f"  Avg compression:       {rate_data.get('avg_compression_pct', 0):.1f}%")
+        print(f"  Quality preserved:     {rate_data.get('avg_quality_score', 0):.2f}")
+        print(f"  Compression latency:   {rate_data.get('avg_compress_ms', 0):.0f}ms (local CPU)")
+        print(f"  Effort:                ~2 hours")
+    else:
+        print("  ⚠️  No data — run: python 07_llmlingua_compression.py")
+
+    # ── Lever 7 — DSPy auto-optimization ──────────────────────────────────────
+    print("\n📊 LEVER 7 — DSPy Automatic Prompt Optimization")
+    print("─" * 40)
+    if b8:
+        improvement = b8.get("improvement_pct", 0)
+        print(f"  Optimizer:         {b8.get('optimizer', 'BootstrapFewShot')}")
+        print(f"  Baseline score:    {b8.get('baseline_score', 0):.2f}")
+        print(f"  Optimized score:   {b8.get('optimized_score', 0):.2f}")
+        print(f"  Improvement:       {improvement:+.1f}%")
+        print(f"  Runtime cost:      $0  (optimization done offline)")
+        print(f"  Effort:            ~3 hours (one-time)")
+    else:
+        print("  ⚠️  No data — run: python 08_dspy_optimization.py")
 
     # ── Quality ───────────────────────────────────────────────────────────────
     if b6:

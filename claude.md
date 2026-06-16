@@ -83,13 +83,29 @@ Module 5-6 (RAG + Governance)  ░░░░░░░░░░  [0%]
 - [x] `module_2_finops/benchmarks/08_dspy_optimization.py` — DSPy automatic prompt optimization
 - [x] `GUIDE_DOCKER_FIRST_RUN.md` — step-by-step first launch guide
 
+- [x] `module_2_finops/benchmarks/09_syntactic_optimization.py` — manual syntactic techniques (Role, CoT, Few-shot, ordering)
+
 **Key concepts implemented:**
 - Hybrid semantic cache: ANN search (ChromaDB) → LLM judge scores candidates → hit/miss decision
 - Cross-provider routing: MODEL_SIMPLE / MODEL_MODERATE / MODEL_COMPLEX from .env (mix any provider)
 - LLMLingua-2: local BERT model (~117M params), compresses prompts 2x–20x before LLM call, zero API cost
-- DSPy: automatic prompt optimization using BootstrapFewShot — run once before prod, zero runtime cost
+- DSPy MIPRO/COPRO: automatic prompt optimization — run once offline before prod, zero runtime cost
+- Syntactic optimization: Role prompting, Chain-of-Thought, Few-shot, instruction ordering — free, immediate +10–25% quality
 - Phase 1 (learning): Mistral Small $0.0001/1K, DeepSeek $0.00027/1K
 - Phase 2 (demo/pre-prod): Claude Sonnet $0.003/1K, GPT-4o $0.0025/1K
+
+**Full prompt optimization pipeline (production target):**
+```
+Raw prompt
+    ↓
+Step 1: Syntactic (Role + CoT + Few-shot) — free, +10–25% quality
+    ↓
+Step 2: DSPy COPRO/MIPRO — auto-optimized offline, +15–30% more
+    ↓
+Step 3: LLMLingua-2 — compression runtime local CPU, −40–80% tokens
+    ↓
+LiteLLM → LLM (Mistral / Claude / DeepSeek)
+```
 
 ---
 
@@ -174,9 +190,10 @@ python 01_prompt_optimization.py
 ⬜ Run 02_semantic_cache.py        → measure hybrid cache hit rate
 ⬜ Run 03_model_routing.py         → measure cross-provider routing savings
 ⬜ Run 04_conversation_history.py  → measure context growth / sliding window
-⬜ Run 07_llmlingua_compression.py → measure LLMLingua-2 compression (pip install llmlingua)
-⬜ Run 08_dspy_optimization.py     → measure DSPy auto-optimization (pip install dspy-ai)
-⬜ Run 05_combined_report.py       → full FinOps report (all 6 levers)
+⬜ Run 09_syntactic_optimization.py → measure Role/CoT/Few-shot quality gain
+⬜ Run 07_llmlingua_compression.py  → measure LLMLingua-2 compression (pip install llmlingua)
+⬜ Run 08_dspy_optimization.py      → measure DSPy auto-optimization (pip install dspy-ai)
+⬜ Run 05_combined_report.py        → full FinOps report (all 7 levers)
 ⬜ Produce report with real numbers for client pitches
 ```
 
@@ -231,6 +248,7 @@ pip install dspy-ai            # DSPy (Stanford)
     ├── benchmarks/05_combined_report.py       ✅ Ready to run (reads all b1–b8)
     ├── benchmarks/07_llmlingua_compression.py ✅ Ready (pip install llmlingua)
     ├── benchmarks/08_dspy_optimization.py     ✅ Ready (pip install dspy-ai)
+    ├── benchmarks/09_syntactic_optimization.py ✅ Ready (no extra deps)
     └── reports/                           ⬜ Generated after running tests
 ```
 
@@ -262,9 +280,10 @@ python 01_prompt_optimization.py
 python 02_semantic_cache.py
 python 03_model_routing.py
 python 04_conversation_history.py
+python 09_syntactic_optimization.py                  # no extra deps
 pip install llmlingua && python 07_llmlingua_compression.py
 pip install dspy-ai   && python 08_dspy_optimization.py
-python 05_combined_report.py       # full report — run last
+python 05_combined_report.py       # full report — run last (7 levers)
 
 # --- Git ---
 cd ~/learning

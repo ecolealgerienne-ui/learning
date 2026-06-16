@@ -1,345 +1,279 @@
-# 📌 claude.md — Contexte Persistant Formation IA
+# 📌 claude.md — Persistent Training Context
 
-Ce fichier doit être lu **EN PREMIER** à chaque nouvelle session Claude Code.  
-Mise à jour après chaque session pour garder un fil continu.
-
----
-
-## 🎯 PROJET EN COURS
-
-**Projet :** Formation Architecte IA pour Environnements Réglementés  
-**Durée totale :** 2-3 mois (16 semaines, Option B)  
-**Fin estimée :** Fin août 2026
-
-**Objectif final :** Consultant freelance IA en environnements réglementés (banque, assurance)
+Read this file FIRST at the start of every Claude Code session.  
+Update after each session to maintain continuity.
 
 ---
 
-## 📍 STATUT ACTUEL
+## 🎯 CURRENT PROJECT
 
-**Date dernière mise à jour :** [À remplir après chaque session]  
-**Module en cours :** Module 1 — Gateway LLM  
-**Semaine :** [À mettre à jour : 1, 2, 3, etc.]  
-**Phase :** [FORMATION / HANDS-ON / LIVRABLE]
+**Project:** AI Architect Training for Regulated Environments  
+**Total duration:** 2–3 months (16 weeks, Option B)  
+**Estimated completion:** End of August 2026
 
-**Progression globale :**
+**Final goal:** Freelance AI consultant for regulated environments (banking, insurance)
+
+---
+
+## 📍 CURRENT STATUS
+
+**Last updated:** 2026-06-16  
+**Current module:** Module 1 complete (theory) → hands-on pending  
+**Week:** 3  
+**Phase:** HANDS-ON
+
+**Overall progress:**
 
 ```
-Module 1 (Gateway LLM)         ██░░░░░░░░  [10%]
-Module 2 (FinOps)              ░░░░░░░░░░  [0%]
-Module 3 (Sécurité)            ░░░░░░░░░░  [0%]
+Module 1 (LLM Gateway)         ████░░░░░░  [40%] — Theory done, stack not started yet
+Module 2 (FinOps)              ██░░░░░░░░  [20%] — Scripts ready, tests pending
+Module 3 (Security)            ░░░░░░░░░░  [0%]
 Module 4 (Azure)               ░░░░░░░░░░  [0%]
-Module 5-6 (RAG + Gouvernance) ░░░░░░░░░░  [0%]
+Module 5-6 (RAG + Governance)  ░░░░░░░░░░  [0%]
 ```
 
 ---
 
-## 📋 ÉTAT ACTUEL DU MODULE 1
+## ✅ ACCOMPLISHED — FULL SESSION HISTORY
 
-### Udemy
+### Repository & Infrastructure
+- [x] Complete repo structure created at `~/learning/`
+- [x] `module_1_gateway/docker/docker-compose.yml` — full stack (Postgres, Redis, LiteLLM, Langfuse)
+- [x] `module_1_gateway/docker/litellm-config.yaml` — models, Langfuse callbacks, budget config
+- [x] `module_1_gateway/docker/.env.example` — template with all required variables
+- [x] `module_1_gateway/code/test_claude_api.py` — API test script ready to run
+- [x] `module_1_gateway/deliverables/starter-kit/` — production-ready client deliverable
 
-- [ ] Module 1 (Introduction) — LANCÉ
-- [ ] Module 2 (LLM Basics) — EN COURS
-- [ ] Module 3 (Langfuse Overview) — À faire
-- [ ] Module 4 (Langfuse Setup) — À faire
-- [ ] Module 5 (Integrations) — À faire
-- [ ] Module 6 (Basic Monitoring) — À faire
-- [ ] Modules 7-11 (Cost tracking, Optimization, etc.) — À faire
+### Course Code (Udemy — Paulo Dichone)
+- [x] `module_1_gateway/course_code/instrumented_llm.py` — @observe() decorator, Langfuse SDK v3
+- [x] `module_1_gateway/course_code/model_routing.py` — TaskType enum, regex classifier
+- [x] `module_1_gateway/course_code/semantic_cache.py` — ChromaDB + SentenceTransformer, TTL 24h
+- [x] 15 Python files from Udemy course integrated into repo
+- [x] **Course "LLM Observability & Cost Management" (Paulo Dichone) — COMPLETED ✅**
 
-**Concepts notés :** [À remplir dans `module_1_gateway/notes/concepts.md`]
+### Commercial Materials (all in English)
+- [x] `ARGUMENTS_CLIENT.md` — 23 arguments from course slides with banking translations
+- [x] `OFFRE_SPRINT_IA_30JOURS.md` — standalone 30-day sprint proposal
+- [x] `PITCH_VOCABULARY.md` — 30 technical + commercial terms, 30-second pitch
+- [x] `MARCHE_ET_OPPORTUNITES.md` — market research: Gartner, EU AI Act, BaFin, rates
+- [x] `LINKEDIN_POSTS.md` — 10 posts in English, 10-week calendar, LinkedIn profile
 
-### Docker & Infrastructure
+### LinkedIn Visuals (10 original SVGs, 1200×627px, dark theme, English)
+- [x] `post1_boite_noire.svg` — Classic Monitoring vs LLM Observability
+- [x] `post2_token_spike.svg` — Token spike chart + guardrails config
+- [x] `post3_roi.svg` — €35K→€15K before/after + 7–30x ROI badge
+- [x] `post4_prompt_optimization.svg` — 847→127 tokens, −85%
+- [x] `post5_top5_cost_drivers.svg` — 5 leaks with color-coded impact %
+- [x] `post6_rag_pipeline.svg` — RAG pipeline cost by step
+- [x] `post7_gartner.svg` — Market $1.97B→$9.26B + Gartner quote + EU AI Act
+- [x] `post8_model_routing.svg` — Decision tree Haiku/Sonnet/Opus + cost comparison
+- [x] `post9_audit_2jours.svg` — Day 1 diagnostic + Day 2 quick wins checklist
+- [x] `post10_langfuse_vs_others.svg` — Langfuse vs LangSmith vs Helicone vs DataDog
 
-- [x] Dossier structure créée : `module_1_gateway/`
-- [x] Docker Compose créé : `module_1_gateway/docker/docker-compose.yml`
-- [x] LiteLLM config créée : `module_1_gateway/docker/litellm-config.yaml`
-- [ ] Premier test "health check" — À faire
-- [ ] Claude API connectée — À faire
-- [ ] Virtual keys setup (multi-tenant) — À faire
-
-**Containers running :** [Nombre : 0/4]
-
-- [ ] PostgreSQL 15 — ❌
-- [ ] Redis 7 — ❌
-- [ ] LiteLLM — ❌
-- [ ] Langfuse web — ❌
-
-### Livrable (Starter Kit)
-
-- [x] `docker-compose.yml` créé (dans `deliverables/starter-kit/`)
-- [x] `litellm-config.yaml` créé (dans `deliverables/starter-kit/`)
-- [x] `README.md` écrit
-- [x] `ARCHITECTURE.md` écrit
-- [ ] Screenshots UI prises
-- [ ] Testé end-to-end
-- [ ] Prêt pour GitHub public
-
-**Status :** EN COURS
-
----
-
-## 🔄 DERNIÈRE SESSION
-
-**Date :** 2026-06-14  
-**Durée :** [À remplir]  
-**Ce qu'on a fait :**
-
-- [x] Création de la structure complète du repo
-- [x] Génération de tous les fichiers de base (docker-compose, configs, notes, code)
-- [x] Git commit initial + push sur `claude/pensive-mccarthy-4ukxr8`
-- [x] Création de `claude.md`
-
-**Résultats :**
-
-- ✅ Repo initialisé avec 8 fichiers, structure complète
-- ✅ `docker-compose.yml` et `litellm-config.yaml` prêts à tester
-- ✅ `test_claude_api.py` prêt
-
-**Prochaine étape :** Lancer `docker-compose up -d` et tester le health check LiteLLM
+### Module 2 (FinOps)
+- [x] `module_2_finops/` folder structure created
+- [x] `module_2_finops/benchmarks/01_prompt_optimization.py` — ready to run
+- [x] `module_2_finops/benchmarks/02_semantic_cache.py` — ready to run
+- [x] `module_2_finops/benchmarks/03_model_routing.py` — ready to run
+- [x] `module_2_finops/benchmarks/04_conversation_history.py` — ready to run
+- [x] `module_2_finops/benchmarks/05_combined_report.py` — ready to run
+- [x] `GUIDE_DOCKER_FIRST_RUN.md` — step-by-step first launch guide
 
 ---
 
-## 🚨 BLOCAGES ACTUELS
+## 🔴 NEXT IMMEDIATE STEP
 
-### Actifs (à résoudre)
+**To do at home (requires ANTHROPIC_API_KEY):**
 
-_Aucun pour le moment_
-
-### Résolus (archivés)
-
-_Aucun pour le moment_
-
----
-
-## 📝 NOTES IMPORTANTES
-
-### Profil Amar (RAPPEL)
-
-- Architecte technique en banque (France)
-- Stack : Docker, NestJS, PostgreSQL, Redis, Keycloak (production)
-- Python confortable, expérience Odoo multi-tenant
-- 2-3 jours/semaine disponible
-- RTX 4070 SUPER (pour Ollama)
-
-### Positionnement Cible
-
-> **"Architecte IA pour environnements réglementés"**
-
-❌ PAS consultant généraliste IA  
-❌ PAS développeur d'agents  
-✅ Focus : industrialisation, gouvernance, sécurité, FinOps IA
-
-### Règles À Respecter
-
-- ✅ Code = français (commentaires, README)
-- ✅ Tout = générique (PAS de données réelles banque)
-- ✅ Code deployable (pas théorique)
-- ✅ Git commits réguliers
-- ❌ Éviter : LangGraph, CrewAI, AutoGen, fine-tuning
-- ❌ Pas de données bancaires réelles dans les exemples
-
----
-
-## 📅 ROADMAP RESTANTE
-
-### Semaines 1-3 (MODULE 1)
-
-```
-Semaine 1 :
-  - Udemy Modules 1-3
-  - Docker Compose up + tests premiers endpoints
-  - Claude API connectée
-
-Semaine 2 :
-  - Udemy Modules 4-8
-  - Ollama + fallback automatique
-  - Observabilité partielle Langfuse
-
-Semaine 3 :
-  - Udemy Modules 9-11
-  - Langfuse complet
-  - Livrable starter kit finalisé
+```bash
+cd ~/learning/module_1_gateway/docker
+cp .env.example .env
+# Edit .env: add ANTHROPIC_API_KEY, LITELLM_MASTER_KEY, DB passwords
+docker-compose up -d
+curl http://localhost:4000/health
+# Open http://localhost:3000 → Langfuse UI
 ```
 
-### Semaines 4-5 (MODULE 2 — FinOps)
+Full step-by-step guide: `GUIDE_DOCKER_FIRST_RUN.md`
 
-```
-Benchmarks :
-  - Prompt caching (tokens/coûts)
-  - Model routing (Haiku vs Sonnet)
-  - Historique conversation (effet exponentiel)
-```
-
-### Semaines 6-8 (MODULE 3 — Sécurité)
-
-```
-Keycloak + LiteLLM SSO
-Vault + secrets management
-DLP basique
-Audit logs (ELK)
-```
-
-### Semaines 9-16 (MODULE 4 — Azure)
-
-```
-Udemy : "Microsoft Foundry & Python" (25-30h)
-Udemy : "AB-100 Agentic AI Architect" (25-30h)
-Deploy agents sur Azure
-Certification AB-100
+Then run FinOps benchmarks:
+```bash
+cd ~/learning/module_2_finops/benchmarks
+python 01_prompt_optimization.py
 ```
 
 ---
 
-## 📂 FICHIERS CLÉS
+## 🚨 CURRENT BLOCKERS
+
+**Active:**
+- [ ] ANTHROPIC_API_KEY not configured in `.env` → Docker stack never launched
+- [ ] Zero containers running → all hands-on tests pending
+
+**Resolved:**
+- ✅ Git divergence (26 images uploaded directly to GitHub) → fixed with rebase
+- ✅ Copyright concern on course slides → created 10 original SVG visuals
+- ✅ Language → everything converted to English (posts + visuals)
+
+---
+
+## 📝 PROFILE REMINDER
+
+**Amar — Banking Technical Architect (France)**
+- Stack: Docker, NestJS, PostgreSQL, Redis, Keycloak (production experience)
+- Python: comfortable, Odoo multi-tenant background
+- Available: 2–3 days/week
+- Hardware: RTX 4070 SUPER (for local Ollama)
+
+**Target positioning:**
+> **"AI Architect for Regulated Environments"**
+
+❌ NOT a generalist AI consultant  
+❌ NOT an agent developer  
+✅ Focus: industrialization, governance, security, AI FinOps
+
+**Rules:**
+- ✅ Code must be deployable (not theoretical)
+- ✅ Everything generic (no real bank data in examples)
+- ✅ Git commits after every session
+- ❌ Avoid: LangGraph, CrewAI, AutoGen, fine-tuning
+- ❌ No real banking data in examples
+
+---
+
+## 📅 REMAINING ROADMAP
+
+### Module 1 — IN PROGRESS
+```
+✅ Udemy course "LLM Observability & Cost Management" — DONE
+✅ Docker Compose + LiteLLM config — files ready
+✅ Starter-kit deliverable — files ready
+⬜ docker-compose up → first health check     ← NEXT
+⬜ First real Claude API call via LiteLLM
+⬜ Traces visible in Langfuse UI
+⬜ Virtual keys (multi-tenant) configured
+⬜ End-to-end test + screenshots
+```
+
+### Module 2 — FinOps (scripts ready, tests pending)
+```
+✅ Benchmark scripts created in module_2_finops/benchmarks/
+⬜ Run 01_prompt_optimization.py  → measure real savings
+⬜ Run 02_semantic_cache.py       → measure cache hit rate
+⬜ Run 03_model_routing.py        → measure routing savings
+⬜ Run 04_conversation_history.py → measure context growth
+⬜ Run 05_combined_report.py      → full FinOps report
+⬜ Produce report with real numbers for client pitches
+```
+
+### Module 3 — Security (not started)
+```
+⬜ Keycloak + LiteLLM SSO
+⬜ Secrets management (Vault or Docker secrets)
+⬜ Basic DLP (prompt scanning)
+⬜ Audit logs (structured + ELK optional)
+```
+
+### Module 4 — Azure (not started)
+```
+⬜ Course: "Microsoft Azure AI Foundry" (Udemy)
+⬜ Course: "AB-100 Agentic AI Architect" (Udemy)
+⬜ Deploy on Azure
+⬜ AB-100 certification
+```
+
+---
+
+## 📂 KEY FILES
 
 ```
 ~/learning/
-├── claude.md                    ← CE FICHIER (Contexte persistant)
-├── CONTEXTE.md                  ← Prompt pour Claude Code
-├── 01_plan_formation.md         ← Plan complet 16 semaines
-├── 03_progression.md            ← Journal détaillé (mise à jour chaque semaine)
-├── SEMAINE_1_plan_action.md     ← Jour par jour Module 1
-└── module_1_gateway/
-    ├── docker/
-    │   ├── docker-compose.yml   ✅ Créé
-    │   ├── litellm-config.yaml  ✅ Créé
-    │   └── README_DOCKER.md     ✅ Créé
-    ├── notes/
-    │   ├── concepts.md          ← À remplir (concepts Udemy)
-    │   ├── setup.md             ← À remplir (log du setup)
-    │   └── questions.md         ← À remplir (blocages)
-    ├── code/
-    │   └── test_claude_api.py   ✅ Créé
-    ├── deliverables/
-    │   └── starter-kit/         ✅ Créé (livrable final)
-    └── README.md                ✅ Créé
+├── claude.md                              ← THIS FILE
+├── GUIDE_DOCKER_FIRST_RUN.md              ← Step-by-step first launch ✅
+├── ARGUMENTS_CLIENT.md                    ← 23 client arguments ✅
+├── OFFRE_SPRINT_IA_30JOURS.md             ← Commercial proposal ✅
+├── MARCHE_ET_OPPORTUNITES.md              ← Market research ✅
+├── LINKEDIN_POSTS.md                      ← 10 posts (English) ✅
+├── assets/linkedin_visuals/               ← 10 SVG visuals (English) ✅
+├── module_1_gateway/
+│   ├── docker/docker-compose.yml          ✅ Ready to run
+│   ├── docker/litellm-config.yaml         ✅ Ready to run
+│   ├── docker/.env.example                ✅ → copy to .env and fill
+│   ├── code/test_claude_api.py            ✅ Ready to run
+│   ├── course_code/                       ✅ 15 files from Udemy
+│   └── deliverables/starter-kit/         ✅ Client deliverable ready
+└── module_2_finops/
+    ├── README.md                          ✅
+    ├── benchmarks/01_prompt_optimization.py   ✅ Ready to run
+    ├── benchmarks/02_semantic_cache.py        ✅ Ready to run
+    ├── benchmarks/03_model_routing.py         ✅ Ready to run
+    ├── benchmarks/04_conversation_history.py  ✅ Ready to run
+    ├── benchmarks/05_combined_report.py       ✅ Ready to run
+    └── reports/                           ⬜ Generated after running tests
 ```
 
 ---
 
-## 🔗 RESSOURCES ESSENTIELLES
-
-### Udemy (Formation principale)
-
-- "LLM Observability & Cost Management" (Paulo Dichone)
-- https://www.udemy.com/course/llm-observability-cost/
-
-### Docs Officielles
-
-- LiteLLM : https://docs.litellm.ai/docs/proxy/quick_start
-- Langfuse : https://langfuse.com/docs
-- Anthropic : https://docs.anthropic.com/
-
-### Local URLs (quand containers running)
-
-- LiteLLM : http://localhost:8000
-- Langfuse : http://localhost:3000
-- Health check : http://localhost:8000/health
-
----
-
-## ⚡ COMMANDES PRINCIPALES
+## ⚡ MAIN COMMANDS
 
 ```bash
-# Navigation
+# --- MODULE 1: Docker stack ---
 cd ~/learning/module_1_gateway/docker
-
-# Docker
+cp .env.example .env          # first time only
 docker-compose up -d
-docker-compose logs litellm -f
 docker-compose ps
+docker-compose logs litellm -f
+docker-compose logs langfuse-web -f
 docker-compose down
 
-# Tests
-curl http://localhost:8000/health
+# Health checks
+curl http://localhost:4000/health
+open http://localhost:3000      # Langfuse UI
 
-curl http://localhost:8000/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -d '{"model": "claude-sonnet", "messages": [{"role": "user", "content": "test"}]}'
+# First API test
+python ~/learning/module_1_gateway/code/test_claude_api.py
 
-# Git
+# --- MODULE 2: FinOps benchmarks ---
+cd ~/learning/module_2_finops/benchmarks
+pip install openai anthropic langfuse python-dotenv
+python 01_prompt_optimization.py
+python 02_semantic_cache.py
+python 03_model_routing.py
+python 04_conversation_history.py
+python 05_combined_report.py
+
+# --- Git ---
 cd ~/learning
-git add .
-git commit -m "Module 1: [description]"
+git add -A
+git commit -m "Module X: [description]"
 git push origin claude/pensive-mccarthy-4ukxr8
-git log --oneline -10
+git log --oneline -5
 ```
 
 ---
 
-## 📊 TEMPLATE MISE À JOUR (À COPIER APRÈS CHAQUE SESSION)
+## 🔗 LOCAL URLs (when containers running)
 
-```markdown
-## 🔄 Dernière Session
+- LiteLLM API:  http://localhost:4000
+- LiteLLM UI:   http://localhost:4000/ui
+- Langfuse UI:  http://localhost:3000
+- Health check: http://localhost:4000/health
 
-**Date** : [AAAA-MM-DD]
-**Durée** : [Xh Ym]
+---
 
-### Ce qu'on a fait
-- [ ] [Action 1] ✅
-- [ ] [Action 2] ✅
-- [ ] [Action 3] ❌
+## 📊 SESSION UPDATE TEMPLATE
 
-### Résultats
-✅ [Succès 1 - description]
-✅ [Succès 2 - description]
-❌ [Blocage 1 - description]
-
-### Bloqué sur
-1. [Blocage 1] - Status : EN COURS
-2. [Blocage 2] - Status : EN COURS
-
-### Prochaine étape
-- [ ] [Action A - description précise]
-- [ ] [Action B - description précise]
-
-### Git commits
-git log --oneline -3
-
-### Notes importantes
-- [Note 1]
-- [Note 2]
+```
+## Last Session — [DATE]
+### Done
+- [x] ...
+### Results
+✅ ...  ❌ ...
+### Next step
+- [ ] ...
 ```
 
 ---
 
-## 🎯 RAPPELS IMPORTANTS
-
-### À CHAQUE NOUVELLE SESSION :
-
-1. ✅ Lis ce fichier `claude.md` EN PREMIER
-2. ✅ Vérifie les blocages actuels
-3. ✅ Repère où on s'était arrêté
-4. ✅ Lance les commandes nécessaires
-5. ✅ Dis-moi "Contexte compris, on continue [description]"
-
-### À LA FIN DE CHAQUE SESSION :
-
-1. ✅ Git commit
-2. ✅ Mets à jour ce fichier `claude.md`
-3. ✅ Mets à jour `03_progression.md`
-4. ✅ Note les blocages dans `notes/questions.md`
-
----
-
-## 📞 COMMENT JE REPRENDS LE CONTEXTE
-
-**Tu dis :**
-```
-"Salut, je reprends Module 1, j'ai relu claude.md,
-on s'était arrêtés sur [blocage], maintenant on fait [action]"
-```
-
-**Je fais :**
-```
-✅ Lis claude.md
-✅ Lis les derniers commits git
-✅ Vois ton état Docker
-✅ On continue de là
-```
-
----
-
-_MISE À JOUR : Après chaque session, remplis les sections ci-dessus._  
-_FORMAT : Clair, concis, actionnable._  
-_OBJECTIF : Zero context loss, continuité totale._
+_Update this file at the end of every session._  
+_Goal: zero context loss, full continuity._

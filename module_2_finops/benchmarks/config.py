@@ -46,22 +46,26 @@ DAILY_CONVERSATIONS   = int(os.getenv("DAILY_CONVERSATIONS",  "10000"))
 # Add your models here as you test new providers.
 
 PRICING: dict[str, dict] = {
-    # Mistral
-    "mistral/mistral-small-latest":  {"input": 0.0001,  "output": 0.0003},
-    "mistral/mistral-large-latest":  {"input": 0.002,   "output": 0.006},
-    # DeepSeek
-    "deepseek/deepseek-chat":        {"input": 0.00027, "output": 0.0011},
-    "deepseek/deepseek-reasoner":    {"input": 0.0014,  "output": 0.0055},
-    # Gemini
-    "gemini/gemini-2.0-flash":       {"input": 0.0001,  "output": 0.0004},
-    "gemini/gemini-1.5-pro":         {"input": 0.00125, "output": 0.005},
-    # Claude
-    "claude-haiku":                  {"input": 0.00025, "output": 0.00125},
-    "claude-sonnet":                 {"input": 0.003,   "output": 0.015},
-    "claude-opus":                   {"input": 0.015,   "output": 0.075},
-    # OpenAI
-    "gpt-4o-mini":                   {"input": 0.00015, "output": 0.0006},
-    "gpt-4o":                        {"input": 0.0025,  "output": 0.01},
+    # ── Mistral (verified June 2026 — mistral.ai/pricing) ─────────────────────
+    # Batch -50% | Cached input = 10% of input price
+    "mistral/mistral-small-latest":   {"input": 0.0001,  "output": 0.0003},   # Small 3.2
+    "mistral/mistral-medium-latest":  {"input": 0.0004,  "output": 0.002},    # Medium 3
+    "mistral/mistral-large-latest":   {"input": 0.002,   "output": 0.006},    # Large
+    "mistral/devstral-small":         {"input": 0.0001,  "output": 0.0003},   # Devstral Small 2
+    "mistral/devstral-latest":        {"input": 0.0004,  "output": 0.002},    # Devstral 2
+    # ── DeepSeek ──────────────────────────────────────────────────────────────
+    "deepseek/deepseek-chat":         {"input": 0.00027, "output": 0.0011},
+    "deepseek/deepseek-reasoner":     {"input": 0.0014,  "output": 0.0055},
+    # ── Gemini ────────────────────────────────────────────────────────────────
+    "gemini/gemini-2.0-flash":        {"input": 0.0001,  "output": 0.0004},
+    "gemini/gemini-1.5-pro":          {"input": 0.00125, "output": 0.005},
+    # ── Claude (Anthropic) ────────────────────────────────────────────────────
+    "claude-haiku":                   {"input": 0.00025, "output": 0.00125},
+    "claude-sonnet":                  {"input": 0.003,   "output": 0.015},
+    "claude-opus":                    {"input": 0.015,   "output": 0.075},
+    # ── OpenAI ────────────────────────────────────────────────────────────────
+    "gpt-4o-mini":                    {"input": 0.00015, "output": 0.0006},
+    "gpt-4o":                         {"input": 0.0025,  "output": 0.01},
     # Groq
     "groq/llama-3.3-70b":            {"input": 0.00006, "output": 0.00006},
 }

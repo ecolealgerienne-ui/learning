@@ -1,225 +1,172 @@
 """
-Module 2 — Benchmark 3: Smart Model Routing
-=============================================
-Compares the cost of routing tasks to the right model vs always using the premium.
+Benchmark 3 — Cross-Provider Smart Model Routing
+==================================================
+Routes tasks to the right model based on complexity.
+Models are configured in .env — can mix ANY providers.
 
-Tasks:
-  SIMPLE   → Haiku  ($0.0008/1K tokens)
-  MODERATE → Sonnet ($0.003/1K tokens)
-  COMPLEX  → Opus   ($0.015/1K tokens)
+Examples:
+  Simple   → mistral/mistral-small-latest  ($0.0001/1K)
+  Moderate → deepseek/deepseek-chat        ($0.00027/1K)
+  Complex  → claude-sonnet                 ($0.003/1K)
 
 Run: python 03_model_routing.py
 """
 
-import os
-import json
-import time
-import re
+import json, time, re, os
 from datetime import datetime
-from dotenv import load_dotenv
-from enum import Enum
+from collections import Counter
+from config import client, MODELS, DAILY_CALLS, token_cost, print_config
 
-load_dotenv()
+# ── Task classifier (keyword-based, zero cost) ────────────────────────────────
 
-try:
-    from openai import OpenAI
-except ImportError:
-    print("Install: pip install openai python-dotenv")
-    exit(1)
+COMPLEX_RE  = re.compile(r"(legal reasoning|multi.?step|adversarial|regulatory opinion|"
+                          r"compliance judgment|risk assessment|edge case|unprecedented)", re.I)
+MODERATE_RE = re.compile(r"(analyz|audit|contract|compliance|regulation|report|"
+                          r"risk|explain|detail|compare|assess)", re.I)
 
-# ── Config ────────────────────────────────────────────────────────────────────
+def classify(question: str) -> str:
+    if COMPLEX_RE.search(question):  return "complex"
+    if MODERATE_RE.search(question): return "moderate"
+    return "simple"
 
-LITELLM_BASE_URL = os.getenv("LITELLM_BASE_URL", "http://localhost:4000")
-LITELLM_API_KEY  = os.getenv("LITELLM_API_KEY", "sk-litellm-master-2026")
+def model_for(complexity: str) -> str:
+    return {"simple": MODELS.simple, "moderate": MODELS.moderate,
+            "complex": MODELS.complex}.get(complexity, MODELS.default)
 
-client = OpenAI(base_url=f"{LITELLM_BASE_URL}/v1", api_key=LITELLM_API_KEY)
-
-# ── Model config ──────────────────────────────────────────────────────────────
-
-class TaskComplexity(Enum):
-    SIMPLE   = "simple"
-    MODERATE = "moderate"
-    COMPLEX  = "complex"
-
-MODEL_CONFIG = {
-    TaskComplexity.SIMPLE:   {"model": "claude-haiku",  "input_per_1k": 0.00025, "output_per_1k": 0.00125},
-    TaskComplexity.MODERATE: {"model": "claude-sonnet", "input_per_1k": 0.003,   "output_per_1k": 0.015},
-    TaskComplexity.COMPLEX:  {"model": "claude-opus",   "input_per_1k": 0.015,   "output_per_1k": 0.075},
-}
-
-# ── Classifier (keyword-based, fast, free) ────────────────────────────────────
-
-COMPLEX_PATTERNS = re.compile(
-    r"(legal reasoning|multi.?step|adversarial|regulatory opinion|"
-    r"compliance judgment|risk assessment|edge case|unprecedented)", re.I
-)
-MODERATE_PATTERNS = re.compile(
-    r"(analyze|audit|contract|compliance|regulation|report|"
-    r"risk|explain|detail|compare)", re.I
-)
-
-def classify_task(question: str) -> TaskComplexity:
-    if COMPLEX_PATTERNS.search(question):
-        return TaskComplexity.COMPLEX
-    if MODERATE_PATTERNS.search(question):
-        return TaskComplexity.MODERATE
-    return TaskComplexity.SIMPLE
-
-# ── Banking task dataset ──────────────────────────────────────────────────────
+# ── Banking tasks dataset ─────────────────────────────────────────────────────
 
 TASKS = [
-    # SIMPLE — classification, extraction, FAQ
-    {"question": "What does DORA stand for?",                                     "expected": TaskComplexity.SIMPLE},
-    {"question": "What is the maximum GDPR fine?",                                "expected": TaskComplexity.SIMPLE},
-    {"question": "Extract the contract date from this text: signed on 2026-01-15","expected": TaskComplexity.SIMPLE},
-    {"question": "Is this email about credit or insurance?",                      "expected": TaskComplexity.SIMPLE},
-    {"question": "Summarize this paragraph in 2 sentences.",                      "expected": TaskComplexity.SIMPLE},
-    # MODERATE — analysis, reports
-    {"question": "Analyze the compliance risks in this loan contract.",            "expected": TaskComplexity.MODERATE},
-    {"question": "Explain the EU AI Act requirements for high-risk AI systems.",   "expected": TaskComplexity.MODERATE},
-    {"question": "Compare MiFID II and DORA requirements for AI systems.",        "expected": TaskComplexity.MODERATE},
-    {"question": "Generate a compliance report for our LLM deployment.",          "expected": TaskComplexity.MODERATE},
-    {"question": "What are the audit requirements under DORA for AI?",            "expected": TaskComplexity.MODERATE},
-    # COMPLEX — legal, edge cases
-    {"question": "Provide legal reasoning on an unprecedented AI liability case.", "expected": TaskComplexity.COMPLEX},
-    {"question": "Multi-step regulatory opinion on cross-border AI compliance.",   "expected": TaskComplexity.COMPLEX},
-    {"question": "Adversarial review of our AI governance framework.",             "expected": TaskComplexity.COMPLEX},
+    # SIMPLE
+    {"q": "What does DORA stand for?",                                      "expected": "simple"},
+    {"q": "What is the maximum GDPR fine?",                                 "expected": "simple"},
+    {"q": "Extract the contract date from: signed on 2026-01-15",           "expected": "simple"},
+    {"q": "Is this email about credit or insurance?",                       "expected": "simple"},
+    {"q": "Summarize this paragraph in 2 sentences.",                       "expected": "simple"},
+    # MODERATE
+    {"q": "Analyze the compliance risks in this loan contract.",             "expected": "moderate"},
+    {"q": "Explain the EU AI Act requirements for high-risk AI systems.",    "expected": "moderate"},
+    {"q": "Compare MiFID II and DORA requirements for AI systems.",         "expected": "moderate"},
+    {"q": "Assess the regulatory exposure of our credit scoring AI.",       "expected": "moderate"},
+    {"q": "What audit trail is required under DORA for AI decisions?",      "expected": "moderate"},
+    # COMPLEX
+    {"q": "Provide legal reasoning on an unprecedented AI liability case.",  "expected": "complex"},
+    {"q": "Multi-step regulatory opinion on cross-border AI compliance.",    "expected": "complex"},
+    {"q": "Adversarial review of our AI governance framework.",              "expected": "complex"},
 ]
-
-# ── LLM call ─────────────────────────────────────────────────────────────────
 
 SYSTEM = "Banking regulatory expert. Precise, concise answers."
 
-def call_model(question: str, model: str) -> dict:
+def call(question: str, model: str) -> dict:
     start = time.time()
     try:
-        response = client.chat.completions.create(
-            model=model,
-            messages=[
-                {"role": "system", "content": SYSTEM},
-                {"role": "user",   "content": question},
-            ],
-            max_tokens=300,
+        r = client.chat.completions.create(
+            model=model, max_tokens=300,
+            messages=[{"role": "system", "content": SYSTEM},
+                      {"role": "user",   "content": question}],
         )
-        elapsed = time.time() - start
-        return {
-            "input_tokens":  response.usage.prompt_tokens,
-            "output_tokens": response.usage.completion_tokens,
-            "latency_s":     round(elapsed, 2),
-            "success":       True,
-        }
+        return {"input": r.usage.prompt_tokens, "output": r.usage.completion_tokens,
+                "latency_s": round(time.time() - start, 2), "ok": True,
+                "answer": r.choices[0].message.content}
     except Exception as e:
-        return {"success": False, "error": str(e), "input_tokens": 0, "output_tokens": 0, "latency_s": 0}
-
-def compute_cost(input_tokens: int, output_tokens: int, complexity: TaskComplexity) -> float:
-    cfg = MODEL_CONFIG[complexity]
-    return (input_tokens / 1000 * cfg["input_per_1k"]) + (output_tokens / 1000 * cfg["output_per_1k"])
-
-# ── Main ─────────────────────────────────────────────────────────────────────
+        return {"ok": False, "error": str(e), "input": 0, "output": 0, "latency_s": 0, "answer": ""}
 
 def main():
-    print("=" * 60)
-    print("BENCHMARK 3 — Smart Model Routing")
-    print(f"Tasks: {len(TASKS)}")
-    print("=" * 60)
+    print("=" * 65)
+    print("BENCHMARK 3 — Cross-Provider Smart Model Routing")
+    print("Model routing config:")
+    print_config()
+    print("=" * 65)
 
     results = []
+    correct = 0
     total_routed_cost  = 0.0
-    total_premium_cost = 0.0   # if everything went to Opus
-    classification_correct = 0
+    total_allsimple_cost  = 0.0
+    total_allcomplex_cost = 0.0
 
     for task in TASKS:
-        q         = task["question"]
-        expected  = task["expected"]
-        detected  = classify_task(q)
-        correct   = detected == expected
+        q        = task["q"]
+        expected = task["expected"]
+        detected = classify(q)
+        model    = model_for(detected)
+        is_correct = detected == expected
+        if is_correct:
+            correct += 1
 
-        if correct:
-            classification_correct += 1
+        print(f"\n{'✅' if is_correct else '⚠️ '} [{detected:8}] [{model.split('/')[-1][:20]:20}] {q[:45]}...")
 
-        cfg   = MODEL_CONFIG[detected]
-        model = cfg["model"]
-
-        print(f"\n{'✅' if correct else '⚠️ '} [{detected.value:8}] {q[:55]}...")
-        print(f"   Model: {model}")
-
-        call = call_model(q, model)
-        if not call["success"]:
-            print(f"   ❌ Error: {call.get('error', 'unknown')}")
+        r = call(q, model)
+        if not r["ok"]:
+            print(f"   ❌ {r.get('error')}")
             continue
 
-        routed_cost  = compute_cost(call["input_tokens"], call["output_tokens"], detected)
-        premium_cost = compute_cost(call["input_tokens"], call["output_tokens"], TaskComplexity.COMPLEX)
+        routed_cost     = token_cost(model,            r["input"], r["output"])
+        simple_cost     = token_cost(MODELS.simple,    r["input"], r["output"])
+        complex_cost    = token_cost(MODELS.complex,   r["input"], r["output"])
 
-        total_routed_cost  += routed_cost
-        total_premium_cost += premium_cost
+        total_routed_cost     += routed_cost
+        total_allsimple_cost  += simple_cost
+        total_allcomplex_cost += complex_cost
 
-        print(f"   Tokens: {call['input_tokens']}in + {call['output_tokens']}out | ${routed_cost:.5f} (vs ${premium_cost:.5f} Opus)")
+        print(f"   {r['input']}in + {r['output']}out tokens | ${routed_cost:.5f} routed "
+              f"| ${complex_cost:.5f} if all-complex | {r['latency_s']}s")
+
         results.append({
-            "question":       q,
-            "expected":       expected.value,
-            "detected":       detected.value,
-            "correct":        correct,
-            "model":          model,
-            "input_tokens":   call["input_tokens"],
-            "output_tokens":  call["output_tokens"],
-            "latency_s":      call["latency_s"],
-            "cost_routed":    round(routed_cost, 6),
-            "cost_premium":   round(premium_cost, 6),
+            "question": q, "expected": expected, "detected": detected,
+            "correct": is_correct, "model": model,
+            "input": r["input"], "output": r["output"],
+            "latency_s": r["latency_s"],
+            "cost_routed": round(routed_cost, 6),
+            "cost_allsimple": round(simple_cost, 6),
+            "cost_allcomplex": round(complex_cost, 6),
+            "answer_preview": r["answer"][:120],
         })
 
     # ── Analysis ──────────────────────────────────────────────────────────────
 
-    accuracy = classification_correct / len(TASKS) * 100
-    savings_pct = (total_premium_cost - total_routed_cost) / total_premium_cost * 100
+    n = len(results)
+    accuracy       = correct / len(TASKS) * 100
+    vs_allcomplex  = (total_allcomplex_cost - total_routed_cost) / total_allcomplex_cost * 100
+    vs_allsimple   = (total_routed_cost - total_allsimple_cost)  / total_allsimple_cost  * 100
 
-    # Monthly at 200K requests/day
-    daily_calls = 200_000
-    scale = daily_calls / len(TASKS)
-    monthly_routed  = total_routed_cost  * scale * 30
-    monthly_premium = total_premium_cost * scale * 30
+    scale          = DAILY_CALLS / n
+    monthly_routed  = total_routed_cost    * scale * 30
+    monthly_complex = total_allcomplex_cost * scale * 30
+    monthly_simple  = total_allsimple_cost  * scale * 30
 
-    print("\n" + "=" * 60)
-    print("RESULTS")
-    print("=" * 60)
-    print(f"\nClassifier accuracy:  {accuracy:.1f}%  ({classification_correct}/{len(TASKS)} tasks)")
-    print(f"\nCost comparison (this test):")
-    print(f"  Smart routing:  ${total_routed_cost:.4f}")
-    print(f"  All Opus:       ${total_premium_cost:.4f}")
-    print(f"  Savings:        {savings_pct:.1f}%")
-    print(f"\nMonthly projection ({daily_calls:,} calls/day):")
-    print(f"  All Opus:      ${monthly_premium:,.0f}/month")
-    print(f"  Smart routing: ${monthly_routed:,.0f}/month")
-    print(f"  Savings:       ${monthly_premium - monthly_routed:,.0f}/month")
-    print(f"  Annual:        ${(monthly_premium - monthly_routed)*12:,.0f}/year")
-
-    # Model distribution
-    from collections import Counter
     dist = Counter(r["detected"] for r in results)
-    print(f"\nRouting distribution:")
-    for complexity, count in sorted(dist.items()):
-        pct = count / len(results) * 100
-        print(f"  {complexity:8}: {count:>3} calls ({pct:.0f}%)")
 
-    # ── Save ──────────────────────────────────────────────────────────────────
+    print(f"\n{'='*65}\nRESULTS\n{'='*65}")
+    print(f"\n  Classifier accuracy: {accuracy:.1f}%  ({correct}/{len(TASKS)})")
+    print(f"\n  Cost comparison ({n} tasks):")
+    print(f"    All-complex model ({MODELS.complex.split('/')[-1]:20}): ${total_allcomplex_cost:.4f}")
+    print(f"    Smart routing:                              ${total_routed_cost:.4f}  (−{vs_allcomplex:.1f}%)")
+    print(f"    All-simple model  ({MODELS.simple.split('/')[-1]:20}): ${total_allsimple_cost:.4f}")
+    print(f"\n  Monthly at {DAILY_CALLS:,} calls/day:")
+    print(f"    All-complex: ${monthly_complex:>10,.2f}/month")
+    print(f"    Routing:     ${monthly_routed:>10,.2f}/month  ← smart routing")
+    print(f"    All-simple:  ${monthly_simple:>10,.2f}/month  (quality risk)")
+    print(f"    Savings vs all-complex: ${monthly_complex - monthly_routed:,.2f}/month")
+    print(f"    Annual:                 ${(monthly_complex - monthly_routed)*12:,.0f}/year")
+    print(f"\n  Routing distribution:")
+    for k, v in sorted(dist.items()):
+        model_name = model_for(k).split("/")[-1]
+        print(f"    {k:8}: {v:>3} tasks ({v/n*100:.0f}%)  → {model_name}")
 
     report = {
-        "benchmark":         "model_routing",
-        "date":              datetime.now().isoformat(),
+        "benchmark": "model_routing", "date": datetime.now().isoformat(),
+        "models": {"simple": MODELS.simple, "moderate": MODELS.moderate, "complex": MODELS.complex},
         "classifier_accuracy_pct": round(accuracy, 1),
-        "savings_pct":       round(savings_pct, 1),
-        "monthly_savings_usd": round(monthly_premium - monthly_routed, 0),
-        "annual_savings_usd":  round((monthly_premium - monthly_routed) * 12, 0),
-        "distribution":      dict(dist),
-        "raw_results":       results,
+        "savings_vs_allcomplex_pct": round(vs_allcomplex, 1),
+        "monthly_savings_usd": round(monthly_complex - monthly_routed, 2),
+        "annual_savings_usd":  round((monthly_complex - monthly_routed) * 12, 0),
+        "distribution": dict(dist),
+        "raw_results": results,
     }
-
     os.makedirs("../reports", exist_ok=True)
     fname = f"../reports/benchmark3_routing_{datetime.now().strftime('%Y%m%d_%H%M')}.json"
     with open(fname, "w") as f:
         json.dump(report, f, indent=2)
-    print(f"\n📄 Results saved: {fname}")
-
+    print(f"\n📄 Saved: {fname}")
 
 if __name__ == "__main__":
     main()

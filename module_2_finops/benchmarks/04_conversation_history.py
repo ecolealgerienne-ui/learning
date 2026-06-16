@@ -1,206 +1,125 @@
 """
-Module 2 — Benchmark 4: Conversation History Growth
-=====================================================
-Demonstrates how unmanaged conversation history causes exponential token growth.
-Shows the impact of truncation strategies.
+Benchmark 4 — Conversation History Growth
+==========================================
+Shows how unmanaged history causes exponential token cost.
+Compares full-history vs sliding-window strategies.
+Uses MODEL_DEFAULT from .env.
 
 Run: python 04_conversation_history.py
 """
 
-import os
-import json
-import time
+import json, time, os
 from datetime import datetime
-from dotenv import load_dotenv
+from config import client, MODELS, DAILY_CONVERSATIONS, token_cost, print_config
 
-load_dotenv()
-
-try:
-    from openai import OpenAI
-except ImportError:
-    print("Install: pip install openai python-dotenv")
-    exit(1)
-
-# ── Config ────────────────────────────────────────────────────────────────────
-
-LITELLM_BASE_URL = os.getenv("LITELLM_BASE_URL", "http://localhost:4000")
-LITELLM_API_KEY  = os.getenv("LITELLM_API_KEY", "sk-litellm-master-2026")
-MODEL            = "claude-haiku"
-
-client = OpenAI(base_url=f"{LITELLM_BASE_URL}/v1", api_key=LITELLM_API_KEY)
+MODEL = MODELS.default
 
 SYSTEM = "Banking assistant. Answer questions about regulations and compliance."
 
-# Simulates a realistic banking support conversation
 CONVERSATION_TURNS = [
-    "Hello, I need help with GDPR compliance for our AI system.",
-    "We're building a credit scoring model. What data can we use?",
-    "What about using transaction history from the last 5 years?",
-    "Do we need explicit consent for each data point?",
+    "Hello, I need help with GDPR compliance for our AI credit scoring system.",
+    "We're using transaction history from the last 5 years. Is that allowed?",
+    "Do we need explicit consent for each data point we use?",
     "What's the difference between legitimate interest and consent under GDPR?",
     "Can we use anonymized data without consent?",
-    "What does 'pseudonymization' mean in practice?",
-    "How long can we retain the scoring data?",
-    "What are the deletion rights for scored customers?",
-    "We have EU and UK customers — does Brexit affect the rules?",
-    "What about US customers processed in France?",
-    "Do we need a DPO for this use case?",
-    "What DPA notification is required?",
-    "Is there a template for the ROPA record?",
+    "What does 'pseudonymization' mean in practice for banking?",
+    "How long can we retain the credit scoring data?",
+    "What are the deletion rights for customers who were scored?",
+    "We have EU and UK customers — does Brexit affect the rules differently?",
+    "What about US customers whose data is processed in France?",
+    "Do we need a Data Protection Officer for this use case?",
+    "What DPA notification is required before going live?",
     "What happens if we have a data breach affecting scoring data?",
+    "Does the EU AI Act add additional requirements on top of GDPR here?",
+    "What's the first thing we should do before deploying this system?",
 ]
 
-# ── Strategy: No management (full history) ────────────────────────────────────
+def call(messages: list) -> dict:
+    start = time.time()
+    r = client.chat.completions.create(model=MODEL, messages=messages)
+    return {
+        "input":  r.usage.prompt_tokens,
+        "output": r.usage.completion_tokens,
+        "latency_s": round(time.time() - start, 2),
+        "answer": r.choices[0].message.content,
+    }
 
-def run_no_management() -> list[dict]:
-    """Send complete conversation history on every turn — realistic bad practice."""
-    history = []
-    results = []
-
+def run_full_history() -> list[dict]:
+    history, results = [], []
     for i, user_msg in enumerate(CONVERSATION_TURNS):
         history.append({"role": "user", "content": user_msg})
-
-        start = time.time()
-        response = client.chat.completions.create(
-            model=MODEL,
-            messages=[{"role": "system", "content": SYSTEM}] + history,
-        )
-        elapsed = time.time() - start
-
-        assistant_msg = response.choices[0].message.content
-        history.append({"role": "assistant", "content": assistant_msg})
-
-        results.append({
-            "turn":          i + 1,
-            "input_tokens":  response.usage.prompt_tokens,
-            "output_tokens": response.usage.completion_tokens,
-            "total_tokens":  response.usage.total_tokens,
-            "latency_s":     round(elapsed, 2),
-        })
-
-        print(f"  Turn {i+1:>2}: {response.usage.total_tokens:>6} tokens | {elapsed:.2f}s | input={response.usage.prompt_tokens}")
-
+        r = call([{"role": "system", "content": SYSTEM}] + history)
+        history.append({"role": "assistant", "content": r["answer"]})
+        results.append({"turn": i+1, "input": r["input"], "output": r["output"],
+                        "total": r["input"]+r["output"], "latency_s": r["latency_s"]})
+        print(f"  Turn {i+1:>2}: {r['input']+r['output']:>6} tokens (input={r['input']:>5}) | {r['latency_s']}s")
     return results
-
-# ── Strategy: Sliding window (last N turns) ───────────────────────────────────
 
 def run_sliding_window(window: int = 4) -> list[dict]:
-    """Keep only the last N message pairs — simple and effective."""
-    history = []
-    results = []
-
+    history, results = [], []
     for i, user_msg in enumerate(CONVERSATION_TURNS):
         history.append({"role": "user", "content": user_msg})
-
-        # Keep only last `window` pairs (2*window messages)
         windowed = history[-(window * 2):]
-
-        start = time.time()
-        response = client.chat.completions.create(
-            model=MODEL,
-            messages=[{"role": "system", "content": SYSTEM}] + windowed,
-        )
-        elapsed = time.time() - start
-
-        assistant_msg = response.choices[0].message.content
-        history.append({"role": "assistant", "content": assistant_msg})
-
-        results.append({
-            "turn":          i + 1,
-            "messages_sent": len(windowed) + 1,   # +1 for system
-            "input_tokens":  response.usage.prompt_tokens,
-            "output_tokens": response.usage.completion_tokens,
-            "total_tokens":  response.usage.total_tokens,
-            "latency_s":     round(elapsed, 2),
-        })
-
-        print(f"  Turn {i+1:>2}: {response.usage.total_tokens:>6} tokens | {len(windowed)} msgs sent | {elapsed:.2f}s")
-
+        r = call([{"role": "system", "content": SYSTEM}] + windowed)
+        history.append({"role": "assistant", "content": r["answer"]})
+        results.append({"turn": i+1, "msgs_sent": len(windowed)+1,
+                        "input": r["input"], "output": r["output"],
+                        "total": r["input"]+r["output"], "latency_s": r["latency_s"]})
+        print(f"  Turn {i+1:>2}: {r['input']+r['output']:>6} tokens ({len(windowed)} msgs sent) | {r['latency_s']}s")
     return results
 
-# ── Cost helper ───────────────────────────────────────────────────────────────
-
 def total_cost(results: list[dict]) -> float:
-    total = 0.0
-    for r in results:
-        total += (r["input_tokens"]  / 1000) * 0.00025
-        total += (r["output_tokens"] / 1000) * 0.00125
-    return total
-
-# ── Main ─────────────────────────────────────────────────────────────────────
+    return sum(token_cost(MODEL, r["input"], r["output"]) for r in results)
 
 def main():
     print("=" * 60)
     print("BENCHMARK 4 — Conversation History Growth")
     print(f"Model: {MODEL} | Turns: {len(CONVERSATION_TURNS)}")
+    print_config()
     print("=" * 60)
 
-    print("\n🔴 STRATEGY 1: No management (full history)")
-    results_full = run_no_management()
+    print("\n🔴 Full history (no management):")
+    full = run_full_history()
 
-    print("\n🟢 STRATEGY 2: Sliding window (last 4 pairs)")
-    results_window = run_sliding_window(window=4)
+    print("\n🟢 Sliding window (last 4 pairs):")
+    windowed = run_sliding_window(window=4)
 
-    # ── Analysis ──────────────────────────────────────────────────────────────
-
-    cost_full   = total_cost(results_full)
-    cost_window = total_cost(results_window)
+    cost_full   = total_cost(full)
+    cost_window = total_cost(windowed)
     savings_pct = (cost_full - cost_window) / cost_full * 100
 
-    tokens_first = results_full[0]["total_tokens"]
-    tokens_last  = results_full[-1]["total_tokens"]
-    growth_factor = tokens_last / tokens_first
+    growth = full[-1]["total"] / full[0]["total"]
 
-    # Monthly: 10,000 conversations/day, avg 8 turns each
-    daily_conversations = 10_000
-    avg_turns = len(CONVERSATION_TURNS)  # assume full length
-    scale = daily_conversations
-    monthly_cost_full   = cost_full   * scale * 30
-    monthly_cost_window = cost_window * scale * 30
+    scale          = DAILY_CONVERSATIONS
+    monthly_full   = cost_full   * scale * 30
+    monthly_window = cost_window * scale * 30
 
-    print("\n" + "=" * 60)
-    print("RESULTS")
-    print("=" * 60)
-    print(f"\nToken growth (no management):")
-    print(f"  Turn  1: {tokens_first:>6} tokens")
-    print(f"  Turn {len(CONVERSATION_TURNS):>2}: {tokens_last:>6} tokens")
-    print(f"  Growth:  {growth_factor:.1f}x over the conversation")
-
-    print(f"\nCost for one {len(CONVERSATION_TURNS)}-turn conversation:")
-    print(f"  No management:   ${cost_full:.4f}")
-    print(f"  Sliding window:  ${cost_window:.4f}")
-    print(f"  Savings:         {savings_pct:.1f}%")
-
-    print(f"\nMonthly ({daily_conversations:,} conversations/day):")
-    print(f"  No management:   ${monthly_cost_full:>10,.2f}/month")
-    print(f"  Sliding window:  ${monthly_cost_window:>10,.2f}/month")
-    print(f"  Monthly savings: ${monthly_cost_full - monthly_cost_window:>10,.2f}")
-    print(f"  Annual savings:  ${(monthly_cost_full - monthly_cost_window)*12:>10,.2f}")
-
-    print(f"\n✅ Implementation: 15 lines of code in your chat handler")
-    print(f"✅ User experience: no degradation (4 pairs = sufficient context)")
-
-    # ── Save ──────────────────────────────────────────────────────────────────
+    print(f"\n{'='*60}\nRESULTS\n{'='*60}")
+    print(f"  Token growth (unmanaged): {growth:.1f}x  (turn 1→{len(CONVERSATION_TURNS)})")
+    print(f"  Cost per conversation:")
+    print(f"    Full history:    ${cost_full:.4f}")
+    print(f"    Sliding window:  ${cost_window:.4f}  (−{savings_pct:.1f}%)")
+    print(f"  Monthly ({scale:,} conversations/day):")
+    print(f"    Full history:    ${monthly_full:>10,.2f}/month")
+    print(f"    Sliding window:  ${monthly_window:>10,.2f}/month")
+    print(f"    Savings:         ${monthly_full - monthly_window:>10,.2f}/month")
+    print(f"    Annual:          ${(monthly_full - monthly_window)*12:>10,.2f}/year")
+    print(f"  ✅ Implementation effort: ~15 lines in your chat handler")
 
     report = {
-        "benchmark":          "conversation_history",
-        "date":               datetime.now().isoformat(),
-        "model":              MODEL,
-        "turns":              len(CONVERSATION_TURNS),
-        "token_growth_factor": round(growth_factor, 1),
-        "savings_pct":        round(savings_pct, 1),
-        "monthly_savings_usd": round(monthly_cost_full - monthly_cost_window, 2),
-        "annual_savings_usd":  round((monthly_cost_full - monthly_cost_window) * 12, 2),
-        "results_full":       results_full,
-        "results_window":     results_window,
+        "benchmark": "conversation_history", "date": datetime.now().isoformat(),
+        "model": MODEL, "turns": len(CONVERSATION_TURNS),
+        "token_growth_factor": round(growth, 1),
+        "savings_pct": round(savings_pct, 1),
+        "monthly_savings_usd": round(monthly_full - monthly_window, 2),
+        "annual_savings_usd":  round((monthly_full - monthly_window) * 12, 2),
+        "results_full": full, "results_window": windowed,
     }
-
     os.makedirs("../reports", exist_ok=True)
     fname = f"../reports/benchmark4_history_{datetime.now().strftime('%Y%m%d_%H%M')}.json"
     with open(fname, "w") as f:
         json.dump(report, f, indent=2)
-    print(f"\n📄 Results saved: {fname}")
-
+    print(f"\n📄 Saved: {fname}")
 
 if __name__ == "__main__":
     main()

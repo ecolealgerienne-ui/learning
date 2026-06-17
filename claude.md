@@ -213,10 +213,10 @@ pip install dspy-ai            # DSPy (Stanford)
 
 ### Module 4 — Azure (not started)
 ```
-⬜ Course: "Microsoft Azure AI Foundry" (Udemy)
-⬜ Course: "AB-100 Agentic AI Architect" (Udemy)
-⬜ Deploy on Azure
-⬜ AB-100 certification
+⬜ Course: "Microsoft Azure AI Foundry" (Udemy — Scott Duffy ou Alan Rodrigues)
+⬜ AI-102 certification prep (Microsoft Learn official path)
+⬜ Deploy on Azure AI Foundry
+⬜ AI-102 certification exam
 ```
 
 ---
